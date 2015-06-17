@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.ui.control.bigram.BigramConfigurationController">
+    <children>
+        <Label graphicTextGap="0.0" layoutY="163.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Capitilized Words" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font size="15.0" fx:id="x1" />
+            </font>
+        </Label>
+        <HBox layoutY="222.0" prefHeight="30.0" prefWidth="443.0" spacing="40.0" AnchorPane.leftAnchor="78.5" AnchorPane.rightAnchor="78.5">
+            <children>
+                <RadioButton id="dropRadioButton" fx:id="stemCapWordsRadioButton" mnemonicParsing="false" text="Stem Capitilized Words">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="MethodRadioBoxGroup" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton id="DropAndInsertRadioButton" fx:id="donotStepCapWordRadioButton" mnemonicParsing="false" text="Don't Step Capitilized Words" toggleGroup="$MethodRadioBoxGroup" />
+            </children>
+        </HBox>
+        <Label fx:id="titleLabel" font="$x1" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Method" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+        <HBox layoutX="79.0" layoutY="109.0" prefHeight="30.0" prefWidth="443.0" spacing="40.0">
+            <children>
+                <RadioButton id="dropRadioButton" fx:id="ruleBasedRadioButton" mnemonicParsing="false" text="Rule Based (Porter)">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="x2" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton id="DropAndInsertRadioButton" fx:id="dictionaryBasedRadioButton" mnemonicParsing="false" text="Dictionary Based (Krovetz)" toggleGroup="$x2" />
+            </children>
+        </HBox>
+      <TextField fx:id="mytemptextfield" layoutX="104.0" layoutY="287.0" />
+    </children>
+    <stylesheets>
+        <URL value="@../../../app/main/style-default.css" />
+    </stylesheets>
+</AnchorPane>

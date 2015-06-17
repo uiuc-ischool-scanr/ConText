@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="435.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.ui.control.entitynetwork.EntityNetworkConfigurationController">
+  <children>
+    <Label fx:id="titleLabel" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <font>
+        <Font size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Network Generation Parameters" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+     
+   <Label labelFor="$codebookMethodComboBox" layoutX="25.0" layoutY="101.0" text="Method Type" visible="false" />
+    <ComboBox id="codebookMethod" fx:id="codebookMethodComboBox" layoutX="145.0" layoutY="96.0" prefHeight="23.0" prefWidth="141.0" promptText="" styleClass="smallerfont" visible="false">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>   
+    <Label layoutX="296.0" layoutY="99.0" text="Insertion Mode" visible="false">
+      <labelFor>
+        <ComboBox id="codebookMethod" layoutX="100.0" layoutY="141.0" prefWidth="138.5" promptText="Select Method">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+      </labelFor>
+    </Label>
+    <ComboBox id="codebookMethod" fx:id="codebookModeComboBox" layoutX="414.0" layoutY="98.0" prefHeight="23.0" prefWidth="160.0" promptText="" styleClass="smallerfont" visible="false">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+    <Label layoutX="43.0" layoutY="123.0" text="Aggregation">
+      <labelFor>
+        <ComboBox id="codebookMethod" layoutX="100.0" layoutY="141.0" prefWidth="138.5" promptText="Select Method">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+      </labelFor>
+    </Label>
+    <ComboBox id="codebookMethod" fx:id="aggregationComboBox" layoutX="145.0" layoutY="121.0" prefHeight="23.0" prefWidth="128.0" promptText="" styleClass="smallerfont">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+    <Label layoutX="21.0" layoutY="169.0" prefHeight="18.0" prefWidth="121.0" text="Distance (1-500)">
+      <labelFor>
+        <ComboBox id="codebookMethod" layoutX="100.0" layoutY="141.0" prefWidth="138.5" promptText="Select Method">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+      </labelFor>
+    </Label>
+    <TextField fx:id="distanceTextField" layoutX="145.0" layoutY="164.0" prefHeight="28.0" prefWidth="141.0" />
+    <Label layoutX="296.0" layoutY="169.0" prefHeight="18.0" prefWidth="112.0" text="Unit of Analysis" textAlignment="LEFT">
+      <labelFor>
+        <ComboBox id="codebookMethod" layoutX="100.0" layoutY="141.0" prefWidth="138.5" promptText="Select Method">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+      </labelFor>
+    </Label>
+    <ComboBox id="codebookMethod" fx:id="unitOfAnalysisComboBox" layoutX="408.0" layoutY="167.0" onAction="#handleUnitOfAnalysisComboBox" prefHeight="23.0" prefWidth="128.0" promptText="" styleClass="smallerfont">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+    <TextField fx:id="customTagTextField" layoutX="542.0" layoutY="164.0" prefHeight="28.0" prefWidth="51.0" />
+    <Label layoutX="40.0" layoutY="202.0" text="Entity Types" />
+    <VBox fx:id="gridContainerVBox" layoutX="145.0" layoutY="202.0" prefHeight="233.0" prefWidth="386.5" styleClass="smallerfont" />
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

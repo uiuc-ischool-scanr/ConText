@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.keyword.KeywordConfigurationController">
+  <children>
+    <TextField id="stopwordFileTextField" fx:id="keywordFileTextField" layoutX="35.0" layoutY="112.0" minHeight="25.0" prefWidth="406.0" />
+    <Button fx:id="browseButton" layoutX="449.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="86.0" styleClass="highlightsButton" text="Browse...">
+      <font>
+        <Font size="14.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Label graphicTextGap="0.0" layoutY="163.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Bound Parameters" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <font>
+        <Font size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label fx:id="titleLabel" font="$x1" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Keywords List" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+    <TextField fx:id="leftBoundTextField" layoutX="201.0" layoutY="221.0" prefWidth="111.0" />
+    <Label layoutX="35.0" layoutY="224.0" text="Number of words in left" />
+    <TextField fx:id="rightBoundTextField" layoutX="201.0" layoutY="255.0" prefWidth="111.0" />
+    <Label layoutX="35.0" layoutY="255.0" text="Number of words in right" />
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

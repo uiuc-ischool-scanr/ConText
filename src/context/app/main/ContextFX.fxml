@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+<?scenebuilder-stylesheet style-default.css?>
+
+<AnchorPane id="AnchorPane" prefHeight="704.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.app.main.ContextFXController">
+  <children>
+    <SplitPane dividerPositions="0.8504273504273504" focusTraversable="true" orientation="VERTICAL" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <VBox prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <MenuBar prefHeight="31.0" prefWidth="980.0" style="-fx-font-size:13;" useSystemMenuBar="false">
+                  <menus>
+                    <Menu mnemonicParsing="false" text="File">
+                      <items>
+                       <!-- <MenuItem mnemonicParsing="false" text="New Project...">
+                          <accelerator>
+                            <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                          </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Open Project">
+                          <accelerator>
+                            <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                          </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Close Project" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleCloseAllMenuItem" text="Close All" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Save">
+                          <accelerator>
+                            <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                          </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Save as...">
+                          <accelerator>
+                            <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                          </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />  --> 
+                        <Menu mnemonicParsing="false" text="Import">
+                          <items>
+                            <MenuItem fx:id="importTextCorpusMenuItem" mnemonicParsing="false" onAction="#handleImportTextCorpusMenuItem" text="Text Corpus Directory..." />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Export">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="To CSV..." />
+                          </items>
+                        </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleExitMenuItem" text="Exit" />
+                      </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Data Collection and Curation">
+                      <items>
+                        <MenuItem fx:id="parseLexisNexisMenuItem" mnemonicParsing="false" onAction="#handleParseLexisNexisMenuItem" text="Parse LexisNexis..." />
+                        <MenuItem fx:id="csvParserMenuItem" mnemonicParsing="false" onAction="#handleCsvParserMenuItem" text="Parse CSV Files..." />
+                                        
+                      </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Text Analysis">
+                      <items>
+                        <Menu mnemonicParsing="false" text="Preprocessing">
+                          <items>
+                            <MenuItem fx:id="POSMenuItem" mnemonicParsing="false" onAction="#handlePOSMenuItem" text="Part of Speech Tagging" />
+                            <MenuItem fx:id="removeStopwordsMenuItem" mnemonicParsing="false" onAction="#handleRemoveStopwordsMenuItem" text="Remove Stop Words" />
+                            <MenuItem fx:id="stemmingMenuItem" mnemonicParsing="false" onAction="#handleStemmingMenuItem" text="Stemming" />
+                            <MenuItem id="bigramDetectionMenuItem" fx:id="bigramDetectionMenuItem" mnemonicParsing="false" onAction="#handleBigramDetectionMenuItem" text="Bigram Detection" />
+                          </items>
+                        </Menu>
+                        
+                        <Menu mnemonicParsing="false" text="Summarization">
+                          <items>
+                            <MenuItem fx:id="corpusStatMenuItem" mnemonicParsing="false" onAction="#handleCorpusStatMenuItem" text="Corpus Statistics" />
+                            <MenuItem fx:id="topicModelingMenuItem" mnemonicParsing="false" onAction="#handleTopicModelingMenuItem" text="Topic Modeling" />
+                            <MenuItem id="keywordMenuItem" fx:id="keywordMenuItem" mnemonicParsing="false" onAction="#handleKeywordMenuItem" text="Keyword in Context" />
+                            <MenuItem id="entropyMenuItem" fx:id="entropyMenuItem" mnemonicParsing="false" onAction="#handleEntropyMenuItem" text="Entropy" />      
+                            <MenuItem fx:id="sentimentAnalysisMenuItem" mnemonicParsing="false" onAction="#handleSentimentAnalysisMenuItem" text="Sentiment Analysis" />                
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Codebook">
+                          <items>
+                            <MenuItem fx:id="entityDetectionMenuItem" mnemonicParsing="false" onAction="#handleEntityDetectionMenuItem" text="Entity Detection" />
+                            <MenuItem fx:id="codebookApplicationMenuItem" mnemonicParsing="false" onAction="#handleCodebookApplicationMenuItem" text="Codebook Application" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Visualization">
+                          <items>
+                            <MenuItem fx:id="wordCloudMenuItem" mnemonicParsing="false" onAction="#handleWordCloudMenuItem" text="Word Clouds of Topics and Sentiment" />
+                          </items>
+                        </Menu>                 
+                        <!-- <MenuItem mnemonicParsing="false" onAction="#handleSentimentClassificationOfTweetsMenuItem" text="Sentiment Classification of Tweets" />  -->
+                      </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Network Construction">
+                      <items>
+                        <Menu mnemonicParsing="false" text="From Meta Data..." visible="true">
+                          <items>
+                            <MenuItem fx:id="lexisNexisNetworkGenerationMenuItem" mnemonicParsing="false" onAction="#handleLexisNexisNetworkGenerationMenuItem" text="Meta-data based (LexisNexis)" visible="true" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="From Text Data...">
+                          <items>
+                            <MenuItem fx:id="lexisNexisNetworkGenerationMenuItem2" mnemonicParsing="false" onAction="#handleLexisNexisNetworkGenerationMenuItem" text="Meta-data based (LexisNexis)" visible="false" />
+                            <MenuItem fx:id="entityTypesNetworkGenerationMenuItem" mnemonicParsing="false" onAction="#handleEntityTypesNetworkGenerationMenuItem" text="Entity Type based" />
+                            <MenuItem fx:id="codebookNetworkGenrationMenuItem" mnemonicParsing="false" onAction="#handleCodebookNetworkGenerationMenuItem" text="Co-Occurrence based" />
+                            <Menu mnemonicParsing="false" text="Syntax based">
+                            	<items>
+                            		<MenuItem fx:id="shallowParsingMenuItem" mnemonicParsing="false" onAction="#handleSyntaxBasedMenuItem" text="Shallow Parsing (POS)" />
+                            		<MenuItem fx:id="deepParsingMenuItem" mnemonicParsing="false" onAction="#handleDeepParsingMenuItem" text="Deep Parsing (Parse Tree)" />
+                            	</items>
+                            
+                            </Menu>
+                          </items>                       
+                        </Menu>
+                        
+                      </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Network Analysis" visible="false">
+                      <items>
+                        <MenuItem fx:id="geocodedNetworkMenuItem" mnemonicParsing="false" onAction="#handleGeocodedNetworkMenuItem" text="Geocoded Network" />
+                      </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Help">
+                      <items>
+                        <MenuItem fx:id="helpContentMenuItem" mnemonicParsing="false" onAction="#handleHelpContentMenuItem" text="Help Contents" />
+                        <MenuItem fx:id="onlineDocsMenuItem" mnemonicParsing="false" onAction="#handleOnlineDocsMenuItem" text="Online Docs and Support" />
+                        <MenuItem fx:id="reportIssueMenuItem" mnemonicParsing="false" onAction="#handleReportIssueMenuItem" text="Report Issue..." />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="checkForUpdateMenuItem" mnemonicParsing="false" onAction="#handleCheckForUpdateMenuItem" text="Check for Updates" visible="false" />
+                        <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#handleAboutMenuItem" text="About" />
+                      </items>
+                    </Menu>
+                  </menus>
+                  <VBox.margin>
+                    <Insets fx:id="x2" />
+                  </VBox.margin>
+                </MenuBar>
+                <ToolBar style="-fx-background-color: #EFEFEF;" VBox.vgrow="ALWAYS">
+                  <!-- <items>
+                    <Button fx:id="newProjectButton" ellipsisString="" graphicTextGap="0.0" minWidth="24.0" mnemonicParsing="false" onAction="#handleNewProject" prefWidth="30.0" style="" styleClass="toolbarButton" text="" textAlignment="CENTER" textOverrun="CLIP" visible="true">
+                      <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
+                          <image>
+                            <Image url="@../../../resources/newProject24.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                    <Button id="newFileButton" fx:id="newFile" ellipsisString="" graphicTextGap="0.0" minWidth="24.0" mnemonicParsing="false" onAction="#handleNewFile" prefWidth="30.0" style="" styleClass="toolbarButton" text="" textAlignment="CENTER" textOverrun="CLIP" visible="true">
+                      <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
+                          <image>
+                            <Image url="@../../../resources/newFile24.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                    <Button fx:id="saveFileButton" ellipsisString="" graphicTextGap="0.0" minWidth="24.0" mnemonicParsing="false" onAction="#handleSaveFile" prefWidth="30.0" style="" styleClass="toolbarButton" text="" textAlignment="CENTER" textOverrun="CLIP" visible="true">
+                      <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
+                          <image>
+                            <Image url="@../../../resources/save24.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                  </items>  -->
+                  <VBox.margin>
+                    <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                  </VBox.margin>
+                </ToolBar>
+                <SplitPane fx:id="leftMainSplitPane" dividerPositions="0.15950920245398773" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+                  <items>
+                    <AnchorPane minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
+                      <children>
+                        <TreeView fx:id="resourceTreeView" editable="false" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="-1.0" prefWidth="-1.0">
+                      <children>
+                        <TabPane fx:id="mainTabPane" prefHeight="-1.0" prefWidth="-1.0" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <tabs>
+                            <Tab fx:id="tab1" onClosed="#handleTab1Closed" text="Welcome">
+                              <content>
+                                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                  <children>
+                                    <WebView fx:id="welcomeWebView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                  </children>
+                                </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                      </children>
+                    </AnchorPane>
+                     <!-- <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="-1.0" prefWidth="-1.0" visible="false">
+                      <children>
+                        <WebView fx:id="helpWebView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                      </children>
+                    </AnchorPane>
+                      -->
+                  </items>
+                  <VBox.margin>
+                    <Insets fx:id="x1" />
+                  </VBox.margin>
+                </SplitPane>
+              </children>
+            </VBox>
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <AnchorPane prefHeight="102.0" prefWidth="30.0">
+                  <children>
+                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="1.0" style="-fx-background-color: #EEEEEE;&#10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Button contentDisplay="GRAPHIC_ONLY" minWidth="30.0" mnemonicParsing="false" prefWidth="30.0" styleClass="toolbarButton" text="Button">
+                          <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                <Image url="@../../../resources/Windows-Close-Program-icon.png" />
+                              </image>
+                            </ImageView>
+                          </graphic>
+                        </Button>
+                        <Button fx:id="clearLogButton" contentDisplay="GRAPHIC_ONLY" minWidth="30.0" mnemonicParsing="false" onAction="#handleClearLogButton" prefWidth="30.0" styleClass="toolbarButton" text="Button">
+                          <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                <Image url="@../../../resources/Actions-draw-eraser-icon.png" />
+                              </image>
+                            </ImageView>
+                          </graphic>
+                        </Button>
+                      </children>
+                      <padding>
+                        <Insets top="5.0" />
+                      </padding>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+                <TextArea id="log" fx:id="logTextArea" prefHeight="102.0" prefWidth="949.0" wrapText="true" HBox.hgrow="ALWAYS">
+                  <HBox.margin>
+                    <Insets right="1.0" />
+                  </HBox.margin>
+                </TextArea>
+              </children>
+            </HBox>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+  <stylesheets>
+    <URL value="@style-default.css" />
+  </stylesheets>
+</AnchorPane>

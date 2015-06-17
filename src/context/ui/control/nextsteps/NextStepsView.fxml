@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" fx:id="root" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+    <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+            <Label fx:id="messageLabel" layoutX="59.0" layoutY="58.0" prefHeight="33.0" prefWidth="541.0" text="Process Sucessfully Done.">
+                <font>
+                    <Font name="Arial Bold" size="20.0" fx:id="x1" />
+                </font>
+            </Label>
+            <Label font="$x1" maxWidth="-1.0" minWidth="-1.0" pickOnBounds="false" prefHeight="39.0" prefWidth="600.0" styleClass="control-header" text="Next Step..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <VBox id="vboxId" fx:id="vbox" prefHeight="275.0" prefWidth="493.0" spacing="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0" />
+        </children>
+        <stylesheets>
+            <URL value="@../../../app/main/style-default.css" />
+        </stylesheets>
+    </AnchorPane>
+    <stylesheets>
+        <URL value="@../../../app/main/style-default.css" />
+    </stylesheets>
+</fx:root>

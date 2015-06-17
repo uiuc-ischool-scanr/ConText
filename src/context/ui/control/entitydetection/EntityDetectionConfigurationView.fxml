@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.entitydetection.EntityDetectionConfigurationController">
+  <children>
+    <Label maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <font>
+        <Font size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Stopword List" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+    <ComboBox id="codebookMethod" fx:id="modelComboBox" layoutX="118.0" layoutY="117.0" prefHeight="23.0" prefWidth="152.0" promptText="" styleClass="smallerfont">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+    <Label layoutX="53.0" layoutY="118.0" text="Model">
+      <labelFor>
+        <ComboBox id="codebookMethod" layoutX="100.0" layoutY="141.0" prefWidth="138.5" promptText="Select Method">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+      </labelFor>
+    </Label>
+    <Label layoutX="51.0" layoutY="168.0" text="Output" visible="false" />
+    <RadioButton fx:id="slashTagsRadioButton" layoutX="118.0" layoutY="168.0" mnemonicParsing="false" text="slashTags" visible="false">
+      <toggleGroup>
+        <ToggleGroup fx:id="group1" />
+      </toggleGroup>
+    </RadioButton>
+    <RadioButton fx:id="innerXMLRadioButton" layoutX="218.0" layoutY="168.0" mnemonicParsing="false" text="innerXML" toggleGroup="$group1" visible="false" />
+    <RadioButton id="html" fx:id="htmlRadioButton" layoutX="322.0" layoutY="168.0" mnemonicParsing="false" text="HTML" toggleGroup="$group1" visible="false" />
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

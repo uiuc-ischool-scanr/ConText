@@ -1,0 +1,48 @@
+acomp,adjectival complement
+amod,adjectival modifier
+advcl,adverbial clause modifier
+advmod,adverbial modifier
+agent,agent
+appos,appositional modifier
+aux,auxiliary
+ccomp,clausal complement
+csubjpass,clausal passive subject
+csubj,clausal subject
+conj,conjunct
+xsubj,controlling subject
+cc,coordination
+cop,copula
+dep,dependent
+det,determiner
+dobj,direct object
+discourse,discourse element
+number,element of compound number
+expl,expletive
+goeswith,goes with
+iobj,indirect object
+mark,marker
+mwe,multi-word expression
+neg,negation modifier
+nsubj,nominal subject
+nn,noun compound modifier
+npadvmod,noun phrase as adverbial modifier
+num,numeric modifier
+pobj,object of a preposition
+xcomp,open clausal complement
+parataxis,parataxis
+auxpass,passive auxiliary
+nsubjpass,passive nominal subject
+prt,phrasal verb particle
+poss,possession modifier
+possessive,possessive modifier
+preconj,preconjunct
+predet,predeterminer
+prepc,prepositional clausal modifier
+pcomp,prepositional complement
+prep,prepositional modifier
+punct,punctuation
+quantmod,quantifier phrase modifier
+vmod,reduced non-finite verbal modifier
+ref ,referent
+root,root
+tmod,temporal modifier

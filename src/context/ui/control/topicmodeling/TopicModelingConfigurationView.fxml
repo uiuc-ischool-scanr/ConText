@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.topicmodeling.TopicModelingConfigurationController">
+  <children>
+    <TextField fx:id="stopwordFileTextField" layoutX="35.0" layoutY="326.0" minHeight="25.0" prefWidth="406.0" />
+    <Button fx:id="browseButton" layoutX="449.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="86.0" styleClass="highlightsButton" text="Browse...">
+      <font>
+        <Font size="14.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Label graphicTextGap="0.0" layoutY="46.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Topics" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <font>
+        <Font size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <HBox layoutY="222.0" prefHeight="30.0" prefWidth="443.0" spacing="40.0" AnchorPane.leftAnchor="78.5" AnchorPane.rightAnchor="78.5" />
+    <Label fx:id="titleLabel" font="$x1" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Stopword List" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="264.0" />
+    <TextField id="numberOfTopics" fx:id="numberOfTopicsTextField" layoutX="330.0" layoutY="111.0" prefWidth="108.0" />
+    <TextField fx:id="wordsPerTopicsTextField" layoutX="330.0" layoutY="149.0" prefWidth="108.0" />
+    <TextField fx:id="numberOfIterationsTextField" layoutX="333.0" layoutY="188.0" prefWidth="108.0" />
+    <Label layoutX="134.0" layoutY="114.0" text="Number of Topics" />
+    <Label layoutX="134.0" layoutY="152.0" text="Number of Words per Topic" />
+    <Label layoutX="134.0" layoutY="191.0" text="Number of Iterations" />
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

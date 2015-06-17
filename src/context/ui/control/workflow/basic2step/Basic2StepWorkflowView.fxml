@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" fx:id="rootPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="485.0" prefWidth="694.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <children>
+      <TabPane fx:id="tabPane" prefHeight="254.0" prefWidth="200.0" rotateGraphic="true" side="LEFT" style="-fx-tab-min-width: 150px; &#10;-fx-tab-max-width: 150px; &#10;-fx-tab-min-height: 130px;&#10;-fx-tab-max-height: 130px; &#10;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab id="tab1" fx:id="tab1" style="" text="">
+            <content>
+              <AnchorPane id="Content" prefHeight="167.0" prefWidth="200.0" styleClass="category-page">
+                <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="control-page" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                    <children>
+                      <AnchorPane fx:id="pane1" maxWidth="1.7976931348623157E308" prefHeight="365.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+                        <VBox.margin>
+                          <Insets fx:id="x4" />
+                        </VBox.margin>
+                      </AnchorPane>
+                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                        <children>
+                          <Button fx:id="step1NextButton" alignment="CENTER" contentDisplay="RIGHT" minHeight="-1.0" mnemonicParsing="false" onAction="#handleStep1NextButton" prefHeight="-1.0" prefWidth="105.0" text="Next" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                            <font>
+                              <Font size="16.0" fx:id="x2" />
+                            </font>
+                            <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                  <Image url="@../../../../../resources/Actions-go-next-view-icon64.png" />
+                                </image>
+                              </ImageView>
+                            </graphic>
+                            <HBox.margin>
+                              <Insets bottom="33.0" left="10.0" right="25.0" fx:id="x7" />
+                            </HBox.margin>
+                          </Button>
+                        </children>
+                      </HBox>
+                    </children>
+                  </VBox>
+                </children>
+                <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x1" />
+                </padding>
+              </AnchorPane>
+            </content>
+            <graphic>
+              <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="4.0" maxHeight="82.0" minHeight="60.0" prefHeight="82.0" prefWidth="95.0" rotate="90.0" scaleX="1.0" style="-fx-rotate: 90;" text="STEP 1" textAlignment="CENTER" textOverrun="CLIP">
+                <font>
+                  <Font size="18.0" fx:id="x3" />
+                </font>
+                <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                      <Image url="@../../../../../resources/downloads-icon.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Label>
+            </graphic>
+          </Tab>
+          <Tab fx:id="tab3" style="" text="">
+            <content>
+              <AnchorPane id="Content" prefHeight="167.0" prefWidth="200.0" styleClass="category-page">
+                <children>
+                  <VBox prefHeight="465.0" prefWidth="537.0" styleClass="control-page" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                    <children>
+                      <AnchorPane fx:id="pane3" maxWidth="1.7976931348623157E308" prefHeight="365.0" prefWidth="-1.0" VBox.margin="$x4" VBox.vgrow="ALWAYS" />
+                      <VBox prefHeight="100.0" prefWidth="-1.0" VBox.vgrow="NEVER">
+                        <children>
+                          <HBox alignment="CENTER_RIGHT" minHeight="46.0" prefHeight="46.0" prefWidth="537.0" VBox.vgrow="ALWAYS">
+                            <children>
+                              <Button fx:id="step3BackButton" alignment="CENTER" contentDisplay="LEFT" font="$x2" mnemonicParsing="false" onAction="#handleStep3BackButton" prefHeight="-1.0" prefWidth="100.0" text="Back" textAlignment="CENTER">
+                                <graphic>
+                                  <ImageView id="step3Back" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                      <Image url="@../../../../../resources/Actions-go-previous-view-icon64.png" />
+                                    </image>
+                                  </ImageView>
+                                </graphic>
+                                <HBox.margin>
+                                  <Insets bottom="15.0" left="10.0" right="10.0" top="20.0" fx:id="x6" />
+                                </HBox.margin>
+                              </Button>
+                              <Button fx:id="step3RunButton" alignment="CENTER" contentDisplay="RIGHT" font="$x2" minHeight="-1.0" mnemonicParsing="false" onAction="#handleStep3RunButton" prefHeight="-1.0" prefWidth="100.0" text="Run" textAlignment="CENTER">
+                                <graphic>
+                                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                      <Image url="@../../../../../resources/Gears-icon64.png" />
+                                    </image>
+                                  </ImageView>
+                                </graphic>
+                                <HBox.margin>
+                                  <Insets bottom="15.0" left="10.0" right="25.0" top="20.0" />
+                                </HBox.margin>
+                              </Button>
+                            </children>
+                            <VBox.margin>
+                              <Insets fx:id="x4" />
+                            </VBox.margin>
+                          </HBox>
+                          <Label id="progressLabelId" fx:id="progressLabel" prefWidth="537.0" text="" VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                              <Insets left="5.0" />
+                            </VBox.margin>
+                          </Label>
+                          <ProgressBar id="progressBarId" fx:id="progressBar" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="22.0" prefWidth="-1.0" progress="0.0" visible="false" VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                              <Insets fx:id="x42" />
+                            </VBox.margin>
+                          </ProgressBar>
+                        </children>
+                        <VBox.margin>
+                          <Insets fx:id="x4" />
+                        </VBox.margin>
+                      </VBox>
+                    </children>
+                  </VBox>
+                </children>
+                <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x11" />
+                </padding>
+              </AnchorPane>
+            </content>
+            <graphic>
+              <Label id="tab3" alignment="CENTER" contentDisplay="TOP" font="$x3" graphicTextGap="4.0" maxHeight="82.0" minHeight="60.0" prefHeight="82.0" prefWidth="90.0" rotate="90.0" scaleX="1.0" style="-fx-rotate: 90;" text="STEP 2" textAlignment="CENTER" textOverrun="CLIP">
+                <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                      <Image url="@../../../../../resources/Misc-Stats-icon.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Label>
+            </graphic>
+          </Tab>
+        </tabs>
+      </TabPane>
+    </children>
+  </AnchorPane>
+  <stylesheets>
+    <URL value="@../../../../app/main/style-default.css" />
+  </stylesheets>
+</fx:root>

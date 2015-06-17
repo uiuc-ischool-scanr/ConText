@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="false" prefHeight="400.0" prefWidth="600.0" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.input.BasicInputViewController">
+  <children>
+    <ListView id="fileListView" fx:id="inputListView" layoutX="59.0" layoutY="99.0" prefHeight="200.0" prefWidth="211.0" />
+    <Label layoutX="59.0" layoutY="72.0" text="Select Input from existing" />
+    <Label layoutX="59.0" layoutY="315.0" text="or import new one" />
+    <Button id="importFileButton" fx:id="importButton" layoutX="192.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleImportButton" text="Browse..." />
+    <Label fx:id="selectedItemLabel" layoutX="59.0" layoutY="351.0" prefWidth="527.0" text="" />
+    <Label fx:id="titleLabel" prefHeight="33.0" prefWidth="600.0" styleClass="control-header" text="Input Data" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

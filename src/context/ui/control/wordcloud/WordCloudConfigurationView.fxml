@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.wordcloud.WordCloudConfigurationController">
+  <children>
+    <TextField fx:id="stopwordFileTextField" layoutX="139.0" layoutY="97.0" minHeight="25.0" prefWidth="304.0" />
+    <Button id="browseButton" fx:id="browsestopwordsButton" layoutX="449.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleBrowsestopwordsButton" prefHeight="25.0" prefWidth="86.0" styleClass="highlightsButton" text="Browse...">
+      <font>
+        <Font size="14.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Label fx:id="titleLabel" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <font>
+        <Font size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Topic Modeling Properties" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+    <Label layoutX="45.0" layoutY="100.0" text="Stop List" />
+    <Label layoutX="43.0" layoutY="171.0" text="Number of Topics" />
+    <Label layoutX="44.0" layoutY="203.0" text="Words per Topic" />
+    <Label layoutX="44.0" layoutY="233.0" text="Number of Iterations" />
+    <TextField fx:id="numberOfTopicsTextField" layoutX="188.0" layoutY="168.0" prefWidth="144.0" />
+    <TextField fx:id="wordsPerTopicTextField" layoutX="188.0" layoutY="200.0" prefWidth="144.0" />
+    <TextField fx:id="numberOfIterationTextField" layoutX="188.0" layoutY="230.0" prefWidth="144.0" />
+    <Label layoutX="44.0" layoutY="313.0" text="Cloud Type" />
+    <fx:define>
+        <ToggleGroup fx:id="cloudTypeToggleGroup" />
+    </fx:define>
+    <RadioButton fx:id="singleTypeRadioButton" layoutX="154.0" layoutY="313.0" mnemonicParsing="false" text="Single" toggleGroup="$cloudTypeToggleGroup" />
+    <RadioButton fx:id="clusteredTypeRadioButton" layoutX="260.0" layoutY="313.0" mnemonicParsing="false" text="Clustered" toggleGroup="$cloudTypeToggleGroup" />
+    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Cloud Visual Properties" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="265.0" />
+    <Label layoutX="48.0" layoutY="372.0" styleClass="smallerfont" text="Width">
+      <textFill>
+        <Color blue="0.375" green="0.375" red="0.375" fx:id="x3" />
+      </textFill>
+    </Label>
+    <TextField fx:id="widthTextField" layoutX="43.0" layoutY="347.0" prefWidth="86.0" />
+    <TextField fx:id="heightTextField" layoutX="147.0" layoutY="347.0" prefWidth="86.0" />
+    <TextField fx:id="minFontSizeTextField" layoutX="260.0" layoutY="347.0" prefWidth="70.0" />
+    <Label layoutX="153.0" layoutY="373.0" styleClass="smallerfont" text="Height" textFill="$x3" />
+    <Label layoutX="265.0" layoutY="375.0" styleClass="smallerfont" text="Font Size" textFill="$x3" />
+    <Label layoutX="44.0" layoutY="136.0" text="Sentiment List" />
+    <TextField id="stopwordFileTextField" fx:id="sentimentListTextField" layoutX="140.0" layoutY="133.0" minHeight="25.0" prefWidth="304.0" />
+    <Button id="browseButton" fx:id="browseSentimentListButton" font="$x2" layoutX="449.0" layoutY="133.0" mnemonicParsing="false" onAction="#handleBrowseSentimentListButton" prefHeight="25.0" prefWidth="86.0" styleClass="highlightsButton" text="Browse..." />
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

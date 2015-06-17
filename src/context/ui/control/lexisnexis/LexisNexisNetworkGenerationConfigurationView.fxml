@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="558.0" styleClass="mainFxmlClass, root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.lexisnexis.LexisNexisNetworkGenerationConfigurationController">
+  <children>
+    <GridPane gridLinesVisible="false" layoutX="45.0" layoutY="78.0" prefWidth="169.0">
+      <children>
+        <CheckBox fx:id="LLCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="OLCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="PLCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="SLCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="SOCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="POCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="OOCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="PPCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="SSCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="SPCheckBox" mnemonicParsing="false" text="" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Label text="L" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+          <font>
+            <Font size="15.0" fx:id="x2" />
+          </font>
+        </Label>
+        <Label font="$x2" text="O" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <Label font="$x2" text="P" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <Label font="$x2" text="S" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <Label font="$x2" text="L" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Label font="$x2" text="O" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Label font="$x2" text="P" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <Label font="$x2" text="S" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="21.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="37.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="9.0" prefWidth="34.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="9.0" prefWidth="39.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="368.0" minWidth="10.0" prefWidth="36.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label layoutX="81.0" layoutY="247.0" prefHeight="20.0" prefWidth="133.0" text="L: Location" wrapText="false" />
+    <Label layoutX="78.0" layoutY="267.0" prefHeight="20.0" prefWidth="141.0" text="O: Organization" wrapText="false" />
+    <Label layoutX="78.0" layoutY="287.0" prefHeight="20.0" prefWidth="141.0" text="P: Person" wrapText="false" />
+    <Label layoutX="78.0" layoutY="307.0" prefHeight="16.0" prefWidth="141.0" text="S: Subject" wrapText="false" />
+    <Label layoutX="295.0" layoutY="130.0" prefHeight="20.0" prefWidth="76.0" text="Threshold" />
+    <TextField fx:id="thresholdTextField" layoutX="362.0" layoutY="128.0" prefWidth="105.0" />
+    <Label fx:id="titleLabel" prefHeight="31.0" prefWidth="558.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <font>
+        <Font size="14.0" fx:id="x3" />
+      </font>
+    </Label>
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

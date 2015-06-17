@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="531.0" prefWidth="808.0" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.filelist.FileListViewerController">
+  <children>
+    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <WebView fx:id="webView" prefHeight="427.0" prefWidth="808.0" />
+        <AnchorPane prefHeight="86.99990000000253" prefWidth="808.0">
+          <children>
+            <HBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <Button fx:id="goTofirstDocButton" contentDisplay="GRAPHIC_ONLY" minWidth="75.0" mnemonicParsing="false" onAction="#handleGoToFirstDocButton" prefHeight="-1.0" prefWidth="85.0" text="Button" HBox.hgrow="NEVER">
+                  <graphic>
+                    <ImageView fitHeight="70.0" fitWidth="70.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
+                      <image>
+                        <Image url="@../../../../resources/Actions-go-first-view-icon-64.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                  <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+                  </HBox.margin>
+                </Button>
+                <Button fx:id="goToPreviousDocButton" contentDisplay="GRAPHIC_ONLY" minWidth="75.0" mnemonicParsing="false" onAction="#handleGoToPreviousDocButton" prefHeight="-1.0" prefWidth="85.0" text="Button" HBox.hgrow="NEVER">
+                  <graphic>
+                    <ImageView fitHeight="70.0" fitWidth="70.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
+                      <image>
+                        <Image url="@../../../../resources/Actions-go-previous-view-icon64.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                  <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x2" />
+                  </HBox.margin>
+                </Button>
+                <Label fx:id="fileCounterLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="700.0" minWidth="-Infinity" prefHeight="30.0" prefWidth="400.0" text="Label" textAlignment="CENTER" HBox.hgrow="ALWAYS" HBox.margin="$x1">
+                  <font>
+                    <Font size="14.0" />
+                  </font>
+                </Label>
+                <Button fx:id="goToNextDocButton" contentDisplay="GRAPHIC_ONLY" minWidth="75.0" mnemonicParsing="false" onAction="#handleGoToNextDocButton" prefHeight="-1.0" prefWidth="85.0" text="Button" HBox.hgrow="NEVER">
+                  <graphic>
+                    <ImageView fitHeight="70.0" fitWidth="70.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
+                      <image>
+                        <Image url="@../../../../resources/Actions-go-next-view-icon64.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                  <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x3" />
+                  </HBox.margin>
+                </Button>
+                <Button fx:id="goToLastDocButton" contentDisplay="GRAPHIC_ONLY" minWidth="75.0" mnemonicParsing="false" onAction="#handleGoToLastDocButton" prefHeight="-1.0" prefWidth="85.0" text="Button" HBox.hgrow="NEVER">
+                  <graphic>
+                    <ImageView fitHeight="70.0" fitWidth="70.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
+                      <image>
+                        <Image url="@../../../../resources/Actions-go-last-view-icon64.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                  <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x4" />
+                  </HBox.margin>
+                </Button>
+              </children>
+              <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x5" />
+              </padding>
+            </HBox>
+          </children>
+        </AnchorPane>
+      </children>
+    </VBox>
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" prefWidth="800.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.ui.control.csvparser.CsvParserConfigurationController">
+  <children>
+    <Label fx:id="titleLabel" font="$x1" maxWidth="1.7976931348623157E308" prefHeight="46.0" styleClass="control-header" text="Configuration" />
+    <Label graphicTextGap="0.0" layoutY="46.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Parse CSV Files" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <font>
+        <Font size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+      <Label layoutX="35.0" layoutY="99.0" prefHeight="46.0" prefWidth="535.0" text="Each CSV file should include the header. Please select the CSV separator and CSV quote character. If no quote character is using, please select &quot;none&quot;." wrapText="true" />
+      <Label id="csvSeparatorLabel" layoutX="35.0" layoutY="173.0" text="CSV Separator" />
+    <ComboBox id="csvSeparatorComboBox" fx:id="csvSeparatorComboBox" layoutX="172.0" layoutY="168.0" onAction="#handleCsvSeparatorComboBox" prefHeight="28.0" prefWidth="197.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+      <TextField id="csvSeparatorCustomTextField" fx:id="csvSeparatorCustomTextField" layoutX="382.0" layoutY="168.0" prefHeight="28.0" prefWidth="52.0" />
+      <Label id="csvQuoteCharLabel" fx:id="csvQuoteCharLabel" layoutX="459.0" layoutY="173.0" text="CSV Quote Character" />
+      <ComboBox id="csvQuoteCharComboBox" fx:id="csvQuoteCharComboBox" layoutX="612.0" layoutY="168.0" prefHeight="28.0" prefWidth="107.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList" />
+         </items>
+      </ComboBox>
+    <Button fx:id="LoadColumnButton" layoutX="172.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleLoadColumnButton" text="Load Columns" />
+    <Label id="textColumnLabel" layoutX="33.0" layoutY="249.0" text="Text Column" />
+    <ComboBox id="textColumnComboBox" fx:id="textColumnComboBox" layoutX="172.0" layoutY="244.0" prefHeight="28.0" prefWidth="197.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+    <Label id="groupByColumnLabel" layoutX="35.0" layoutY="287.0" text="Group by Column" />
+      <ComboBox id="groupByColumnComboBox" fx:id="groupByColumnComboBox" layoutX="172.0" layoutY="282.0" prefHeight="28.0" prefWidth="197.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList" />
+         </items>
+      </ComboBox>
+      <Label layoutX="33.0" layoutY="316.0" prefHeight="46.0" prefWidth="535.0" text="Only create a group if the group size is greater than or equal to" wrapText="true" />
+      <Label layoutX="33.0" layoutY="347.0" prefHeight="46.0" prefWidth="535.0" text="Items without a group will be saved in the &quot;default.txt&quot; file." wrapText="true" />
+      <TextField id="groupThresholdTextField" fx:id="groupThresholdTextField" layoutX="478.0" layoutY="325.0" prefHeight="28.0" prefWidth="52.0" />
+      
+      
+  </children>
+  <stylesheets>
+    <URL value="@../../../app/main/style-default.css" />
+  </stylesheets>
+</AnchorPane>

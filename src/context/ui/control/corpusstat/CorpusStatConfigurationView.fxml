@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.ui.control.corpusstat.CorpusStatConfigurationController">
+    <children>
+        <Label maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <font>
+                <Font size="15.0" fx:id="x1" />
+            </font>
+        </Label>
+        <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+      <CheckBox fx:id="includePOSCheckBox" layoutX="50.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleIncludePOSCheckBox" text="Results include POS" />
+      <ComboBox fx:id="languageComboBox" layoutX="333.0" layoutY="103.0" prefHeight="30.0" prefWidth="120.0" />
+      <Label fx:id="languageLabel" layoutX="266.0" layoutY="108.0" text="Language" />
+    </children>
+    <stylesheets>
+        <URL value="@../../../app/main/style-default.css" />
+    </stylesheets>
+</AnchorPane>

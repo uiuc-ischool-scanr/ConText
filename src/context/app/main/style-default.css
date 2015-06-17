@@ -1,0 +1,153 @@
+.root {
+    -fx-font-size: 14px;
+}
+
+.smallerfont {
+    -fx-font-size: 12px;
+}
+.toolbarButton {
+    -fx-background-color: #EEEEEE;
+    -fx-border-color: #EEEEEE;
+}
+
+.highlightsButton:hover{
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.6) , 10, 0.5 , 0 , 0 );
+}
+.highlightsButton:focused{
+    -fx-effect: dropshadow( three-pass-box , -fx-focus-color , 5, 0.7 , 0 , 0 );
+}
+
+.toolbarButton:hover {
+    -fx-background-color: linear-gradient(#E2E2E2, #E5E5E5);
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}   
+
+
+.nextstepsLabel {
+    -fx-font-size: 20px;
+}
+.nextstepsLabel:hover {
+    -fx-font-weight: bold;
+}
+.nextstepsLabel:pressed {
+    -fx-font-weight: bold;
+    -fx-text-fill: blue;
+}
+
+
+/* Page Styles */
+.control-page {
+    -fx-background-color: black, white, 
+        linear-gradient(to right,rgb(230,230,230), rgb(250,250,250),rgb(230,230,230));
+    /*-fx-background-image: url("../../../resources/texture.jpg");
+    -fx-background-repeat: repeat repeat;
+    -fx-background-position: left top;
+    -fx-padding: 8px;
+    */
+}
+
+.control-header {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent transparent #AAAAAA transparent;
+    -fx-text-fill: #0072aa;
+    -fx-padding: 10px;
+    -fx-text-fill: rgba(10,10,10,0.8);
+    -fx-background-color: black, white, 
+        linear-gradient(to right,rgb(220,220,220), rgb(240,240,240),rgb(220,220,220));
+    /*  -fx-effect: dropshadow( three-pass-box , white , 0, 0.0 , 10 , 1 ); */
+}
+
+.control-sub-header {
+    -fx-background-image: url("../../../resources/texture.jpg");
+    -fx-background-repeat: repeat repeat;
+    -fx-background-position: left top;
+    /*-fx-background-insets: 4 -8 4 -8; */
+    -fx-border-color: rgba(255,255,255,0.2) transparent rgba(255,255,255,0.2) transparent;
+    /*-fx-border-insets: 3 -8 3 -8;*/
+
+    -fx-padding: 6px 10px 8px 10px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(white, #c1c8cc); 
+    -fx-effect: innershadow( three-pass-box , rgba(255,255,255,0.7) , 0, 0.0 , 0 , -1 );
+}
+
+
+/* UNUSED CSS */
+/*
+.page-subheader {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 0 2px 0;
+    -fx-border-color: transparent transparent #AAAAAA transparent;
+    -fx-border-insets: 0 0 8px 0;
+    -fx-text-fill: #0072aa;
+     -fx-effect: dropshadow( three-pass-box , white , 0, 0.0 , 10 , 1 ); 
+}
+
+.window-button {
+    -fx-background-color: #616161, #464646, #505050;
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 6,5,4;
+    -fx-padding: 0 0 0 0;
+    }
+
+.window-button:focused {
+    -fx-background-color: -fx-accent, #464646, #505050;
+    -fx-background-insets: -0.4,1,2;
+    -fx-background-radius: 6.4,5,4;
+}
+.window-button:hover {
+    -fx-background-color: #616161, white, -fx-accent;
+}
+.window-button:pressed {
+    -fx-background-color: #616161, white, #303030;
+}
+.window-button Rectangle {
+    -fx-fill: #949494;
+}
+.window-button:hover Rectangle {
+    -fx-fill: white;
+}
+
+
+.category-page-flow {
+    -fx-padding: 3px 0 8px 0;
+}
+.sample-tile {
+    -fx-text-fill: white;
+    -fx-graphic-hpos: center;
+    -fx-graphic-vpos: top;
+    -fx-alignment: center;
+    -fx-padding: 4px 4px 3px 4px;
+    -fx-font-size: 14px;
+}
+
+.sample-tile .text {
+    -fx-font-smoothing-type: lcd;
+}
+
+.sample-tile:hover {
+       -fx-border-color: derive(-fx-accent,80%), -fx-accent, derive(-fx-accent,80%);
+       -fx-border-insets: -1,0,1;
+       -fx-border-radius: 7,6,5; 
+    -fx-effect: dropshadow( three-pass-box , white , 8 , 0.4 , 0 , 0 );
+}
+.sample-tile:focused {
+    -fx-effect: dropshadow( three-pass-box , derive(-fx-focus-color, 20%), 12 , 0.6 , 0 , 0 );
+}
+
+
+.tree-cell .tree-disclosure-node .arrow {
+    -fx-shape: null;
+    -fx-background-color: null;
+    -fx-background-image: url("../../../resources/tree_plus.gif");
+}
+.tree-cell:expanded .tree-disclosure-node .arrow {
+    -fx-shape: null;
+    -fx-background-color: null;
+    -fx-background-image: url("../../../resources/tree_minus.gif");
+}
+*/
