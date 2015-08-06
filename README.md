@@ -38,7 +38,7 @@ Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen, Chie
 ### U of I Codes
 The following files are released under **GNU General Public License version 2.0 or later** license:
 * All files in directory "build"
-* All files in directory ìinstallerî
+* All files in directory ‚Äúinstaller‚Äù
 * All files in directory "logo"
 * All files in directory "src"
 * .classpath, .project, build.fxbuild, build.xml, mainfest.mf, and train_model.sh
@@ -78,6 +78,10 @@ The following dependencies are required for the application, and should be used 
  * http://opencsv.sourceforge.net/ 
  * Apache license 2.0
  * Copyright 2007,2010 Kyle Miller.
+ 
+* Sentiment Word Clusters
+ * https://github.com/napsternxg/SentimentWordClusters
+ * Apache License 2.0
 
 
 #### GNU License:
@@ -100,6 +104,18 @@ The following dependencies are required for the application, and should be used 
  * http://nlp.stanford.edu/software/corenlp.shtml
  * GNU General Public License (v3 or later)
  * Manning, Christopher D., Surdeanu, Mihai, Bauer, John, Finkel, Jenny, Bethard, Steven J., and McClosky, David. 2014. [The Stanford CoreNLP Natural Language Processing Toolkit](http://nlp.stanford.edu/pubs/StanfordCoreNlp2014.pdf). In *Proceedings of 52nd Annual Meeting of the Association for Computational Linguistics: System Demonstrations*, pp. 55-60. [[pdf](http://nlp.stanford.edu/pubs/StanfordCoreNlp2014.pdf)] [[bib](http://nlp.stanford.edu/pubs/StanfordCoreNlp2014.bib)]
+
+
+* Stanford Named Entity Recognizer (NER)
+ * http://nlp.stanford.edu/software/CRF-NER.shtml
+ * GNU General Public License (v2 or later)
+ * Note: We are using the following files in the data/Classifiers folder: 
+ english.all.3class.distsim.crf.ser.gz, english.all.3class.distsim.prop,
+ english.conll.4class.distsim.crf.ser.gz, english.conll.4class.distsim.prop,
+ english.muc.7class.distsim.crf.ser.gz, english.muc.7class.distsim.prop,
+ ner-eng-ie.crf-3-all2008-distsim.ser.gz, ner-eng-ie.crf-3-all2008.ser.gz,
+ ner-eng-ie.crf-4-conll-distsim.ser.gz, ner-eng-ie.crf-4-conll.ser.gz
+
 
 * Stanford Parser:
  * http://nlp.stanford.edu/software/lex-parser.shtml
@@ -131,10 +147,6 @@ The following dependencies are required for the application, and should be used 
 
 
 #### Other Licenses:
-
-* Brat:
- * http://brat.nlplab.org/
- * [MIT License](https://github.com/nlplab/brat/blob/master/LICENSE.md)
 
 * D3.js:
  * http://d3js.org/
