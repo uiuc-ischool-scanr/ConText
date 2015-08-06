@@ -28,7 +28,7 @@ public class MalletTopicModeling {
      * @param stopListPath
      * @return
      */
-        public String[] topicModeling(int numTopics, int numWordsPerTopic, int numIterations, List<FileData> CorpusFiles, String stopListPath) {
+        public String[] topicModeling(int numTopics, int numWordsPerTopic, int numIterations, List<FileData> CorpusFiles, String stopListPath, Boolean isLowercase) {
 
         // Begin by importing documents from text to feature sequences
         ArrayList<Pipe> pipeList = new ArrayList<Pipe>();
@@ -56,7 +56,15 @@ public class MalletTopicModeling {
             fileList[indx] = filename;
             indx++;
             try {
+            	if (isLowercase) {
+					final String filecontent = JavaIO.readFile(filename);
+					String fileContentLowerCase = filecontent.toLowerCase();
+					instances.addThruPipe(new Instance(fileContentLowerCase, Integer.toString(indx), Integer.toString(indx), Integer
+							.toString(indx)));
+            	}
+            	else {
                 instances.addThruPipe(new Instance(JavaIO.readFile(filename), Integer.toString(indx), Integer.toString(indx), Integer.toString(indx)));
+            	}
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -117,13 +125,49 @@ public class MalletTopicModeling {
         double[] SumSquareTopicFit = new double[model.getNumTopics()];
         Object[][] TopWords = model.getTopWords(numWordsPerTopic);
 
+        
+        //Need to Edit it!!!!
+        for (int doc = 0; doc < TopicDist.length; doc++) {
+            //String tempString = "";
+            //tempString = tempString.concat(CorpusFiles.get(doc).getFile().getName());
+            for (int topic = 0; topic < TopicDist[doc].length; topic++) {
+                //tempString = tempString.concat("," + Double.toString(TopicDist[doc][topic]));
+                AverageTopicFit[topic] += TopicDist[doc][topic];
+                SumSquareTopicFit[topic] += Math.pow(TopicDist[doc][topic], 2);
+            }
+            //tempString = tempString.concat("\n");
+            //System.out.println(tempString);
+            //docProbs = docProbs.concat(tempString);
+        }
+        
+        
+        /*
+         * Edited by Ming Jiang to sort topics based on AverageTopicFit (decreased order)
+         */
+        
+        double[] AvgTFit = new double[numTopics];
+        List<Double> ATF = new ArrayList();
+        for (int topic = 0 ; topic < numTopics ; topic ++){
+        	AvgTFit[topic] =  AverageTopicFit[topic] / CorpusFiles.size();
+        	ATF.add(AvgTFit[topic]);
+        }
+        
+        AvgTFit = Sorted_Topic_Index(AvgTFit, numTopics);
+        
         for (int doc = 0; doc < TopicDist.length; doc++) {
             String tempString = "";
             tempString = tempString.concat(CorpusFiles.get(doc).getFile().getName());
+            Map<Integer, String> Doc_Top_Dist = new HashMap<Integer, String>();
             for (int topic = 0; topic < TopicDist[doc].length; topic++) {
-                tempString = tempString.concat("," + Double.toString(TopicDist[doc][topic]));
-                AverageTopicFit[topic] += TopicDist[doc][topic];
-                SumSquareTopicFit[topic] += Math.pow(TopicDist[doc][topic], 2);
+            	int key = ATF.indexOf(AvgTFit[topic]);
+                //tempString = tempString.concat("," + Double.toString(TopicDist[doc][key]));
+            	Doc_Top_Dist.put(key, Double.toString(TopicDist[doc][key]));
+                //AverageTopicFit[topic] += TopicDist[doc][topic];
+                //SumSquareTopicFit[topic] += Math.pow(TopicDist[doc][topic], 2);
+            }
+            
+            for (int key = 0 ; key < Doc_Top_Dist.size() ; key ++){
+            	tempString = tempString.concat("," + Doc_Top_Dist.get(key));
             }
             tempString = tempString.concat("\n");
             System.out.println(tempString);
@@ -134,11 +178,13 @@ public class MalletTopicModeling {
             String tempString = "";
 
             tempString = tempString.concat("Topic" + Integer.toString(topic+1) + ",");
-            tempString = tempString.concat(Double.toString(AverageTopicFit[topic] / CorpusFiles.size()) + ",");
+            //tempString = tempString.concat(Double.toString(AverageTopicFit[topic] / CorpusFiles.size()) + ",");
+            int key = ATF.indexOf(AvgTFit[topic]);
+            tempString = tempString.concat(Double.toString(AvgTFit[topic]) + ",");
             //tempString = tempString.concat(Double.toString(SumSquareTopicFit[topic]/numTopics) + ",");
 
             for (int word = 0; word < numWordsPerTopic; word++) {
-                tempString = tempString.concat((String) TopWords[topic][word] + " - ");
+                tempString = tempString.concat((String) TopWords[key][word] + " - ");
             }
             tempString = tempString.concat("\n");
             System.out.println(tempString);
@@ -150,5 +196,35 @@ public class MalletTopicModeling {
         allOuts[1] = docProbs;
         return allOuts;
     }
+        
+     
+        // Sort the averagefit of each topic
+        double[] Sorted_Topic_Index (double[]AvgTFit, int numtopic){
+        	
+        	int k = 0;
+        	for (int m = numtopic; m >= 0 ; m --){
+        		for (int i = 0 ; i < numtopic - 1 ; i ++){
+        			k = i + 1;
+        			if (AvgTFit[i] < AvgTFit[k]){
+        				swapValues(i, k, AvgTFit);
+        			}
+        			
+        		}
+        	}
+        	
+        	return AvgTFit;
+        }
+        
+        private void swapValues(int i, int j, double[] array) {
+        	  
+            double temp;
+            temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        
+        /*
+         * End of Edition by Ming Jiang
+         */
 
 }

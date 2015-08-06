@@ -107,6 +107,7 @@ public class TopicModelingController extends BasicWorkflowController {
         instance.setNumTopics(confController.getNumberOfTopics());
         instance.setNumWordsPerTopic(confController.getNumberOfWordsPerTopics());
         instance.setStopListLoc(confController.getStopwordFile());
+        instance.setIsLowercase(confController.getIsLowercase());
 
         System.out.println(instance);
         CTask task = new TopicModelingTask(this.getProgress(), this.getProgressMessage());

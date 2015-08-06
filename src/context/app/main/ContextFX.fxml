@@ -63,7 +63,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleExitMenuItem" text="Exit" />
                       </items>
                     </Menu>
-                    <Menu mnemonicParsing="false" text="Data Collection and Curation">
+                    <Menu mnemonicParsing="false" text="Data Curation">
                       <items>
                         <MenuItem fx:id="parseLexisNexisMenuItem" mnemonicParsing="false" onAction="#handleParseLexisNexisMenuItem" text="Parse LexisNexis..." />
                         <MenuItem fx:id="csvParserMenuItem" mnemonicParsing="false" onAction="#handleCsvParserMenuItem" text="Parse CSV Files..." />

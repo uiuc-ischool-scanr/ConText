@@ -175,11 +175,7 @@
 				<include name="data/Images/**" />
 			</fileset>
 		</copy>
-		<copy todir="project">
-			<fileset dir="..">
-				<include name="data/resources/**" />
-			</fileset>
-		</copy>
+		
 
 		<mkdir dir="projectRefs" />
 	</target>
@@ -232,11 +228,7 @@
 				<include name="**/*" />
 			</fileset>
 		</copy>
-		<copy todir="build/src">
-			<fileset dir="project/data/resources">
-				<include name="**/*" />
-			</fileset>
-		</copy>
+		
 		<copy todir="build/src">
 			<fileset dir="project/src">
 				<include name="**/*" />
@@ -249,7 +241,7 @@
 					<include name="*" />
 				</fileset>
 				<filelist>
-					<file name="C:\Program Files\Java\jdk1.7.0_75\jre\lib\jfxrt.jar" />
+					<file name="C:\Program Files\Java\jdk1.7.0_71\jre\lib\jfxrt.jar" />
 				</filelist>
 			</classpath>
 		</javac>
@@ -259,9 +251,7 @@
 			<fileset dir="project/data/Images">
 				<exclude name="**/*.java" />
 			</fileset>
-			<fileset dir="project/data/resources">
-				<exclude name="**/*.java" />
-			</fileset>
+			
 			<fileset dir="project/src">
 				<exclude name="**/*.java" />
 			</fileset>
@@ -270,8 +260,8 @@
 
 	</target>
 	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
-		<delete file="dist" />
-		<delete file="deploy" />
+		<delete dir="dist" />
+		<delete dir="deploy" />
 
 		<mkdir dir="dist" />
 		<mkdir dir="dist/libs" />
@@ -311,6 +301,7 @@
 
 		<mkdir dir="dist/output" />
 
+		<delete dir="package"/>
 		<mkdir dir="package" />
 		<!-- Icons only for MacOS -->
 		<mkdir dir="package/macosx" />
@@ -326,6 +317,10 @@
 			<fileset dir="../logo">
 				<include name="ConText.ico" />
 				<include name="ConText.bmp" />
+				
+			</fileset>
+			<fileset dir="../logo/istl64">
+				<include name="ConText.iss"/>
 			</fileset>
 		</copy>
 
@@ -349,7 +344,7 @@
 		</fx:resources>
 		<!-- End of Customization -->
 
-		<fx:application id="fxApplication" name="ConText" mainClass="context.app.main.ContextFX" toolkit="fx" version="1.0-x64" />
+		<fx:application id="fxApplication" name="ConText" mainClass="context.app.main.ContextFX" toolkit="fx" version="1.1-x64" />
 
 		<mkdir dir="build/classes/META-INF" />
 
@@ -364,7 +359,7 @@
 			<manifest>
 				<attribute name="Implementation-Vendor" value="University of Illinois" />
 				<attribute name="Implementation-Title" value="ConText" />
-				<attribute name="Implementation-Version" value="1.0-x64" />
+				<attribute name="Implementation-Version" value="1.1-x64" />
 				<attribute name="JavaFX-Feature-Proxy" value="None" />
 			</manifest>
 		</fx:jar>
@@ -372,11 +367,15 @@
 
 		<mkdir dir="deploy" />
 		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
-		<fx:deploy embedJNLP="false" extension="false" includeDT="false" offlineAllowed="true" outdir="${basedir}/deploy" outfile="Context-FX" nativeBundles="exe" updatemode="background">
+		<fx:deploy 
+			embedJNLP="false" extension="false" includeDT="false" offlineAllowed="true" 
+			outdir="${basedir}/deploy" outfile="Context-FX" nativeBundles="exe" updatemode="background"
+			verbose="true">
 
 			<fx:info title="Context-FX" vendor="University of Illinois" />
 			<fx:application refId="fxApplication" />
 			<fx:resources refid="appRes" />
+			<fx:preferences menu="true" shortcut="true"/>
 
 			<!-- Customized JVM setup for application -->
 			<fx:platform>
@@ -392,7 +391,7 @@
 		<mkdir dir="../installer/windows64" />
 		<copy todir="../installer/windows64">
 			<fileset dir="deploy/bundles">
-				<include name="ConText-1.0-x64.exe" />
+				<include name="ConText-1.1-x64.exe" />
 			</fileset>
 		</copy>
 

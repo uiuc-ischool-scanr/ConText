@@ -232,7 +232,7 @@ public class ContextFXController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         logs = new SimpleStringProperty();
         logTextArea.textProperty().bindBidirectional(logs);
-        welcomeWebView.getEngine().load("http://context.lis.illinois.edu/");
+        welcomeWebView.getEngine().load("https://docs.google.com/document/d/1GQlA9wZ8a4mjS6RdaERTkbKUWtbyAPcCxAu1aocPFvA/pub");
 
         //setHelpGuide("/resources/helpguide/HelpGuidePublic.html");
         leftMainSplitPane.setDividerPosition(0, 0.12);

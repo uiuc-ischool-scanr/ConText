@@ -66,7 +66,7 @@ public class ContextFX extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setTitle("ConText 1.0");
+        stage.setTitle("ConText 1.1");//From August 2015, it becomes ConText 1.1
         stage.getIcons().add(new Image("resources/context-blue.png"));
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();

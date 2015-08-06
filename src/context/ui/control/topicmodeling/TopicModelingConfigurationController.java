@@ -26,12 +26,15 @@ import context.core.entity.FileData;
 import context.ui.control.configuration.ConfigurationController;
 import context.ui.misc.FileHandler;
 import context.ui.misc.PropertiesUtil;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
@@ -63,6 +66,8 @@ public class TopicModelingConfigurationController extends ConfigurationControlle
     private TextField numberOfIterationsTextField;
     @FXML
     private Label titleLabel;
+    @FXML
+    private CheckBox toLowercaseCheckBox;
 
     /**
      *
@@ -84,6 +89,7 @@ public class TopicModelingConfigurationController extends ConfigurationControlle
         numberOfTopicsTextField.setText(AppConfig.getProperty("task.topicmodeling.numberoftopics"));
         wordsPerTopicsTextField.setText(AppConfig.getProperty("task.topicmodeling.wordspertopic"));
         numberOfIterationsTextField.setText(AppConfig.getProperty("task.topicmodeling.numberofiterations"));
+        toLowercaseCheckBox.selectedProperty().set(true);
     }
 
     /**
@@ -125,5 +131,7 @@ public class TopicModelingConfigurationController extends ConfigurationControlle
             stopwordFileTextField.textProperty().set(file.getPath().get());
         }
     }
-
+    public Boolean getIsLowercase() {
+		return toLowercaseCheckBox.isSelected();
+	}
 }

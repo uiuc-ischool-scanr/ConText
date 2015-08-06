@@ -104,7 +104,7 @@ public class WordCloudConfigurationController extends ConfigurationController im
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         stopwordFileTextField.setText(AppConfig.defaultStopwordFileLocation);
-        sentimentListTextField.setText(AppConfig.defaultSentimentWordCloudFileLocation);
+        sentimentListTextField.setText(AppConfig.defaultSentimentFileLocation);
         numberOfTopicsTextField.setText(AppConfig.getProperty("task.wordcloud.numberoftopics"));
         wordsPerTopicTextField.setText(AppConfig.getProperty("task.wordcloud.wordspertopic"));
         numberOfIterationTextField.setText(AppConfig.getProperty("task.wordcloud.numberofiterations"));

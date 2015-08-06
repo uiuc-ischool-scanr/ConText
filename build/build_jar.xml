@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Context-FX" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+<project name="Context-FX" default="do-deploy" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
 	<target name="init-fx-tasks">
 		<path id="fxant">
 			<filelist>
-				<file name="${java.home}\..\lib\ant-javafx.jar"/>
-				<file name="${java.home}\lib\jfxrt.jar"/>
-				<file name="${basedir}"/>
+				<file name="${java.home}\..\lib\ant-javafx.jar" />
+				<file name="${java.home}\lib\jfxrt.jar" />
+				<file name="${basedir}" />
 			</filelist>
 		</path>
 
-		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml"      
-			uri="javafx:com.sun.javafx.tools.ant"
-			classpathref="fxant"/>
+		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpathref="fxant" />
 	</target>
 	<target name="setup-staging-area">
 		<delete dir="externalLibs" />
@@ -22,147 +20,147 @@
 
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-collections-3.2.1.jar"/>
+				<filename name="commons-collections-3.2.1.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="secondstring.jar"/>
+				<filename name="secondstring.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="jxls-core-1.0.2.jar"/>
+				<filename name="jxls-core-1.0.2.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-io-2.4.jar"/>
+				<filename name="commons-io-2.4.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-jexl-2.1.1.jar"/>
+				<filename name="commons-jexl-2.1.1.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-codec-1.3.jar"/>
+				<filename name="commons-codec-1.3.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-digester-2.0.jar"/>
+				<filename name="commons-digester-2.0.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-logging-1.1.1.jar"/>
+				<filename name="commons-logging-1.1.1.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="poi-ooxml-3.9-20121203.jar"/>
+				<filename name="poi-ooxml-3.9-20121203.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="mallet-deps.jar"/>
+				<filename name="mallet-deps.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="mallet.jar"/>
-			</fileset>
-		</copy>
-		<copy todir="externalLibs">
-			<fileset dir="../lib for MacOSX">
-				<filename name="stanford-parser.jar"/>
+				<filename name="mallet.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-beanutils-1.8.3.jar"/>
+				<filename name="commons-beanutils-1.8.3.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="monolog-fx-1.0.0.jar"/>
+				<filename name="monolog-fx-1.0.0.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-lang3-3.1.jar"/>
+				<filename name="commons-lang3-3.1.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="jxls-reader-1.0.2.jar"/>
+				<filename name="jxls-reader-1.0.2.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="xom.jar"/>
-			</fileset>
-		</copy>
-		<copy todir="externalLibs">
-			<fileset dir="../lib for MacOSX">
-				<filename name="stanford-corenlp-3.4.jar"/>
+				<filename name="xom.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="gephi-toolkit.jar"/>
+				<filename name="gephi-toolkit.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="trove-3.0.0a1.jar"/>
+				<filename name="trove-3.0.0a1.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="poi-ooxml-schemas-3.9-20121203.jar"/>
+				<filename name="poi-ooxml-schemas-3.9-20121203.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="jsonic-1.2.0.jar"/>
+				<filename name="jsonic-1.2.0.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="stanford-parser-3.4.1-models-partial.jar"/>
+				<filename name="stanford-parser-3.4.1-models-partial.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="jollyday.jar"/>
+				<filename name="jollyday.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="opencsv-2.3.jar"/>
+				<filename name="opencsv-2.3.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="joda-time.jar"/>
+				<filename name="joda-time.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="poi-3.9-20121203.jar"/>
+				<filename name="stanford-parser.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="langdetect.jar"/>
+				<filename name="stanford-corenlp-3.4.1.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="../lib">
-				<filename name="commons-logging-1.1.2.jar"/>
+				<filename name="poi-3.9-20121203.jar" />
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="../lib">
+				<filename name="langdetect.jar" />
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="../lib">
+				<filename name="commons-logging-1.1.2.jar" />
 			</fileset>
 		</copy>
 
@@ -170,11 +168,6 @@
 		<copy todir="project">
 			<fileset dir="..">
 				<include name="src/**" />
-			</fileset>
-		</copy>
-		<copy todir="project">
-			<fileset dir="..">
-				<include name="lib for MacOSX/**" />
 			</fileset>
 		</copy>
 		<copy todir="project">
@@ -195,35 +188,35 @@
 		<!-- Copy project-libs references -->
 		<copy todir="build/libs">
 			<fileset dir="externalLibs">
-				<include name="commons-lang3-3.1.jar"/>
-				<include name="jsonic-1.2.0.jar"/>
-				<include name="commons-beanutils-1.8.3.jar"/>
-				<include name="gephi-toolkit.jar"/>
-				<include name="secondstring.jar"/>
-				<include name="poi-ooxml-3.9-20121203.jar"/>
-				<include name="poi-3.9-20121203.jar"/>
-				<include name="jxls-reader-1.0.2.jar"/>
-				<include name="commons-jexl-2.1.1.jar"/>
-				<include name="xom.jar"/>
-				<include name="stanford-parser.jar"/>
-				<include name="commons-digester-2.0.jar"/>
-				<include name="jxls-core-1.0.2.jar"/>
-				<include name="commons-codec-1.3.jar"/>
-				<include name="poi-ooxml-schemas-3.9-20121203.jar"/>
-				<include name="commons-logging-1.1.2.jar"/>
-				<include name="commons-logging-1.1.1.jar"/>
-				<include name="mallet-deps.jar"/>
-				<include name="joda-time.jar"/>
-				<include name="monolog-fx-1.0.0.jar"/>
-				<include name="commons-collections-3.2.1.jar"/>
-				<include name="trove-3.0.0a1.jar"/>
-				<include name="jollyday.jar"/>
-				<include name="commons-io-2.4.jar"/>
-				<include name="stanford-parser-3.4.1-models-partial.jar"/>
-				<include name="stanford-corenlp-3.4.jar"/>
-				<include name="langdetect.jar"/>
-				<include name="opencsv-2.3.jar"/>
-				<include name="mallet.jar"/>
+				<include name="commons-lang3-3.1.jar" />
+				<include name="jsonic-1.2.0.jar" />
+				<include name="commons-beanutils-1.8.3.jar" />
+				<include name="gephi-toolkit.jar" />
+				<include name="secondstring.jar" />
+				<include name="poi-ooxml-3.9-20121203.jar" />
+				<include name="poi-3.9-20121203.jar" />
+				<include name="jxls-reader-1.0.2.jar" />
+				<include name="commons-jexl-2.1.1.jar" />
+				<include name="xom.jar" />
+				<include name="stanford-parser.jar" />
+				<include name="commons-codec-1.3.jar" />
+				<include name="commons-digester-2.0.jar" />
+				<include name="jxls-core-1.0.2.jar" />
+				<include name="poi-ooxml-schemas-3.9-20121203.jar" />
+				<include name="commons-logging-1.1.2.jar" />
+				<include name="commons-logging-1.1.1.jar" />
+				<include name="mallet-deps.jar" />
+				<include name="joda-time.jar" />
+				<include name="monolog-fx-1.0.0.jar" />
+				<include name="commons-collections-3.2.1.jar" />
+				<include name="trove-3.0.0a1.jar" />
+				<include name="jollyday.jar" />
+				<include name="commons-io-2.4.jar" />
+				<include name="stanford-parser-3.4.1-models-partial.jar" />
+				<include name="stanford-corenlp-3.4.1.jar" />
+				<include name="langdetect.jar" />
+				<include name="opencsv-2.3.jar" />
+				<include name="mallet.jar" />
 			</fileset>
 		</copy>
 
@@ -232,28 +225,23 @@
 		<!-- Copy project sources itself -->
 		<copy todir="build/src">
 			<fileset dir="project/data/Images">
-				<include name="**/*"/>
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		
 		<copy todir="build/src">
 			<fileset dir="project/src">
-				<include name="**/*"/>
-			</fileset>
-		</copy>
-		<copy todir="build/src">
-			<fileset dir="project/lib for MacOSX">
-				<include name="**/*"/>
+				<include name="**/*" />
 			</fileset>
 		</copy>
 
 		<javac includeantruntime="false" source="1.7" target="1.7" srcdir="build/src" destdir="build/classes" encoding="UTF-8">
 			<classpath>
 				<fileset dir="build/libs">
-					<include name="*"/>
+					<include name="*" />
 				</fileset>
 				<filelist>
-					<file name="/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/jfxrt.jar"/>
+					<file name="C:\Program Files\Java\jdk1.7.0_71\jre\lib\jfxrt.jar" />
 				</filelist>
 			</classpath>
 		</javac>
@@ -261,22 +249,19 @@
 		<!-- Copy over none Java-Files -->
 		<copy todir="build/classes">
 			<fileset dir="project/data/Images">
-				<exclude name="**/*.java"/>
+				<exclude name="**/*.java" />
 			</fileset>
 			
 			<fileset dir="project/src">
-				<exclude name="**/*.java"/>
-			</fileset>
-			<fileset dir="project/lib for MacOSX">
-				<exclude name="**/*.java"/>
+				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
 
 
 	</target>
 	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
-		<delete dir="dist"/>
-		<delete dir="deploy" />
+		<delete file="dist" />
+		<delete file="deploy" />
 
 		<mkdir dir="dist" />
 		<mkdir dir="dist/libs" />
@@ -286,19 +271,18 @@
 				<include name="*" />
 			</fileset>
 		</copy>
-		
-		
+
+
 		<!--Customization-->
 
 		<copy todir="dist">
-					<fileset dir="..">
-						<include name="LICENSE_GNU_GPLv2.txt"/>
-						<include name="LICENSE_GNU_GPLv3.txt"/>
-						<include name="README.txt"/>
-					</fileset>
-				</copy>
+			<fileset dir="..">
+				<include name="LICENSE_GNU_GPLv2.txt" />
+				<include name="LICENSE_GNU_GPLv3.txt" />
+				<include name="README.txt" />
+			</fileset>
+		</copy>
 
-		
 		<mkdir dir="dist/javadoc" />
 		<copy todir="dist/javadoc">
 			<fileset dir="../javadoc">
@@ -314,8 +298,7 @@
 
 
 		<mkdir dir="dist/output" />
-		
-        <delete dir="package"/>
+
 		<mkdir dir="package" />
 		<!-- Icons only for MacOS -->
 		<mkdir dir="package/macosx" />
@@ -348,18 +331,13 @@
 			<fx:fileset dir="dist" includes="data/**" />
 			<fx:fileset dir="dist" includes="javadoc/**" />
 			<fx:fileset dir="dist" includes="output/**" />
-			<fx:fileset dir="dist" includes="LICENSE_GNU_GPLv2.txt"/>
-			<fx:fileset dir="dist" includes="LICENSE_GNU_GPLv3.txt"/>
-			<fx:fileset dir="dist" includes="README.txt"/>
+			<fx:fileset dir="dist" includes="LICENSE_GNU_GPLv2.txt" />
+			<fx:fileset dir="dist" includes="LICENSE_GNU_GPLv3.txt" />
+			<fx:fileset dir="dist" includes="README.txt" />
 		</fx:resources>
 		<!-- End of Customization -->
 
-		<fx:application id="fxApplication" 
-			name="ConText" 
-			mainClass="context.app.main.ContextFX" 
-			toolkit="fx"
-			version="1.1"
-		/>
+		<fx:application id="fxApplication" name="ConText" mainClass="context.app.main.ContextFX" toolkit="fx" version="1.1" />
 
 		<mkdir dir="build/classes/META-INF" />
 
@@ -382,35 +360,21 @@
 
 		<mkdir dir="deploy" />
 		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
-		<fx:deploy
-			embedJNLP="false"
-			extension="false"
-			includeDT="false"
-			offlineAllowed="true"
-			outdir="${basedir}/deploy"
-			outfile="Context-FX" nativeBundles="dmg"
-			updatemode="background" >
+		<fx:deploy embedJNLP="false" extension="false" includeDT="false" offlineAllowed="true" outdir="${basedir}/deploy" outfile="Context-FX" nativeBundles="all" updatemode="background">
 
-			<fx:info title="Context-FX" vendor="University of Illinois"/>
-			<fx:application refId="fxApplication"/>
-			<fx:resources refid="appRes"/>
-			
+			<fx:info title="Context-FX" vendor="University of Illinois" />
+			<fx:application refId="fxApplication" />
+			<fx:resources refid="appRes" />
+
 			<!-- Customized JVM setup for application -->
 			<fx:platform>
-			   <fx:jvmarg value="-Xmx1024m"/>
+				<fx:jvmarg value="-Xmx1024m" />
 			</fx:platform>
 			<!-- End of Customized JVM setup for application -->
-					
+
+
 		</fx:deploy>
 
-		<!-- move installers to installer folder -->
-				<delete dir="../installer/macosx" />
-				<mkdir dir="../installer/macosx"/>
-					<copy todir="../installer/macosx">
-						<fileset dir="deploy/bundles">
-						<include name="ConText.dmg" />
-						</fileset>
-					</copy> 	
-				
+
 	</target>
 </project>

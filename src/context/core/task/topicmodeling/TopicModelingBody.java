@@ -23,6 +23,7 @@ public class TopicModelingBody {
     private String result;
     private String log;
     private String[] allOuts;
+    private boolean isLowercase;
 
     /**
      *
@@ -38,6 +39,7 @@ public class TopicModelingBody {
         this.stopListPath = instance.getStopListLoc();
         this.CorpusFiles = this.input.getFiles();
         this.allOuts = new String[2];
+        this.isLowercase = instance.getIsLowercase();
     }
 
     /**
@@ -48,7 +50,7 @@ public class TopicModelingBody {
         try {
             MalletTopicModeling mtm = new MalletTopicModeling();
 
-            allOuts = mtm.topicModeling(numTopics, numWordsPerTopic, numIterations, CorpusFiles, stopListPath);
+            allOuts = mtm.topicModeling(numTopics, numWordsPerTopic, numIterations, CorpusFiles, stopListPath, isLowercase);
         } catch (Exception e) {
         	e.printStackTrace();
             log += "Error in generating topics:" + e.getMessage() + " \n";

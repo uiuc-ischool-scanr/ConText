@@ -21,7 +21,10 @@
         <Font size="15.0" fx:id="x1" />
       </font>
     </Label>
-    <HBox layoutY="222.0" prefHeight="30.0" prefWidth="443.0" spacing="40.0" AnchorPane.leftAnchor="78.5" AnchorPane.rightAnchor="78.5" />
+    <HBox layoutX="134.0" layoutY="232.0" prefHeight="20.0" prefWidth="455.0" spacing="40.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="16.0">
+         <children>
+            <CheckBox fx:id="toLowercaseCheckBox" mnemonicParsing="false" selected="true" text="Change the content to lowercase"/>
+         </children></HBox>
     <Label fx:id="titleLabel" font="$x1" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Stopword List" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="264.0" />
     <TextField id="numberOfTopics" fx:id="numberOfTopicsTextField" layoutX="330.0" layoutY="111.0" prefWidth="108.0" />

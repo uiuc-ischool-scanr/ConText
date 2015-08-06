@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,11 +21,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
+import au.com.bytecode.opencsv.CSVReader;
 import context.core.entity.CorpusData;
 import context.core.entity.FileData;
 import context.core.util.CorpusAggregator;
@@ -73,7 +76,30 @@ public class WordCloud {
     private int minFontSize;
     private WordCloudTaskInstance instance;
     private CorpusData input;
-
+    private boolean isTff;
+    
+    
+    private static HashMap<String, List<String>> sentimentDict; 
+    
+    private void initSentimentDict(){
+        try {
+        	CSVReader reader = new CSVReader(new FileReader(sentimentLoc));
+        	sentimentDict = new HashMap<String, List<String>>();
+        	String[] line = reader.readNext(); // Read the header
+        	/**
+        	 * Row Format:
+        	 * Word,POS,Stemmed,Priorpolarity,Type
+        	 */
+        	while((line = reader.readNext()) != null){	
+        		sentimentDict.put(line[0], Arrays.asList(line).subList(1, 4));
+        	}
+        	reader.close();
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
+    
     private class TopicStruct {
 
         int id;
@@ -124,6 +150,11 @@ public class WordCloud {
         this.width = instance.getWidth();
         this.height = instance.getHeight();
         this.minFontSize = instance.getMinFontSize();
+        this.initSentimentDict();
+        this.isTff = false;
+        if(sentimentLoc.split("\\.")[0].toLowerCase() == "tff"){
+        	this.isTff = true;
+        }
     }
 
     /**
@@ -283,18 +314,23 @@ public class WordCloud {
 
             // Get an array of sorted sets of word ID/count pairs
             ArrayList<TreeSet<IDSorter>> topicSortedWords = model.getSortedWords();
-
-            File SentimentFile = new File(sentimentLoc);
+            
             String SentimentString = null;
-            try {
-                SentimentString = readFile(SentimentFile);
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            String[] SentimentWords = null; 
+            if(isTff){
+            	File SentimentFile = new File(sentimentLoc);
+                try {
+                    SentimentString = readFile(SentimentFile);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                SentimentWords = SentimentString.split("\r");
+                SentimentWords = SentimentWords[0].split("\n");
             }
-            String[] SentimentWords = SentimentString.split("\r");
-            SentimentWords = SentimentWords[0].split("\n");
-
+            
+            
+            
             // Show top numTopics words in topics with proportions for the first document
             for (int topic = 0; topic < numTopics; topic++) {
                 Iterator<IDSorter> iterator = topicSortedWords.get(topic).iterator();
@@ -312,7 +348,10 @@ public class WordCloud {
                     temp[4] = String.valueOf(2);
                     temp[0] = (String) dataAlphabet.lookupObject(idCountPair.getID());
                     for (String[] stat : StatsArray) {
-                        if (0 == stat[0].compareTo(temp[0]) || (stat[0].regionMatches(true, 0, temp[0], 0, 1) && stat[0].regionMatches(1, temp[0], 1, stat[0].length() - 1) && stat[0].length() == temp[0].length())) {
+                        if (0 == stat[0].compareTo(temp[0]) || 
+                        		(stat[0].regionMatches(true, 0, temp[0], 0, 1)
+                        				&& stat[0].regionMatches(1, temp[0], 1, stat[0].length() - 1)
+                        				&& stat[0].length() == temp[0].length())) {
                             temp[0] = stat[0];
                             int found = 0;
                             for (String word : Words) {
@@ -324,22 +363,41 @@ public class WordCloud {
                             if (1 == found) {
                                 continue;
                             }
-                            if (SentimentString.contains('=' + temp[0] + " ")) {
-                                for (String SentimentWord : SentimentWords) {
-                                    if (SentimentWord.split("word1=")[1].split(" ")[0].equals(temp[0])) {
-                                        String polarity = SentimentWord.split("priorpolarity=")[1].split(" ")[0];
-                                        if (polarity.equals("positive")) {
-                                            temp[4] = String.valueOf(1);
-                                        }
-                                        if (polarity.equals("neutral")) {
-                                            temp[4] = String.valueOf(0);
-                                        }
-                                        if (polarity.equals("negative")) {
-                                            temp[4] = String.valueOf(-1);
-                                        }
+                            String polarity = "";
+                            if(isTff){
+                            	// For backward compatibility
+	                            if (SentimentString.contains('=' + temp[0] + " ")) {
+	                                for (String SentimentWord : SentimentWords) {
+	                                    if (SentimentWord.split("word1=")[1].split(" ")[0].equals(temp[0])) {
+	                                        polarity = SentimentWord.split("priorpolarity=")[1].split(" ")[0];
+	                                        if (polarity.equals("positive")) {
+	                                            temp[4] = String.valueOf(1);
+	                                        }
+	                                        if (polarity.equals("neutral")) {
+	                                            temp[4] = String.valueOf(0);
+	                                        }
+	                                        if (polarity.equals("negative")) {
+	                                            temp[4] = String.valueOf(-1);
+	                                        }
+	                                    }
+	                                }
+	                            }
+                            } else {
+                            	if(sentimentDict.containsKey(temp[0])){
+                            		polarity = sentimentDict.get(temp[0]).get(2);
+                                    if (polarity.equals("positive")) {
+                                        temp[4] = String.valueOf(1);
                                     }
-                                }
+                                    if (polarity.equals("neutral")) {
+                                        temp[4] = String.valueOf(0);
+                                    }
+                                    if (polarity.equals("negative")) {
+                                        temp[4] = String.valueOf(-1);
+                                    }
+                            	}
+                            	
                             }
+                            
                             temp[1] = Integer.toString(Integer.valueOf(stat[1]));
                             Words.add(temp[0]);
                             WordWeights.add(temp);
@@ -403,7 +461,11 @@ public class WordCloud {
                 topicCount[i] = wordPerTopic;
             }
             String jscriptCluster = "var item_count = " + Integer.toString(numTopics) + ";" + lineSep
-                    + "var word_per_item = " + Integer.toString(wordPerTopic) + ";" + lineSep + "var width = " + Integer.toString(width) + "," + lineSep + "    height = " + Integer.toString(height) + "," + lineSep + "\tfontSize = " + Integer.toString(minFontSize) + ";" + lineSep + lineSep + "			var wordList = [" + lineSep;
+                    + "var word_per_item = " + Integer.toString(wordPerTopic) + ";" + lineSep
+                    + "var width = " + Integer.toString(width) + "," + lineSep
+                    + "    height = " + Integer.toString(height) + "," + lineSep
+                    + "\tfontSize = " + Integer.toString(minFontSize) + ";" + lineSep
+                    + lineSep + "			var wordList = [" + lineSep;
             for (String[] WordWeight : WordWeights) {
                 if (totalWords > (numTopics * wordPerTopic)) {
                     break;
@@ -412,7 +474,11 @@ public class WordCloud {
                     TopicStruct tStruct = new TopicStruct();
                     int topicId = tStruct.getIndexForId(topicData, Integer.parseInt(WordWeight[2]));
                     double fitVal = tStruct.getFitValForId(topicData, Integer.parseInt(WordWeight[2]));
-                    jscriptCluster += "\t{text: \"" + WordWeight[0] + "\",topic:" + Integer.toString(topicId) + ",sentiment:" + WordWeight[4] + ",frequency:" + WordWeight[1] + ",fitVal:" + Double.toString(fitVal) + "}," + lineSep;
+                    jscriptCluster += "\t{text: \"" + WordWeight[0]
+                    		+ "\",topic:" + Integer.toString(topicId)
+                    		+ ",sentiment:" + WordWeight[4]
+                    		+ ",frequency:" + WordWeight[1]
+                    		+ ",fitVal:" + Double.toString(fitVal) + "}," + lineSep;
                     topicCount[Integer.parseInt(WordWeight[2])]--;
                     totalWords++;
                 }

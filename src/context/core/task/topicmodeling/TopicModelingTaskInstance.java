@@ -33,7 +33,13 @@ public class TopicModelingTaskInstance extends TaskInstance {
      *
      * @param name
      */
-    public TopicModelingTaskInstance(StringProperty name) {
+    protected Boolean isLowercase;
+   
+    /**
+    *
+    * @param name
+    */
+	public TopicModelingTaskInstance(StringProperty name) {
         super(name);
     }
 
@@ -100,4 +106,18 @@ public class TopicModelingTaskInstance extends TaskInstance {
     public String getStopListLoc() {
         return stopListLoc;
     }
+    /**
+    *
+    * @return
+    */
+    public Boolean getIsLowercase() {
+		return isLowercase;
+	}
+    /**
+    *
+    * @return
+    */
+	public void setIsLowercase(Boolean isLowercase) {
+		this.isLowercase = isLowercase;
+	}
 }
