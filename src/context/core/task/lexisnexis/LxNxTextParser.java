@@ -49,6 +49,13 @@ public class LxNxTextParser {
             hsLastKeyWords.add("\nLANGUAGE:");
             hsLastKeyWords.add("\nPUBLICATION-TYPE:");
             
+            hsLastKeyWords.add("\nGRAPHIC:");
+            hsLastKeyWords.add("\nPHOTO:");
+            hsLastKeyWords.add("\nPhoto:");
+            hsLastKeyWords.add("\nColor Photo:");
+            
+            hsLastKeyWords.add("\nELEMENT-WITNESS:");
+            hsLastKeyWords.add("\nBLOCK-TIME:");
             
             hsLastKeyWords.add("\n(c) Copyright");
             // hsLastKeyWords.add("passage omitted");
@@ -285,9 +292,48 @@ public class LxNxTextParser {
             if (line.startsWith("GRAPHIC: ")) {
                 sGraphic = line.substring("GRAPHIC ".length()).trim();
             }
+            if (line.startsWith("Photo:")){
+            	sGraphic=sGraphic+line.trim();
+            }
+            if (line.startsWith("Color Photo:")){
+            	sGraphic=sGraphic+line.trim();
+            }
+            
         }
         return sGraphic;
     }
+    
+    /**
+    *
+    * @return
+    */
+    public String getElementWitness() {
+        String sElementWitness = "";
+        for (String line : getTextChunks()) {
+            if (line.startsWith("ELEMENT-WITNESS: ")) {
+                sElementWitness = line.substring("ELEMENT-WITNESS ".length()).trim();
+            }
+        }
+        return sElementWitness;
+    }
+   
+    /**
+    *
+    * @return
+    */
+    public String getBlockTime() {
+        String sBlockTime = "";
+        for (String line : getTextChunks()) {
+            if (line.startsWith("BLOCK-TIME: ")) {
+                sBlockTime = line.substring("BLOCK-TIME ".length()).trim();
+            }
+        }
+        return sBlockTime;
+    }
+
+    
+    
+    
 
     /**
      *

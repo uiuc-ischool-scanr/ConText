@@ -77,7 +77,7 @@ public class EntityDetectionBody {
                     text = JavaIO.readFile(file);
                     text = text.replaceAll("\\p{Cc}", " ");
                     text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");
-
+                    //System.out.println("Harathi in entity:"+text);
                     List<String[]> longEntities = new ArrayList<String[]>();
 
                     List<ForAggregation> longEntities3 = new ArrayList<ForAggregation>();
@@ -113,10 +113,14 @@ public class EntityDetectionBody {
                             offsetArray4 = Arrays.copyOf(Entities.get(longEntities4.get(entityIndex).toAggregate[0]), offsetArray4.length);
                             offsetArray4[offsetArray4.length - 1] = MWE4.startInd.get(entityIndex);
                             Entities.put(longEntities4.get(entityIndex).toAggregate[0], offsetArray4);
+                            //System.out.println("Harathi in first if longentities:"+longEntities4.get(entityIndex).toAggregate[0]);
+                            //System.out.println("Harathi in first if offset:"+offsetArray4);
                             longEntities.add(longEntities4.get(entityIndex).toAggregate);
                         } else {
                             Integer[] offsetArray = {MWE4.startInd.get(entityIndex)};
                             Entities.put(longEntities4.get(entityIndex).toAggregate[0], offsetArray);
+                           // System.out.println("Harathi in first else longentities:"+longEntities4.get(entityIndex).toAggregate[0]);
+                           // System.out.println("Harathi in first else offset:"+offsetArray);
                             longEntities.add(longEntities4.get(entityIndex).toAggregate);
                         }
 
@@ -132,10 +136,15 @@ public class EntityDetectionBody {
                             offsetArray7 = Arrays.copyOf(Entities.get(longEntities7.get(entityIndex).toAggregate[0]), offsetArray7.length);
                             offsetArray7[offsetArray7.length - 1] = MWE7.startInd.get(entityIndex);
                             Entities.put(longEntities7.get(entityIndex).toAggregate[0], offsetArray7);
+                            //System.out.println("Harathi in second if longentities:"+longEntities7.get(entityIndex).toAggregate[0]);
+                            //System.out.println("Harathi in secondif offset:"+offsetArray7);
                             longEntities.add(longEntities7.get(entityIndex).toAggregate);
-                        } else {
+                        } 
+                         else {
                             Integer[] offsetArray = {MWE7.startInd.get(entityIndex)};
                             Entities.put(longEntities7.get(entityIndex).toAggregate[0], offsetArray);
+                            //System.out.println("Harathi in second else longentities:"+longEntities7.get(entityIndex).toAggregate[0]);
+                            //System.out.println("Harathi in second else offset:"+offsetArray);
                             longEntities.add(longEntities7.get(entityIndex).toAggregate);
                         }
                     }
@@ -147,26 +156,48 @@ public class EntityDetectionBody {
                     return false;
                 }
             }
-            
+
             //List<String[]> EntitiesToBeRemoved = new ArrayList<String[]>();
             List<String[]> entitiesWithCount = new CorpusAggregator().CorpusAggregate(toAggregate);
             /*
-            for (String[] entityWithCount : entitiesWithCount) {
-//                try {
-                    if (entityWithCount[0].split(" ").length == 1 // && JavaIO.readFile(stopFile).contains(entityWithCount[0].toLowerCase()) ) {
-                        EntitiesToBeRemoved.add(entityWithCount);
-                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    return false;
-//                }
-            }
-            for (String[] entityWithCount : EntitiesToBeRemoved) {
-                entitiesWithCount.remove(entityWithCount);
-            }
+             for (String[] entityWithCount : entitiesWithCount) {
+             //                try {
+             if (entityWithCount[0].split(" ").length == 1 // && JavaIO.readFile(stopFile).contains(entityWithCount[0].toLowerCase()) ) {
+             EntitiesToBeRemoved.add(entityWithCount);
+             }
+             //                } catch (IOException e) {
+             //                    e.printStackTrace();
+             //                    return false;
+             //                }
+             }
+             for (String[] entityWithCount : EntitiesToBeRemoved) {
+             entitiesWithCount.remove(entityWithCount);
+             }
 
-            */
-            this.entitiesWithCount = entitiesWithCount;
+             */
+				for (int i1 = 0; i1 < entitiesWithCount.size(); i1++) {
+				String findStr = entitiesWithCount.get(i1)[0];
+				int count = 0;
+				for (FileData ff : files) {
+                File file = ff.getFile();
+                String text;
+                text = JavaIO.readFile(file);
+                text = text.replaceAll("\\p{Cc}", " ");
+                text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");
+				String str = text;
+				int lastIndex = 0;
+				while(lastIndex != -1){
+				lastIndex = str.indexOf(findStr,lastIndex);
+					if(lastIndex != -1){
+					count ++;
+					lastIndex += findStr.length();
+					}
+				}
+			    }
+				entitiesWithCount.get(i1)[2] = count + "";
+				System.out.println("word: " + entitiesWithCount.get(i1)[0]+ " frequency: "+entitiesWithCount.get(i1)[2]+ " our count: "+count);
+				}
+            this.entitiesWithCount = entitiesWithCount;			
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -222,7 +253,8 @@ public class EntityDetectionBody {
             }
         }
         if (index < 0) {
-            throw new IndexOutOfBoundsException();
+//            throw new IndexOutOfBoundsException();
+            return 0; 
         }
         return index;
     }
@@ -251,6 +283,13 @@ public class EntityDetectionBody {
             toWrite = entitiesWithCount.get(i1)[0].replaceAll("[^A-Za-z0-9\\. ]", "_") + "," + entitiesWithCount.get(i1)[1] + "," + (entitiesWithCount.get(i1)[2]) + "\n";
             sb.append(toWrite);
         }
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filePath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
+        
         FileData.writeDataIntoFile(sb.toString(), filePath);
     }
 }

@@ -25,6 +25,17 @@ public class TopicModelingTaskInstance extends TaskInstance {
     protected int numIterations;
 
     /**
+    *
+    */
+    protected double sumAlpha;
+
+    /**
+    *
+    */
+    protected int numOptInterval;
+
+    
+    /**
      *
      */
     protected String stopListLoc;
@@ -68,6 +79,22 @@ public class TopicModelingTaskInstance extends TaskInstance {
     }
 
     /**
+    *
+    * @param sumAlpha
+    */
+    public void setSumAlpha(double sumAlpha) {
+        this.sumAlpha = sumAlpha;
+    }
+    
+    /**
+    *
+    * @param numOptInterval
+    */
+    public void setNumOptInterval(int numOptInterval) {
+        this.numOptInterval = numOptInterval;
+    }
+    
+    /**
      *
      * @param stopListLoc
      */
@@ -98,6 +125,23 @@ public class TopicModelingTaskInstance extends TaskInstance {
     public int getNumIterations() {
         return numIterations;
     }
+    
+    /**
+    *
+    * @return
+    */
+    public double getSumAlpha(){
+    	return sumAlpha;
+    }
+    
+    /**
+    *
+    * @return
+    */
+    public int getNumOptInterval(){
+    	return numOptInterval;
+    }
+    
 
     /**
      *

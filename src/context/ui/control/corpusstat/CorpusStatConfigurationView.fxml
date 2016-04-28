@@ -16,9 +16,9 @@
             </font>
         </Label>
         <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
-      <CheckBox fx:id="includePOSCheckBox" layoutX="50.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleIncludePOSCheckBox" text="Results include POS" />
-      <ComboBox fx:id="languageComboBox" layoutX="333.0" layoutY="103.0" prefHeight="30.0" prefWidth="120.0" />
-      <Label fx:id="languageLabel" layoutX="266.0" layoutY="108.0" text="Language" />
+      <CheckBox fx:id="includePOSCheckBox" layoutX="50.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleIncludePOSCheckBox" text="Results include POS with aggregate captilization" />
+      <ComboBox fx:id="languageComboBox" layoutX="520.0" layoutY="103.0" prefHeight="30.0" prefWidth="120.0" />
+      <Label fx:id="languageLabel" layoutX="450.0" layoutY="108.0" text="Language" />
     </children>
     <stylesheets>
         <URL value="@../../../app/main/style-default.css" />

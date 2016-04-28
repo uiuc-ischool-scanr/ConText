@@ -1,5 +1,6 @@
 package context.core.task.keyword;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import context.core.entity.CorpusData;
 import context.core.entity.FileData;
 import context.core.entity.TabularData;
 import context.core.util.JavaIO;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -132,6 +134,15 @@ public class KeywordInContext {
             toWrite = key + "," + keywordsMap.get(key) + "\n";
             sb.append(toWrite);
         }
+        
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filePath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
+        //
+        
         FileData.writeDataIntoFile(sb.toString(), filePath);
     }
 }

@@ -102,6 +102,13 @@ public class CodebookUtils {
         content = content.replaceAll("[^A-Za-z0-9 \\_ :;!\\?\\.,\'\"-]", " ");
         
 //        System.out.println("contentInmakeWord3: "+ content);
+        
+        // 2016.03 process newline characters       
+        content= content.replaceAll("(\\r|\\n|\\r\\n)+", " ");
+        
+        System.out.println("contentInmakeWord4: "+ content);
+        
+        
         Annotation document = new Annotation(content);
 
         pipeline.annotate(document);
@@ -137,6 +144,13 @@ public class CodebookUtils {
 
         content = content.replaceAll("\\p{Cc}", " ");
         content = content.replaceAll("[^A-Za-z0-9 \\_ :;!\\?\\.,\'\"-]", " ");
+        
+        // 2016.03 process newline characters       
+        content= content.replaceAll("(\\r|\\n|\\r\\n)+", " ");
+        		
+        System.out.println("contentInmakeWord4: "+ content);
+
+        
         Annotation document = new Annotation(content);
 
         pipeline.annotate(document);
@@ -163,8 +177,16 @@ public class CodebookUtils {
      * @return
      */
     public static Vector<String> make_paragraph(String content) {
+    	
+    	// 2016.03 process newline characters       
+        content= content.replaceAll("(\\r|\\n|\\r\\n)+", "\\\\n");        
+    	
+        System.out.println("contentInmakeWord4: "+ content);
 
-        String[] ss = content.split("\n");
+        
+        String[] ss = content.split("\\n");
+        
+        
         Vector<String> return_list = new Vector<String>();
         for (String s : ss) {
             return_list.addAll(make_words(s));

@@ -133,7 +133,7 @@ public class EntityNetworkConfigurationController extends ConfigurationControlle
                         "Sentence",
                         "Paragraph",
                         "Text",
-                        "Custom Tag..."
+                        "Custom Tag"
                 );
         unitOfAnalysisComboBox.getItems().addAll(unitOfAnalysisOptions);
         unitOfAnalysisComboBox.getSelectionModel().select(0);

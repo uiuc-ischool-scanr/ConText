@@ -102,10 +102,23 @@ public class TopicModelingController extends BasicWorkflowController {
         TabularData tabularData2 = new TabularData(NamingPolicy.generateTabularName(inputname.get() + "-W", outputPath.get(), instance),
                 NamingPolicy.generateTabularPath(inputname.get() + "-W", outputPath.get(), instance));
         instance.setTabularOutput(tabularData2, 1);
+        
+        // Output table for topic words weights
+        TabularData tabularData3=new TabularData(NamingPolicy.generateTabularName(inputname.get()+"-T", outputPath.get(),instance),
+        		NamingPolicy.generateTabularPath(inputname.get()+"-T", outputPath.get(), instance));        
+        instance.setTabularOutput(tabularData3,2);
+        
+        // Output table for LL/Token
+        TabularData tabularData4=new TabularData(NamingPolicy.generateTabularName(inputname.get()+"-L", outputPath.get(), instance),
+        		NamingPolicy.generateTabularPath(inputname.get()+"-L", outputPath.get(), instance));
+        instance.setTabularOutput(tabularData4,3);
+        
 
         instance.setNumIterations(confController.getNumberOfIterations());
         instance.setNumTopics(confController.getNumberOfTopics());
         instance.setNumWordsPerTopic(confController.getNumberOfWordsPerTopics());
+        instance.setSumAlpha(confController.getSumAlpha());
+        instance.setNumOptInterval(confController.getNumberOfOptInterval());       
         instance.setStopListLoc(confController.getStopwordFile());
         instance.setIsLowercase(confController.getIsLowercase());
 

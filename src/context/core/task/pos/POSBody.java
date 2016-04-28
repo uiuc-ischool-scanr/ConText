@@ -162,6 +162,14 @@ public class POSBody {
             sb.append(toWrite);
         }
 //        System.out.println("size of string to write=" + sb.toString().length());
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filepath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
+        //
+        
         FileData.writeDataIntoFile(sb.toString(), filepath);
     }
 

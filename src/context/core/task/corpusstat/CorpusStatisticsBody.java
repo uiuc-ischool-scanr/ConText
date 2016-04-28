@@ -115,15 +115,27 @@ public class CorpusStatisticsBody {
                                 word = word.toLowerCase();
                             }
                             String[] entity = {word, pos, file.getName(), Integer.toString(1)};
-                            if (instance.getLanguage().equals("en")) {
-                                if (!word.matches("[a-zA-Z0-9]*")) {
+                            if (!word.matches("[a-zA-Z0-9_@#]*|:\\)|:-\\)|:\\(|:-\\(|:\\/|:-\\/|:\\\\|:-\\\\|:p|:-p|;\\)|;-\\)|:>|:->")) {
                                     continue;
-                                }
                             }
                             CorpusStatTags.add(entity);
                             numTerms++;
                         }
                     }
+                        for (String retval: text.split(" ")){
+    						//System.out.println("processing " + retval);
+    						if (retval.matches(":\\)|:-\\)|:\\(|:-\\(|:\\/|:-\\/|:\\\\|:-\\\\|:p|:-p|;\\)|;-\\)|:>|:->")) {
+    						String[] entity = {retval, "A", file.getName(), Integer.toString(1)};
+    						System.out.println("pass:" + numTerms);
+                            CorpusStatTags.add(entity);
+                            numTerms++;
+                            //System.out.println("Printing words after corpusstattags:"+retval);
+                            }
+    						else
+    						{
+    						System.out.println("regex dint match " +retval);
+    						}
+    						}
                     toAggregate.add(CorpusStatTags);
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
@@ -195,15 +207,31 @@ public class CorpusStatisticsBody {
                     for (String word : words) {
 
                         String[] entity = {word, "A", file.getName(), Integer.toString(1)};
-                        if (!word.matches("[a-zA-Z0-9]*")) {
+
+                        if (!word.matches("[a-zA-Z0-9_@#]*|:\\)|:\\(|:\\/|:\\\\|:p|;\\)|;-\\)")) {
+
                             continue;
                         }
                         System.out.println("pass:" + numTerms);
                         CorpusStatTags.add(entity);
                         numTerms++;
                     }
+					for (String retval: text.split(" ")){
+						//System.out.println("processing " + retval);
+						if (retval.matches(":\\)|:\\(|:\\/|:\\\\|:p|;\\)|;-\\)")) {
+						String[] entity = {retval, "A", file.getName(), Integer.toString(1)};
+						System.out.println("pass:" + numTerms);
+                        CorpusStatTags.add(entity);
+                        numTerms++;
+                        //System.out.println("Printing words after corpusstattags:"+retval);
+                        }
+						else
+						{
+						System.out.println("regex dint match " +retval);
+						}
+						}
                     toAggregate.add(CorpusStatTags);
-                    System.out.println("CorpusStatTags" + CorpusStatTags.size());
+                    //System.out.println("CorpusStatTags" + CorpusStatTags.size());
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -282,6 +310,14 @@ public class CorpusStatisticsBody {
             sb.append(toWrite);
         }
         System.out.println("in writecsv before writeDataIntoFile");
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filepath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
+        //
+        	
         FileData.writeDataIntoFile(sb.toString(), filepath);
 
     }

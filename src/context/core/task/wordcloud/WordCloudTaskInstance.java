@@ -21,6 +21,9 @@ public class WordCloudTaskInstance extends TaskInstance {
     private int width;
     private int height;
     private int minFontSize;
+    protected Boolean isLowercase;
+    protected int numOptInterval;
+    protected double sumAlpha;
 
     /**
      *
@@ -87,6 +90,23 @@ public class WordCloudTaskInstance extends TaskInstance {
     public void setWordPerTopic(int wordPerTopic) {
         this.wordPerTopic = wordPerTopic;
     }
+    
+    /**
+    *
+    * @param sumAlpha
+    */
+    public void setSumAlpha(double sumAlpha) {
+        this.sumAlpha = sumAlpha;
+    }
+    
+    /**
+    *
+    * @param numOptInterval
+    */
+    public void setNumOptInterval(int numOptInterval) {
+        this.numOptInterval = numOptInterval;
+    }
+    
 
     /**
      *
@@ -169,6 +189,23 @@ public class WordCloudTaskInstance extends TaskInstance {
     public int getWordPerTopic() {
         return wordPerTopic;
     }
+    
+    /**
+    *
+    * @return
+    */
+    public double getSumAlpha(){
+    	return sumAlpha;
+    }
+    
+    /**
+    *
+    * @return
+    */
+    public int getNumOptInterval(){
+    	return numOptInterval;
+    }
+    
 
     /**
      *
@@ -193,4 +230,18 @@ public class WordCloudTaskInstance extends TaskInstance {
     public int getMinFontSize() {
         return minFontSize;
     }
+    /**
+    *
+    * @return
+    */
+    public Boolean getIsLowercase() {
+		return isLowercase;
+	}
+    /**
+    *
+    * @return
+    */
+	public void setIsLowercase(Boolean isLowercase) {
+		this.isLowercase = isLowercase;
+	}
 }

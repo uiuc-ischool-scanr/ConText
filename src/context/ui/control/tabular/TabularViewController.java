@@ -141,7 +141,9 @@ public class TabularViewController extends AnchorPane implements Initializable {
                 public ObservableValue<String> call(TableColumn.CellDataFeatures<List<String>, String> p) {
                     final String val = p.getValue().get(j);
                     if (isRoundDoubles() && NumberUtils.isNumber(val) && val.contains(".")) {
-                        DecimalFormat df = new DecimalFormat("#.##");
+                        
+                    	//2016.01.26 Julian Edited: Add decimal digits from 2 to 4 digits
+                    	DecimalFormat df = new DecimalFormat("#.####");
                         Double d = Double.parseDouble(val);
                         return new SimpleStringProperty(df.format(d));
                     } else {

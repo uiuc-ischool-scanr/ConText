@@ -26,12 +26,15 @@ import context.core.entity.FileData;
 import context.ui.control.configuration.ConfigurationController;
 import context.ui.misc.FileHandler;
 import context.ui.misc.PropertiesUtil;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -53,15 +56,9 @@ public class WordCloudConfigurationController extends ConfigurationController im
     public static String path = PropertiesUtil.getFXMLPath(WordCloudConfigurationController.class);
 
     @FXML
-    private Font x1;
-    @FXML
-    private Font x2;
-    @FXML
     private Label titleLabel;
     @FXML
     private ToggleGroup cloudTypeToggleGroup;
-    @FXML
-    private Color x3;
     @FXML
     private TextField stopwordFileTextField;
     @FXML
@@ -70,6 +67,10 @@ public class WordCloudConfigurationController extends ConfigurationController im
     private TextField wordsPerTopicTextField;
     @FXML
     private TextField numberOfIterationTextField;
+    @FXML
+    private TextField numberOfOptIntervalTextField;
+    @FXML
+    private TextField sumOfAlphaTextField;
     @FXML
     private RadioButton singleTypeRadioButton;
     @FXML
@@ -86,6 +87,8 @@ public class WordCloudConfigurationController extends ConfigurationController im
     private TextField sentimentListTextField;
     @FXML
     private Button browseSentimentListButton;
+    @FXML
+    private CheckBox toLowercaseCheckBox;
 
     /**
      *
@@ -108,10 +111,14 @@ public class WordCloudConfigurationController extends ConfigurationController im
         numberOfTopicsTextField.setText(AppConfig.getProperty("task.wordcloud.numberoftopics"));
         wordsPerTopicTextField.setText(AppConfig.getProperty("task.wordcloud.wordspertopic"));
         numberOfIterationTextField.setText(AppConfig.getProperty("task.wordcloud.numberofiterations"));
+        numberOfOptIntervalTextField.setText(AppConfig.getProperty("task.topicmodeling.numoptinterval"));
+        sumOfAlphaTextField.setText(AppConfig.getProperty("task.topicmodeling.sumalpha"));
+        
         widthTextField.setText(AppConfig.getProperty("task.wordcloud.width"));
         heightTextField.setText(AppConfig.getProperty("task.wordcloud.height"));
         minFontSizeTextField.setText(AppConfig.getProperty("task.wordcloud.fontsize"));
         clusteredTypeRadioButton.selectedProperty().set(true);
+        toLowercaseCheckBox.selectedProperty().set(true);
     }
 
     /**
@@ -170,6 +177,23 @@ public class WordCloudConfigurationController extends ConfigurationController im
     }
 
     /**
+    *
+    * @return
+    */
+    public int getNumberOfOptInterval(){
+    	return Integer.parseInt(numberOfOptIntervalTextField.textProperty().get());
+    }
+    
+    /**
+    *
+    * @return
+    */
+    public double getSumAlpha(){
+    	return Double.parseDouble(sumOfAlphaTextField.textProperty().get());
+    }
+    
+    
+    /**
      *
      * @return
      */
@@ -192,6 +216,14 @@ public class WordCloudConfigurationController extends ConfigurationController im
     public int getFontSize() {
         return Integer.parseInt(minFontSizeTextField.textProperty().get());
     }
+    
+    /**
+    *
+    * @return
+    */
+   public Boolean getIsLowercase() {
+       return toLowercaseCheckBox.selectedProperty().getValue();
+   }
 
     @FXML
     private void handleBrowsestopwordsButton(ActionEvent event) {

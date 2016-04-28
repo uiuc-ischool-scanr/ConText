@@ -3,6 +3,8 @@ package context.core.task.topicmodeling;
 import context.core.entity.CorpusData;
 import context.core.entity.FileData;
 import context.core.entity.TabularData;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -18,6 +20,8 @@ public class TopicModelingBody {
     private int numTopics;
     private int numWordsPerTopic;
     private int numIterations;
+    private int numOptInterval;
+    private double sumAlpha;
     private String stopListPath;
     private List<FileData> CorpusFiles;
     private String result;
@@ -36,6 +40,8 @@ public class TopicModelingBody {
         this.numTopics = instance.getNumTopics();
         this.numWordsPerTopic = instance.getNumWordsPerTopic();
         this.numIterations = instance.getNumIterations();
+        this.numOptInterval=instance.getNumOptInterval();
+        this.sumAlpha=instance.getSumAlpha();
         this.stopListPath = instance.getStopListLoc();
         this.CorpusFiles = this.input.getFiles();
         this.allOuts = new String[2];
@@ -48,9 +54,10 @@ public class TopicModelingBody {
      */
     public boolean ModelTopic() {
         try {
-            MalletTopicModeling mtm = new MalletTopicModeling();
+            MalletTopicModeling mtm = new MalletTopicModeling(numTopics, numWordsPerTopic,
+            		numIterations,numOptInterval,sumAlpha, CorpusFiles, stopListPath, isLowercase);
 
-            allOuts = mtm.topicModeling(numTopics, numWordsPerTopic, numIterations, CorpusFiles, stopListPath, isLowercase);
+            allOuts = mtm.topicModellingOutput();
         } catch (Exception e) {
         	e.printStackTrace();
             log += "Error in generating topics:" + e.getMessage() + " \n";
@@ -73,9 +80,12 @@ public class TopicModelingBody {
      * @param filepath1
      * @param filepath2
      */
-    public void writeOutput(String filepath1, String filepath2) {
-        this.writeProbsCsv(filepath2);
+    public void writeOutput(String filepath1, String filepath2, String filepath3, String filepath4) {
+        
         this.writeWordsCsv(filepath1);
+        this.writeProbsCsv(filepath2);
+        this.writeWeightsCsv(filepath3);
+        this.writeTokenCsv(filepath4);
 
     }
 
@@ -85,8 +95,16 @@ public class TopicModelingBody {
      */
     public void writeWordsCsv(String filepath) {
         StringBuilder b = new StringBuilder();
-        b.append("Topic,Average Fit,TopicMembers\n");//Average Square Fit,TopicMembers\n");
+        b.append("Topic,Weight,TopicMembers\n");//Average Square Fit,TopicMembers\n");
         b.append(allOuts[0]);
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filepath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
+        //
+        
         FileData.writeDataIntoFile(b.toString(), filepath);
     }
 
@@ -102,7 +120,55 @@ public class TopicModelingBody {
         }
         b.append("\n");
         b.append(allOuts[1]);
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filepath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
+        //
+        
         FileData.writeDataIntoFile(b.toString(), filepath);
     }
+    
+    /**
+    *
+    * @param filepath
+    */
+   public void writeWeightsCsv(String filepath) {
+       StringBuilder b = new StringBuilder();
+       b.append("Topic,Word,WordWeights\n");
+       b.append(allOuts[2]);
+       
+       // 2016.03 Add this code to delete existing file
+       File toDelete = new File(filepath);
+       	if (toDelete.exists()) {
+       		toDelete.delete(); 
+       	}
+       //
+       
+       FileData.writeDataIntoFile(b.toString(), filepath);
+   }
+    
+   /**
+   *
+   * @param filepath
+   */
+  public void writeTokenCsv(String filepath) {
+      StringBuilder b = new StringBuilder();
+      b.append("LL/Token\n");
+      b.append(allOuts[3]);
+      
+      // 2016.03 Add this code to delete existing file
+      File toDelete = new File(filepath);
+      	if (toDelete.exists()) {
+      		toDelete.delete(); 
+      	}
+      //
+      
+      FileData.writeDataIntoFile(b.toString(), filepath);
+  }
+   
+   
 
 }

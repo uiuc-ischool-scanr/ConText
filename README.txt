@@ -11,9 +11,12 @@ Contributors:
 
 * Amirhossein Aleyasen <aleyase2@illinois.edu>
 * Chieh-Li Chin <cchin6@illinois.edu>
+* Ming Jiang <mjiang17@illinois.edu>
+* Harathi Korrapati <korrapa2@illinois.edu>
 * Shubhanshu Mishra <smishra8@illinois.edu>
 * Kiumars Soltani <soltani2@illinois.edu>
 * Liang Tao <ltao3@illinois.edu>
+
 
 
 
@@ -21,7 +24,7 @@ License:
 --------
 
 ### ConText Application Executable Files
-The ConText application executable files (i.e. ConText-1.1.dmg, ConText-1.1-x64.exe, ConText-1.1-x86.exe, ConText.jar, and ConText.zip) are licensed under **GNU General Public License version 3.0 or later** license.
+The ConText application executable files (e.g. ConText-1.X.dmg, ConText-1.X-x64.exe, ConText-1.X-x86.exe, ConText.jar, and ConText.zip) are licensed under **GNU General Public License version 3.0 or later** license.
 
 The executable files include the following:
 * The application code, packaged into a set of JAR files, plus any other application resources (data files, native libraries)
@@ -30,7 +33,7 @@ The executable files include the following:
 * Metadata, such as icons
 
 
-Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved. Other copyright statements provided below.
+Copyright (c) 2016 University of Illinois Board of Trustees, All rights reserved. Other copyright statements provided below.
 
 Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen, Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.
 
@@ -43,7 +46,7 @@ The following files are released under **GNU General Public License version 2.0 
 * All files in directory "src"
 * .classpath, .project, build.fxbuild, build.xml, mainfest.mf, and train_model.sh
 
-Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.
+Copyright (c) 2016 University of Illinois Board of Trustees, All rights reserved.
 
 Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen, Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.
 

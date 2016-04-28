@@ -3,8 +3,8 @@
 [Setup]
 AppId={{fxApplication}}
 AppName=ConText
-AppVersion=1.1-x64
-AppVerName=ConText-1.1-x64
+AppVersion=1.2.0-x64
+AppVerName=ConText-1.2.0-x64
 AppPublisher=University of Illinois
 AppComments=Context-FX
 AppCopyright=
@@ -23,7 +23,7 @@ DefaultGroupName=University of Illinois
 LicenseFile=
 ;WinXP or above
 MinVersion=0,5.1 
-OutputBaseFilename=ConText-1.1-x64
+OutputBaseFilename=ConText-1.2.0-x64
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=lowest

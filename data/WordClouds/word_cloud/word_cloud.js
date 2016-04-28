@@ -4,30 +4,36 @@ var dims = {x: 200, y: 200} ;
 d3.select("#txtWidth").property("value", width);
 d3.select("#txtHeight").property("value", height);
 d3.select("#txtSpacing").property("value", radius);
+d3.select("#txtFontSize").property("value", fontSize);
 console.log(wordList);
 
 var color = d3.scale.linear()
     .domain([0, item_count-1])
     .range(["yellow", "white"]);
 
+
+var topicFreqMax = [];
+var topicFreqMin = [];
+
 for(i=0;i<item_count;i++){
   topics[i] = [];
-}
-topicFreqMax = 0;
-topicFreqMin = wordList[0].frequency;
-for(word in wordList){
-	topics[wordList[word].topic].push(wordList[word]);
-	if(wordList[word].frequency > topicFreqMax){
-		topicFreqMax = wordList[word].frequency;
-	}
-	if(wordList[word].frequency < topicFreqMin){
-		topicFreqMin = wordList[word].frequency;
-	}
+  topicFreqMax.push(0);
+  topicFreqMin.push(wordList[0].frequency);
 }
 
-var fontScale = d3.scale.linear()
-    .domain([topicFreqMin,topicFreqMax])
-    .range([fontSize, 3*fontSize]);
+for(word in wordList){
+	topics[wordList[word].topic].push(wordList[word]);
+	if(wordList[word].frequency > topicFreqMax[wordList[word].topic]){
+		topicFreqMax[wordList[word].topic] = wordList[word].frequency;
+	}
+	if(wordList[word].frequency < topicFreqMin[wordList[word].topic]){
+		topicFreqMin[wordList[word].topic] = wordList[word].frequency;
+	}
+}
+var globalMax = d3.max(topicFreqMax);
+var globalMin = d3.min(topicFreqMin);
+
+
 
 console.log(topics);
 var index = 1;
@@ -65,14 +71,27 @@ function drawForceCloud(words, index) {
         .text(function(d) { return d.text; });
   }
 
-function getSize(freq,i){
-	//normalFreq = (freq - topicFreqMin)/(topicFreqMax-topicFreqMin);
-	//return Math.log(1+normalFreq)*2 + fontSize;
-  //return normalFreq*50 + fontSize;
-  return fontScale(freq);
-}
+
 
 function drawClusters(){
+	var fontScale = d3.scale.linear()
+		.domain([globalMin,globalMax])
+		.range([fontSize, 3*fontSize]);
+	var fontScales = [];
+	for(var i = 0; i < item_count; i ++){
+		var t_fontSize = fontScale(topics[i][0].fitVal);
+		fontScales.push(d3.scale.linear()
+		.domain([topicFreqMin[i],topicFreqMax[i]])
+		.range([t_fontSize, 3*t_fontSize]));
+	}
+	
+	var getSize = function(freq,i){
+		//normalFreq = (freq - topicFreqMin)/(topicFreqMax-topicFreqMin);
+		//return Math.log(1+normalFreq)*2 + fontSize;
+	  //return normalFreq*50 + fontSize;
+	  //return fontScale(freq);
+	  return fontScales[i](freq);
+	}
       var force = d3.layout.force()
         .nodes(nodes)
         .size([width, height])
@@ -165,6 +184,7 @@ function updateCluster(){
 	width = d3.select("#txtWidth").property("value");
 	height = d3.select("#txtHeight").property("value");
 	radius = d3.select("#txtSpacing").property("value");
+	fontSize = d3.select("#txtFontSize").property("value");
 	clearClusters();
 	drawClusters();
 	

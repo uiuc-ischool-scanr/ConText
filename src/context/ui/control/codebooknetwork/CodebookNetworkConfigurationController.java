@@ -120,7 +120,7 @@ public class CodebookNetworkConfigurationController extends ConfigurationControl
                         "Sentence",
                         "Paragraph",
                         "Text",
-                        "Custome Tag..."
+                        "Custom Tag"
                 );
         unitOfAnalysisComboBox.getItems().addAll(unitOfAnalysisOptions);
         unitOfAnalysisComboBox.getSelectionModel().select(2);

@@ -516,10 +516,6 @@ public class ContextFXController implements Initializable {
         handleGenericTaskMenuItem(new WordCloudController());
     }
 
-    /*@FXML
-     private void handleImportWeiboMenuItem(ActionEvent event) {
-     handleGenericTaskMenuItem(new WeiboController());
-     }*/
     @FXML
     private void handleKeywordMenuItem(ActionEvent event) {
         handleGenericTaskMenuItem(new KeywordController());

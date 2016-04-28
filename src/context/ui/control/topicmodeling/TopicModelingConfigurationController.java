@@ -65,6 +65,10 @@ public class TopicModelingConfigurationController extends ConfigurationControlle
     @FXML
     private TextField numberOfIterationsTextField;
     @FXML
+    private TextField numberOfOptIntervalTextField;
+    @FXML
+    private TextField sumOfAlphaTextField;
+    @FXML
     private Label titleLabel;
     @FXML
     private CheckBox toLowercaseCheckBox;
@@ -85,10 +89,12 @@ public class TopicModelingConfigurationController extends ConfigurationControlle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        stopwordFileTextField.setText(AppConfig.defaultDeleteListFileLocation);
+        stopwordFileTextField.setText(AppConfig.defaultStopwordFileLocation);
         numberOfTopicsTextField.setText(AppConfig.getProperty("task.topicmodeling.numberoftopics"));
         wordsPerTopicsTextField.setText(AppConfig.getProperty("task.topicmodeling.wordspertopic"));
         numberOfIterationsTextField.setText(AppConfig.getProperty("task.topicmodeling.numberofiterations"));
+        numberOfOptIntervalTextField.setText(AppConfig.getProperty("task.topicmodeling.numoptinterval"));
+        sumOfAlphaTextField.setText(AppConfig.getProperty("task.topicmodeling.sumalpha"));
         toLowercaseCheckBox.selectedProperty().set(true);
     }
 
@@ -122,6 +128,22 @@ public class TopicModelingConfigurationController extends ConfigurationControlle
      */
     public int getNumberOfWordsPerTopics() {
         return Integer.parseInt(wordsPerTopicsTextField.textProperty().get());
+    }
+    
+    /**
+    *
+    * @return
+    */
+    public int getNumberOfOptInterval(){
+    	return Integer.parseInt(numberOfOptIntervalTextField.textProperty().get());
+    }
+    
+    /**
+    *
+    * @return
+    */
+    public double getSumAlpha(){
+    	return Double.parseDouble(sumOfAlphaTextField.textProperty().get());
     }
 
     @FXML

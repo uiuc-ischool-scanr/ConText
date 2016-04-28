@@ -103,10 +103,14 @@ public class WordCloudController extends BasicWorkflowController {
         instance.setNumIters(confController.getNumberOfIterations());
         instance.setNumTopics(confController.getNumberOfTopics());
         instance.setWordPerTopic(confController.getNumberOfWordsPerTopics());
+        instance.setSumAlpha(confController.getSumAlpha());
+        instance.setNumOptInterval(confController.getNumberOfOptInterval());       
+        
         instance.setClustering(confController.isClustering());
         instance.setHeight(confController.getCloudHeight());
         instance.setWidth(confController.getCloudWidth());
         instance.setMinFontSize(confController.getFontSize());
+        instance.setIsLowercase(confController.getIsLowercase());
         CTask task = new WordCloudTask(this.getProgress(), this.getProgressMessage());
         task.setTaskInstance(instance);
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {

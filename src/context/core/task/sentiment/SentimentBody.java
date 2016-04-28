@@ -324,6 +324,14 @@ public class SentimentBody {
             toWrite = ToHumanCSV.get(i1) + "\n";
             sb.append(toWrite);
         }
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filepath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
+        //
+        
         FileData.writeDataIntoFile(sb.toString(), filepath);
     }
 

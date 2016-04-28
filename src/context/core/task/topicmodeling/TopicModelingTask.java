@@ -52,8 +52,10 @@ public class TopicModelingTask extends CTask {
         //Write the output to CSV
         String filepath1 = ins.getTabularOutput(0).getPath().get();
         String filepath2 = ins.getTabularOutput(1).getPath().get();
+        String filepath3=ins.getTabularOutput(2).getPath().get();
+        String filepath4=ins.getTabularOutput(3).getPath().get();
         task.progress(17, 20, "Saving results in " + filepath1 + " and " + filepath2);
-        tmb.writeOutput(filepath1, filepath2);
+        tmb.writeOutput(filepath1, filepath2,filepath3,filepath4);
         task.progress(20, 20, "Results saved successfully");
 
         task.done();

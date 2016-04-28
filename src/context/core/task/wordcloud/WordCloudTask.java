@@ -51,7 +51,7 @@ public class WordCloudTask extends CTask {
         inputCorpus.addAllFiles(new File(inputCorpus.getPath().get()));
         task.progress(8, 20, inputCorpus.getFiles().size() + " files loaded");
 
-        WordCloud wc = new WordCloud(ins);
+        ClusteredWordCloud wc = new ClusteredWordCloud(ins);
 
         //Run corpus statistics
         task.progress(11, 20, "Running Word Cloud...");

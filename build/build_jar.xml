@@ -337,7 +337,7 @@
 		</fx:resources>
 		<!-- End of Customization -->
 
-		<fx:application id="fxApplication" name="ConText" mainClass="context.app.main.ContextFX" toolkit="fx" version="1.1" />
+		<fx:application id="fxApplication" name="ConText" mainClass="context.app.main.ContextFX" toolkit="fx" version="1.2.0" />
 
 		<mkdir dir="build/classes/META-INF" />
 
@@ -352,7 +352,7 @@
 			<manifest>
 				<attribute name="Implementation-Vendor" value="University of Illinois" />
 				<attribute name="Implementation-Title" value="ConText" />
-				<attribute name="Implementation-Version" value="1.1" />
+				<attribute name="Implementation-Version" value="1.2.0" />
 				<attribute name="JavaFX-Feature-Proxy" value="None" />
 			</manifest>
 		</fx:jar>

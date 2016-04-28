@@ -67,6 +67,7 @@ public class NetworkGeneration {
         String word = "";
         Integer wordIndex = null;
         int windowSize = instance.getDistance();
+        //System.out.println("Harathi windowsize"+windowSize);
 
         /**
          * Start with an element in the words vector and seek ahead till the
@@ -75,34 +76,54 @@ public class NetworkGeneration {
          * next element in the words vector and repeat. TODO - Add feature for
          * skipping the seperator.
          */
-        for (int i = 0; i < words.size() - windowSize; i++) {
+        //System.out.println("Harathi words"+words.size());
+        //if(windowSize >= words.size())
+        //{
+        //    System.out.println("Harathi window size exceeded words size, so changin it to words count -1 "+ (words.size()-1));
+        //    windowSize = words.size() -1;
+        //}
+        for (int i = 0; i < words.size(); i++) {
             word = words.get(i);
             if (word == null) {
                 continue;
             }
             word = word.toLowerCase();
+         //System.out.println("Harathi first word"+word);
             if (setCodebook.contains(word)) {
                 wordIndex = i;
             } else {
                 wordIndex = null;
             }
-//            System.out.println("Source: " + word + ", " + wordIndex);
+           //System.out.println("Harathi Source word and word index: " + word + ", " + wordIndex);
             int dist = 0;
             for (int j = 1; j + i < words.size() && dist <= windowSize && wordIndex != null; j++) {
                 Integer targetIndex = i + j;
+				if(targetIndex >= words.size())
+				    break;
                 String target = words.get(targetIndex);
                 target = target.toLowerCase();
 //                System.out.println("Target: (" + dist + ")" + target + ", " + targetIndex);
                 if (target == null) {
 //                    System.out.println("Seperator found and also breaking out of window: (" + dist + ")" + target + ", " + targetIndex);
-                    break;
+                	//System.out.println("Harathi in if loop target before continue"+target);
+                	//System.out.println("Harathi in if loop word before continue"+word);
+                	dist++;
+                	continue;
                 }
+                //System.out.println("Harathi in if loop target after if loop"+target);
+            	//System.out.println("Harathi in if loop word after if loop"+word);
                 if (target.equals(".")) {
-//                    System.out.println("Seperator found: (" + dist + ")" + target + ", " + targetIndex);
+                	dist++;
+                    System.out.println("Seperator found: (" + dist + ")" + target + ", " + targetIndex);
+                    continue;
+                }
+                if (target.startsWith("`")) {
+                    System.out.println("Seperator found: (" + dist + ")" + target + ", " + targetIndex);
+                     dist++;
                     continue;
                 }
 //                System.out.println("No Seperator found: (" + dist + ")" + target + ", " + targetIndex);
-                dist++;
+               dist++;
                 if (!setCodebook.contains(target)) {
                     continue;
                 }
@@ -110,9 +131,10 @@ public class NetworkGeneration {
                 int id1 = setCodebook.get(word);
                 int id2 = setCodebook.get(target);
 //                System.out.println("Edge: " + id1 + ", " + id2);
-                if (id1 == id2) {
-                    continue;
-                }
+                //if (id1 == id2) {
+                //    continue;
+                //}
+                System.out.println("Edge: " + word + ", " + target);
 
                 Pair<String, String> cb1 = this.cbInfo.get(id1);
                 Pair<String, String> cb2 = this.cbInfo.get(id2);
@@ -125,7 +147,7 @@ public class NetworkGeneration {
                 if (id1 <= id2) {
                     edges.adjustOrPutValue(new ImmutablePair<Integer, Integer>(id1, id2), 1, 1);
                 } else {
-                    edges.adjustOrPutValue(new ImmutablePair<Integer, Integer>(id2, id1), 1, 1);
+                    edges.adjustOrPutValue(new ImmutablePair<Integer, Integer>(id1, id2), 1, 1);
                 }
 //                System.out.println("Added Edge: " + id1 + "," + id2);
 
@@ -228,6 +250,12 @@ public class NetworkGeneration {
                         + node2.getLeft() + "," + node2.getRight() + "," + networkIt.value() + "\n");
             }
         }
+        
+        // 2016.03 Add this code to delete existing file
+        File toDelete = new File(filepath);
+        	if (toDelete.exists()) {
+        		toDelete.delete(); 
+        	}
 
         FileData.writeDataIntoFile(sb.toString(), filepath);
     }
@@ -237,6 +265,7 @@ public class NetworkGeneration {
      * @return
      */
     public boolean applyNetwork() {
+    	//System.out.println("Harathi in APPLYNETWORK");
 
         TObjectIntHashMap<String> setCodebook = this.fillCodebookSet();
         TIntObjectHashMap<Pair<String, String>> nodes = new TIntObjectHashMap<Pair<String, String>>();
@@ -256,17 +285,30 @@ public class NetworkGeneration {
         try {
             for (FileData f : files) {
                 String content = JavaIO.readFile(f.getFile());
-//                System.out.println("content before =======" + content);
+              //System.out.println("content before =======" + content);
 //                content = codebookificationContent(content, setCodebook);
 //                System.out.println("content after========" + content);
                 if (content.isEmpty()) {
                     continue;
                 }
-                Vector<String> words = CodebookUtils.getWords(content, instance.getSeparator(), instance.getCustomTag());
-
+                //Vector<String> words = CodebookUtils.getWords(content, instance.getSeparator(), instance.getCustomTag());
+				if(instance.getSeparator() ==1)
+				{
+                String[] sentences = content.split("[.\n]+");
+				for(String sentence : sentences)
+				{
+				System.out.println("processing sentence" + sentence);
+				String[] ss = sentence.split("[ .,\n]+");
+                Vector<String> words = new Vector<String>();
+                	for (String word : ss) {
+					    words.add( word);
+                }
                 if (!instance.isNetInputCorpus()) {
                     nodes.clear();
                     edges.clear();
+                    for (int i = 0; i < words.size() ; i++) {
+                    	//System.out.println("Harathi in appy network word"+words.get(i));
+                    	}
                     makeNetwork(words, nodes, edges, setCodebook);
 
                     String nameInputFileWithoutExtension = FilenameUtils.getBaseName(f.getFile().getName());
@@ -275,8 +317,77 @@ public class NetworkGeneration {
                     System.out.println("filepath (without extension)=" + filepath);
                     this.writeOutput(nodes, edges, filepath + ".csv", filepath + ".gexf");
                 } else {
+                	for (int i = 0; i < words.size() ; i++) {
+                    	//System.out.println("Harathi in appy network word"+words.get(i));
+                    	}
                     makeNetwork(words, nodes, edges, setCodebook);
                 }
+				}
+				}
+				else if(instance.getSeparator() ==2)
+				{
+				System.out.println("processing paragraphs");
+                String[] paras = content.split("[\n]+");
+				for(String para : paras)
+				{
+				System.out.println("processing paragraph " + para);
+				String[] ss = para.split("[ .,]+");
+                Vector<String> words = new Vector<String>();
+                	for (String word : ss) {
+					    words.add( word);
+                }
+                if (!instance.isNetInputCorpus()) {
+                    nodes.clear();
+                    edges.clear();
+                    for (int i = 0; i < words.size() ; i++) {
+                    	//System.out.println("Harathi in appy network word"+words.get(i));
+                    	}
+                    makeNetwork(words, nodes, edges, setCodebook);
+
+                    String nameInputFileWithoutExtension = FilenameUtils.getBaseName(f.getFile().getName());
+                    path = FilenameUtils.getFullPath(f.getFile().getAbsolutePath());
+                    final String filepath = path + nameInputFileWithoutExtension + "-Network";
+                    System.out.println("filepath (without extension)=" + filepath);
+                    this.writeOutput(nodes, edges, filepath + ".csv", filepath + ".gexf");
+                } else {
+                	for (int i = 0; i < words.size() ; i++) {
+                    	//System.out.println("Harathi in appy network word"+words.get(i));
+                    	}
+                    makeNetwork(words, nodes, edges, setCodebook);
+                }
+				}
+				}
+				if(instance.getSeparator() ==3)
+				{
+				System.out.println("processing text" );
+ 				{
+				System.out.println("processing content" + content);
+				String[] ss = content.split("[ .,\n]+");
+                Vector<String> words = new Vector<String>();
+                	for (String word : ss) {
+					    words.add( word);
+                }
+                if (!instance.isNetInputCorpus()) {
+                    nodes.clear();
+                    edges.clear();
+                    for (int i = 0; i < words.size() ; i++) {
+                    	//System.out.println("Harathi in appy network word"+words.get(i));
+                    	}
+                    makeNetwork(words, nodes, edges, setCodebook);
+
+                    String nameInputFileWithoutExtension = FilenameUtils.getBaseName(f.getFile().getName());
+                    path = FilenameUtils.getFullPath(f.getFile().getAbsolutePath());
+                    final String filepath = path + nameInputFileWithoutExtension + "-Network";
+                    System.out.println("filepath (without extension)=" + filepath);
+                    this.writeOutput(nodes, edges, filepath + ".csv", filepath + ".gexf");
+                } else {
+                	for (int i = 0; i < words.size() ; i++) {
+                    	//System.out.println("Harathi in appy network word"+words.get(i));
+                    	}
+                    makeNetwork(words, nodes, edges, setCodebook);
+                }
+				}
+				}
 
             }
 

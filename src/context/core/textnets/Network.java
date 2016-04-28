@@ -58,6 +58,10 @@ public class Network {
         GRAPHML
     };
     private String edgeTableDelim = ",";
+    
+    //Add edgeID, initialize edgeID =1 when network generated
+	//thus each session will has the default edgeID starts from 1
+    private int edgeID;
 
     /**
      * @return the edgeTableDelim
@@ -73,6 +77,14 @@ public class Network {
         this.edgeTableDelim = edgeTableDelim;
     }
 
+    public synchronized int getEdgeID(){
+    	return edgeID;
+    }
+    
+    public synchronized void setEdgeID(int edgeID){
+    	this.edgeID=edgeID;
+    }
+    
     private String edgeTablePath = "";
 
     /**
@@ -98,8 +110,12 @@ public class Network {
         pc.newProject();
         workspace = pc.getCurrentWorkspace();
         graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+       
         graph = graphModel.getUndirectedGraph();
+        
+        
         this.setEdgeTableDelim(",");
+        this.setEdgeID(1);
     }
 
     /**
@@ -136,11 +152,16 @@ public class Network {
             w = ed.getWeight();
             ed.setWeight(w + 1);
             return ed;
+        }else{
+        	 //Add edgeID, initialize edgeID =1 when network generated
+        	 //thus each session will has the default edgeID starts from 1
+        	 ed = graphModel.factory().newEdge(String.valueOf(edgeID),n1, n2, 1, false);
+             //ed = graphModel.factory().newEdge(n1, n2);
+             //ed.setWeight(w);		
+        	 edgeID++;
+             return ed;
         }
-        ed = graphModel.factory().newEdge(n1, n2, 1, false);
-        //ed = graphModel.factory().newEdge(n1, n2);
-        //ed.setWeight(w);		
-        return ed;
+       
     }
 
     /**
