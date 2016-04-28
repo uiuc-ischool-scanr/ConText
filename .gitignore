@@ -1,0 +1,6 @@
+*.class
+*.exe
+*.dmg
+.DS_Store
+*.iml
+*.eml
