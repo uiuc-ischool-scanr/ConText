@@ -23,7 +23,7 @@ License:
 --------
 
 ### ConText Application Executable Files
-The ConText application executable files (e.g. ConText-1.*.dmg, ConText-1.*-x64.exe, ConText-1.*-x86.exe, ConText.jar, and ConText.zip) are licensed under **GNU General Public License version 3.0 or later** license.
+The ConText application executable files (e.g. ConText-1.\*.dmg, ConText-1.\*-x64.exe, ConText-1.\*-x86.exe, ConText.jar, and ConText.zip) are licensed under **GNU General Public License version 3.0 or later** license.
 
 The executable files include the following:
 * The application code, packaged into a set of JAR files, plus any other application resources (data files, native libraries)
