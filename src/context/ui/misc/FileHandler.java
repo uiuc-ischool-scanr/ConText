@@ -154,8 +154,7 @@ public class FileHandler {
      * @param args
      */
     public static void main(String[] args) {
-        String test = "C:\\Data\\Dropbox\\Development\\Java-ws\\Context-FX\\data\\Corpus";
-        System.out.println(getFileName(test));
+        
     }
 
     /**
