@@ -168,7 +168,7 @@ Citing ConText:
 -------------
 While not a condition of use, the developers would appreciate if you acknowledge its use with a citation:
 
-Diesner, J., Aleyasen, A., Chin, C., Mishra, S., Soltani, K., Tao, L. (2015). ConText: Network Construction from Texts [Software]. Available from http://context.lis.illinois.edu/
+Diesner, J., Aleyasen, A., Chin, C., Mishra, S., Soltani, K., Tao, L. (2015). ConText: Network Construction from Texts [Software]. Available from http://context.ischool.illinois.edu/
 
 
 
