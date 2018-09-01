@@ -168,7 +168,7 @@ Citing ConText:
 -------------
 While not a condition of use, the developers would appreciate if you acknowledge its use with the following citations:
 
-Diesner, J. (2014). ConText: Software for the Integrated Analysis of Text Data and Network Data [http://jdiesnerlab.ischool.illinois.edu/calls/ICA2014/Diesner_ICA_2014.pdf]. Paper presented at the Social and Semantic Networks in Communication Research. Preconference at Conference of International Communication Association (ICA), Seattle, WA.
+Diesner, J. (2014). [ConText: Software for the Integrated Analysis of Text Data and Network Data](http://jdiesnerlab.ischool.illinois.edu/calls/ICA2014/Diesner_ICA_2014.pdf). Paper presented at the Social and Semantic Networks in Communication Research. Preconference at Conference of International Communication Association (ICA), Seattle, WA.
 
 Diesner, J., Aleyasen, A., Chin, C., Mishra, S., Soltani, K., Tao, L. (2015). ConText: Network Construction from Texts [Software]. Available from http://context.ischool.illinois.edu/
 
