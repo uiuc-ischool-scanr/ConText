@@ -3,7 +3,7 @@ ConText: Network Construction from Texts
 
 ConText supports a) the construction of network data from natural language text data, a process also known as relation extraction and b) the joint analysis of text data and network data.
 
-
+***A new version of ConText running with Java 8 will be published soon.***
 
 Contributors:
 -------------
@@ -38,7 +38,7 @@ The executable files include the following:
 
 Copyright (c) 2019 University of Illinois Board of Trustees, All rights reserved. Other copyright statements provided below.
 
-Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen, Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.
+Developed at the iSchool @ UIUC, by Dr. Jana Diesner, Amirhossein Aleyasen, Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
 
 
 
@@ -52,9 +52,9 @@ The following files are released under **GNU General Public License version 2.0 
 * .classpath, .project, build.fxbuild, build.xml, mainfest.mf, and train_model.sh
 
 
-Copyright (c) 2018 University of Illinois Board of Trustees, All rights reserved.
+Copyright (c) 2019 University of Illinois Board of Trustees, All rights reserved.
 
-Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen, Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.
+Developed at the iSchool @ UIUC, by Dr. Jana Diesner, Amirhossein Aleyasen, Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
 
 
 ### Dependencies
