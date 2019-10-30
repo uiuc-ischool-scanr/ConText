@@ -4,6 +4,7 @@ ConText: Network Construction from Texts
 ConText supports a) the construction of network data from natural language text data, a process also known as relation extraction and b) the joint analysis of text data and network data.
 
 
+
 Contributors:
 -------------
 
@@ -16,6 +17,9 @@ Contributors:
 * Liang Tao <ltao3@illinois.edu>
 * Ming Jiang <mjiang17@illinois.edu>
 * Harathi Korrapati <korrapa2@illinois.edu>
+* Nikolaus Nova Parulian <nnp2@illinois.edu>
+* Lan Jiang <lanj3@illinois.edu>
+* Siva Ratna Kumari Narisetti
 
 
 
@@ -32,9 +36,11 @@ The executable files include the following:
 * Metadata, such as icons
 
 
-Copyright (c) 2018 University of Illinois Board of Trustees, All rights reserved. Other copyright statements provided below.
+Copyright (c) 2019 University of Illinois Board of Trustees, All rights reserved. Other copyright statements provided below.
 
 Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen, Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.
+
+
 
 
 ### U of I Codes
@@ -170,5 +176,5 @@ While not a condition of use, the developers would appreciate if you acknowledge
 
 Diesner, J. (2014). [ConText: Software for the Integrated Analysis of Text Data and Network Data](http://jdiesnerlab.ischool.illinois.edu/calls/ICA2014/Diesner_ICA_2014.pdf). Paper presented at the Social and Semantic Networks in Communication Research. Preconference at Conference of International Communication Association (ICA), Seattle, WA.
 
-Diesner, J., Aleyasen, A., Chin, C., Mishra, S., Soltani, K., Tao, L. (2015). ConText: Network Construction from Texts [Software]. Available from http://context.ischool.illinois.edu/
+Diesner, J., Aleyasen, A., Chin, C., Mishra, S., Soltani, K., Tao, L., Jiang, M., Korrapati, H., Parulian, N., & Jiang, L. (2019). ConText: Network Construction from Texts [Software]. Available from http://context.ischool.illinois.edu/
 
