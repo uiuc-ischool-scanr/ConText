@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="context.ui.control.keyword.KeywordConfigurationController">
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="400.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.ui.control.keyword.KeywordConfigurationController">
   <children>
     <TextField id="stopwordFileTextField" fx:id="keywordFileTextField" layoutX="35.0" layoutY="112.0" minHeight="25.0" prefWidth="406.0" />
     <Button fx:id="browseButton" layoutX="449.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="86.0" styleClass="highlightsButton" text="Browse...">
@@ -27,6 +27,12 @@
     <Label layoutX="35.0" layoutY="224.0" text="Number of words in left" />
     <TextField fx:id="rightBoundTextField" layoutX="201.0" layoutY="255.0" prefWidth="111.0" />
     <Label layoutX="35.0" layoutY="255.0" text="Number of words in right" />
+      <CheckBox fx:id="omit_case_checkbox" layoutX="35.0" layoutY="350.0" mnemonicParsing="false" text="Omit case of term" />
+      <Label graphicTextGap="0.0" layoutY="300" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Omit Case" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="15.0" fx:id="x3" />
+         </font>
+      </Label>
   </children>
   <stylesheets>
     <URL value="@../../../app/main/style-default.css" />

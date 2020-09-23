@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+* Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -34,6 +35,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -59,6 +61,12 @@ public class BasicInputViewController extends AnchorPane implements Initializabl
 
     @FXML
     private Label titleLabel;
+    /*@FXML
+    private CheckBox drop_num_checkbox;
+    @FXML
+    private CheckBox drop_pun_checkbox;
+    @FXML
+    private CheckBox keep_pou_checkbox;*/
 
     /**
      *
@@ -114,6 +122,7 @@ public class BasicInputViewController extends AnchorPane implements Initializabl
                         selectedItemLabel.setText(new_val.getPath().get());
                     }
                 });
+        //keep_pou_checkbox.visibleProperty().set(false);
     }
 
     @FXML
@@ -124,6 +133,15 @@ public class BasicInputViewController extends AnchorPane implements Initializabl
             inputListView.getSelectionModel().selectLast();
         }
     }
+    
+    /*@FXML
+    public void handleKeepPouCheckBox(ActionEvent event) {
+        if (drop_pun_checkbox.isSelected()) {
+            keep_pou_checkbox.visibleProperty().set(true);
+        } else {
+            keep_pou_checkbox.visibleProperty().set(false);
+        }
+    }*/
 
     /**
      *
@@ -132,5 +150,26 @@ public class BasicInputViewController extends AnchorPane implements Initializabl
     public StringProperty getSelectedCorpusName() {
         return this.getInputListView().getSelectionModel().selectedItemProperty().getValue().getName();
     }
+    
+   /* public boolean isDropnum(){
+        if (drop_num_checkbox.isSelected()) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isDroppun(){
+        if (drop_pun_checkbox.isSelected()) {
+            return true;
+        }
+    return false;
+    }
+    
+    public boolean isKeeppou(){
+        if (keep_pou_checkbox.isSelected()){
+            return true;
+        }
+        return false;
+    }*/
 
 }

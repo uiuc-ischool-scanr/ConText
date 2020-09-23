@@ -53,6 +53,9 @@ public class EntropyController extends Basic2StepWorkflowController {
         EntropyTaskInstance instance = (EntropyTaskInstance) getTaskInstance();
         StringProperty inputPath = basicInputViewController.getSelectedItemLabel().textProperty();
         StringProperty inputname = basicInputViewController.getSelectedCorpusName();
+        /* instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou()); */
         CorpusData input = new CorpusData(inputname, inputPath);
         input.setId(basicInputViewController.getSelectedInput().getId());
         instance.setInput(input);

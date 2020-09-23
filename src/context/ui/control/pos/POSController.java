@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -24,10 +25,12 @@ package context.ui.control.pos;
 import context.app.ProjectManager;
 import context.core.entity.CTask;
 import context.core.entity.CorpusData;
+import context.core.entity.FileList;
 import context.core.entity.TabularData;
 import context.core.task.pos.POSTask;
 import context.core.task.pos.POSTaskInstance;
 import context.ui.control.workflow.basic.BasicWorkflowController;
+import context.ui.misc.FileHandler;
 import context.ui.misc.NamingPolicy;
 import java.io.IOException;
 import javafx.beans.property.StringProperty;
@@ -87,6 +90,9 @@ public class POSController extends BasicWorkflowController {
         POSTaskInstance instance = (POSTaskInstance) getTaskInstance();
         StringProperty inputPath = basicInputViewController.getSelectedItemLabel().textProperty();
         StringProperty inputname = basicInputViewController.getSelectedCorpusName();
+        /*instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou());*/
         CorpusData input = new CorpusData(inputname, inputPath);
         instance.setInput(input);
 
@@ -94,13 +100,27 @@ public class POSController extends BasicWorkflowController {
 //        CorpusData output = new CorpusData(NamingPolicy.generateOutputName(inputPath.get(), outputPath.get(), instance), outputPath);
 //        instance.setTextOutput(output);
 
+        /*
+        Niko
+        add handler for creating subdirectory output
+        */
+        final String subdirectory = outputPath.get()+"/POS-Results/";
+        FileHandler.createDirectory(subdirectory);
+        System.out.println("Created sub dir: "+subdirectory);
+        FileList output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory);
+        instance.setTextOutput(output);
+        outputPath.set(subdirectory);
+        /*
+        End Addition
+        */
+
+
         TabularData tabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
                 NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
         instance.setTabularOutput(tabularData, 0);
         
         instance.setLanguage(confController.getLanguage());
-        
-
+                
         CTask task = new POSTask(this.getProgress(), this.getProgressMessage());
         task.setTaskInstance(instance);
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {

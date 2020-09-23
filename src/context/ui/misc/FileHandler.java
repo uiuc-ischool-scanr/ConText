@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -22,6 +23,7 @@
 package context.ui.misc;
 
 import context.app.AppConfig;
+import context.app.main.ContextFX;
 import context.app.main.ContextFXController;
 import context.core.entity.FileData;
 import context.core.entity.FileList;
@@ -96,7 +98,7 @@ public class FileHandler {
         dirChooser.setTitle(message);
 
         dirChooser.setInitialDirectory(new File(getLastDirectoryLocation()));
-        final File selectedDirectory = dirChooser.showDialog(ContextFXController.getStage());
+        final File selectedDirectory = dirChooser.showDialog(ContextFX.appController.getStage());
         if (selectedDirectory != null) {
             selectedDirectory.getAbsolutePath();
 //            File[] files = selectedDirectory.listFiles();
@@ -119,7 +121,7 @@ public class FileHandler {
         fileChooser.setTitle(message);
 
         fileChooser.setInitialDirectory(new File(getLastFileLocation()));
-        final File selectedFile = fileChooser.showOpenDialog(ContextFXController.getStage());
+        final File selectedFile = fileChooser.showOpenDialog(ContextFX.appController.getStage());
         if (selectedFile != null) {
             selectedFile.getAbsolutePath();
             FileData file = new FileData(new SimpleStringProperty(selectedFile.getName()), selectedFile);

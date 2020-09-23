@@ -2,6 +2,8 @@ package context.core.task.entropy;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -42,6 +44,9 @@ public class Entropybody {
     private EntropyTaskInstance instance;
     private CorpusData input;
     private List<TabularData> tabularOutput;
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
 
     private StanfordCoreNLP pipeline;
     private List<String[]> corpusStatsWithTFIDF;
@@ -64,6 +69,9 @@ public class Entropybody {
         this.input = (CorpusData) instance.getInput();
         this.tabularOutput = instance.getTabularOutput();
         this.pipeline = instance.getPipeline();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
     }
 
     /**
@@ -105,6 +113,17 @@ public class Entropybody {
                         for (TaggedWord token : taggedWords) {
                             // this is the text of the token
                             String word = token.word();
+                            /*if (drop_num) {
+                                word = word.replaceAll("[0-9]", "");
+                            }
+                            if (drop_pun) {
+                                if (keep_pou) {
+                                    word = word.replaceAll("[\\p{P}&&[^#]]+","");
+                                } else {
+                                    word = word.replaceAll("\\p{P}", "");
+                                }
+                            }*/
+                            
                             // this is the POS tag of the token
                             String pos = token.tag();
                             boolean val = pos.contains("NN");
@@ -266,7 +285,14 @@ public class Entropybody {
                 String[] entropy_entity = new String[3];
                 entropy_entity[0] = String.valueOf(count_file_terms);
                 entropy_entity[1] = String.valueOf(H_X);
+                BigDecimal bd_HX = new BigDecimal(entropy_entity[1]);
+                bd_HX=bd_HX.setScale(12, RoundingMode.HALF_UP);
+                entropy_entity[1]=bd_HX.toString();
+                
                 entropy_entity[2] = String.valueOf(Smoothed_H_X);
+                BigDecimal bd_smoothed_HX = new BigDecimal(entropy_entity[2]);
+                bd_smoothed_HX = bd_smoothed_HX.setScale(12, RoundingMode.HALF_UP);
+                entropy_entity[2] = bd_smoothed_HX.toString();
 
                 //System.out.println(file.getName() + " , " + count_file_terms + " , " + H_X + " , " + H_X / Math.log10(count_file_terms));
                 files_entropy.put(file.getName(), entropy_entity);

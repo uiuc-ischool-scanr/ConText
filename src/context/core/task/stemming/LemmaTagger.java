@@ -1,8 +1,8 @@
-/*
- 
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+/* 
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+ * Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+ * Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+ * Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang..     
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -16,9 +16,8 @@
  * You should have received a copy of the GNU General Public License along with   
  * this program; if not, see <http://www.gnu.org/licenses>.   
  *
- 
- 
  */
+
 package context.core.task.stemming;
 
 import context.app.AppConfig;
@@ -78,6 +77,11 @@ public class LemmaTagger {
 //        String tagged = tagger.tagString(sample);
         // Output the result
 //        System.out.println(tagged);
+
+        /* 
+        Niko Change
+        */
+        //List<CoreLabel> sent = Sentence.toCoreLabelList("These", "are", "some", "questions");
         List<CoreLabel> sent = Sentence.toCoreLabelList("These", "are", "some", "questions");
         final List<TaggedWord> lemmatize = lemmatize(sent, "en");
         System.out.println("Lemmatize::");

@@ -28,6 +28,9 @@ public class StemmingBody {
     private CorpusData input;
     private CorpusData output;
     private StanfordCoreNLP pipeline;
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
 
     /**
      *
@@ -43,6 +46,9 @@ public class StemmingBody {
         this.input = (CorpusData) instance.getInput();
         this.output = (CorpusData) instance.getTextOutput();
         this.pipeline = instance.getPipeline();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
 
     }
 
@@ -62,6 +68,16 @@ public class StemmingBody {
                 text = file.readFileIntoString();
 
                 text = text.replaceAll("\\p{Cc}", " ");
+                /*if (drop_num) {
+                    text = text.replaceAll("[0-9]", "");
+                }
+                if (drop_pun) {
+                    if (keep_pou) {
+                        text = text.replaceAll("[\\p{P}&&[^#]]+"," ");
+                    } else {
+                        text = text.replaceAll("\\p{P}", " ");
+                    }
+                }*/
                 text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");
                 // create an empty Annotation just with the given text
                 Annotation document = new Annotation(text);

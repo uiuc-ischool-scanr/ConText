@@ -1,8 +1,8 @@
-/*
- 
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+/* 
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+ * Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+ * Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+ * Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang..     
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -16,9 +16,8 @@
  * You should have received a copy of the GNU General Public License along with   
  * this program; if not, see <http://www.gnu.org/licenses>.   
  *
- 
- 
  */
+
 package context.core.task.pos;
 
 import java.io.File;
@@ -38,6 +37,7 @@ import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -51,6 +51,9 @@ public class POSBody {
     private POSTaskInstance instance;
     private CorpusData input;
     private List<TabularData> tabularOutput;
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
 
     /**
      *
@@ -75,6 +78,9 @@ public class POSBody {
         this.input = (CorpusData) instance.getInput();
         this.pipeline = instance.getPipeline();
         this.tabularOutput = instance.getTabularOutput();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
     }
 
     /**
@@ -95,6 +101,16 @@ public class POSBody {
                     text = JavaIO.readFile(file);
                     if (instance.getLanguage().equals("en")) {
                         text = text.replaceAll("\\p{Cc}", " ");
+                        /*if (drop_num) {
+                            text = text.replaceAll("[0-9]", " ");
+                        }
+                        if (drop_pun) {
+                            if (keep_pou) {
+                                text = text.replaceAll("[\\p{P}&&[^#]]+"," ");
+                            } else {
+                                text = text.replaceAll("\\p{P}", " ");
+                            }
+                        }*/
                         text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");
                     }
                     Annotation document = new Annotation(text);
@@ -123,6 +139,24 @@ public class POSBody {
                             POStags.add(entity);
                         }
                     }
+                    
+                    /*
+                    Niko
+                    add handler for writing pos result files
+                    */
+                    String inputNameWithoutExtension = FilenameUtils.getBaseName(ff.getFile().getName());
+                    String inputExtension = FilenameUtils.getExtension(ff.getFile().getName());
+                    String outputFile = inputNameWithoutExtension + "-POS." + inputExtension;
+                    CorpusData output = (CorpusData) instance.getTextOutput();
+                    int index = output.addFile(outputFile);
+                    List<List<String[]>> aggregateTemp = new ArrayList<List<String[]>>();
+                    aggregateTemp.add(POStags);
+                    List<String[]> POStagsTemp = new CorpusAggregator().CorpusAggregate(aggregateTemp);
+                    writeCsv(POStagsTemp, output.getFiles().get(index).getPath().get());
+                    /*
+                    End addition
+                    */
+                    
                     toAggregate.add(POStags);
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
@@ -148,7 +182,6 @@ public class POSBody {
     }
 
     private void writeCsv(List<String[]> taggedPOS, String filepath) {
-
         System.out.println("POS Size=" + taggedPOS.size());
         StringBuffer sb = new StringBuffer();
 
@@ -160,8 +193,9 @@ public class POSBody {
 
             toWrite = taggedPOS.get(i1)[0] + "," + taggedPOS.get(i1)[1] + "," + taggedPOS.get(i1)[2] + "\n";
             sb.append(toWrite);
-        }
-//        System.out.println("size of string to write=" + sb.toString().length());
+        }        
+        //System.out.println("size of string to write=" + sb.toString().length());
+        //System.out.println("string to write=" + sb.toString());
         
         // 2016.03 Add this code to delete existing file
         File toDelete = new File(filepath);

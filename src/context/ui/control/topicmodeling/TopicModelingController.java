@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -24,10 +25,12 @@ package context.ui.control.topicmodeling;
 import context.app.ProjectManager;
 import context.core.entity.CTask;
 import context.core.entity.CorpusData;
+import context.core.entity.FileList;
 import context.core.entity.TabularData;
 import context.core.task.topicmodeling.TopicModelingTask;
 import context.core.task.topicmodeling.TopicModelingTaskInstance;
 import context.ui.control.workflow.basic.BasicWorkflowController;
+import context.ui.misc.FileHandler;
 import context.ui.misc.NamingPolicy;
 import java.io.IOException;
 import javafx.beans.property.StringProperty;
@@ -95,6 +98,20 @@ public class TopicModelingController extends BasicWorkflowController {
 //                outputPath);
 //        instance.setTextOutput(output);
 
+        /*
+        Niko
+        add handler for creating subdirectory output
+        */
+        final String subdirectory = outputPath.get()+"/TOPIC-Results/";
+        FileHandler.createDirectory(subdirectory);
+        System.out.println("Created sub dir: "+subdirectory);
+        FileList output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory);
+        instance.setTextOutput(output);
+        outputPath.set(subdirectory);
+        /*
+        End Addition
+        */
+
         TabularData tabularData1 = new TabularData(NamingPolicy.generateTabularName(inputname.get() + "-P", outputPath.get(), instance),
                 NamingPolicy.generateTabularPath(inputname.get() + "-P", outputPath.get(), instance));
         instance.setTabularOutput(tabularData1, 0);
@@ -121,6 +138,9 @@ public class TopicModelingController extends BasicWorkflowController {
         instance.setNumOptInterval(confController.getNumberOfOptInterval());       
         instance.setStopListLoc(confController.getStopwordFile());
         instance.setIsLowercase(confController.getIsLowercase());
+        /*instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou());*/
 
         System.out.println(instance);
         CTask task = new TopicModelingTask(this.getProgress(), this.getProgressMessage());

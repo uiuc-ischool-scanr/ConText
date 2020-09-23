@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -104,7 +105,10 @@ public class WordCloudController extends BasicWorkflowController {
         instance.setNumTopics(confController.getNumberOfTopics());
         instance.setWordPerTopic(confController.getNumberOfWordsPerTopics());
         instance.setSumAlpha(confController.getSumAlpha());
-        instance.setNumOptInterval(confController.getNumberOfOptInterval());       
+        instance.setNumOptInterval(confController.getNumberOfOptInterval());
+        /*instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou());*/
         
         instance.setClustering(confController.isClustering());
         instance.setHeight(confController.getCloudHeight());

@@ -1,6 +1,7 @@
 package context.core.task.entitydetection;
 
 import static context.app.AppConfig.getUserDirLoc;
+import context.app.main.ContextFX;
 import context.app.main.ContextFXController;
 import context.core.entity.CTask;
 import context.core.entity.CorpusData;
@@ -20,35 +21,9 @@ import org.openide.util.Exceptions;
  */
 public class EntityDetectionTask extends CTask {
 
-    private static CRFClassifier classifier3;
-    private static CRFClassifier classifier7;
-    private static CRFClassifier classifier4;
-
-    static {
-        try {
-            //TODO: for using STANFORD NER these should be uncomment!
-            ContextFXController.appendLog("Loading classifier... (it takes times for first usage of entity detection process, please wait)");
-            File f3 = new File(getUserDirLoc() + "/data/Classifiers/english.all.3class.distsim.crf.ser.gz");
-            classifier3 = CRFClassifier.getClassifier(f3);
-//            classifier3 = CRFClassifier.getClassifier("edu/stanford/nlp/models/ner/english.all.3class.distsim.crf.ser.gz");
-            ContextFXController.appendLog("Classfier #1 loaded.");
-            File f7 = new File(getUserDirLoc() + "/data/Classifiers/english.muc.7class.distsim.crf.ser.gz");
-            classifier7 = CRFClassifier.getClassifier(f7);
-//            classifier7 = CRFClassifier.getClassifier("edu/stanford/nlp/models/ner/english.muc.7class.distsim.crf.ser.gz");
-            ContextFXController.appendLog("Classfier #2 loaded.");
-            File f4 = new File(getUserDirLoc() + "/data/Classifiers/english.conll.4class.distsim.crf.ser.gz");
-            classifier4 = CRFClassifier.getClassifier(f4);
-//            classifier4 = CRFClassifier.getClassifier("edu/stanford/nlp/models/ner/english.conll.4class.distsim.crf.ser.gz");
-            ContextFXController.appendLog("All classifiers loaded successfully.");
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        } catch (ClassCastException ex) {
-            Exceptions.printStackTrace(ex);
-        } catch (ClassNotFoundException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-    }
-
+    //Classifiers are loaded from EntityDetectionClassifier.java
+	
+    
     /**
      *
      * @param progress
@@ -83,9 +58,9 @@ public class EntityDetectionTask extends CTask {
         if (ins.getModel() == 0) { // Stanford NER
             task.progress(8, 20, "Loading classifiers...");
 
-            ins.set3Classifier(classifier3);
-            ins.set4Classifier(classifier4);
-            ins.set7Classifier(classifier7);
+            ins.set3Classifier(EntityDetectionClassifier.getInstance().classifier3);
+            ins.set4Classifier(EntityDetectionClassifier.getInstance().classifier4);
+            ins.set7Classifier(EntityDetectionClassifier.getInstance().classifier7);
 
             EntityDetectionBody edb = new EntityDetectionBody(ins);
 
@@ -93,7 +68,7 @@ public class EntityDetectionTask extends CTask {
             //Run entity Detection
             if (!edb.detectEntities()) {
                 System.out.println("Error in detection");
-                return instance;
+                return ins;
             }
 
             //Write the output to CSV

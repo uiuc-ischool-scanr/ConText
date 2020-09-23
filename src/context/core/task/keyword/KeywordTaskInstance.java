@@ -13,6 +13,7 @@ public class KeywordTaskInstance extends TaskInstance {
     FileData keywordFile;
     Integer leftBound;
     Integer rightBound;
+    Boolean omit_case;
 
     /**
      *
@@ -45,6 +46,10 @@ public class KeywordTaskInstance extends TaskInstance {
     public Integer getRightBound() {
         return rightBound;
     }
+    
+    public Boolean getOmitCase() {
+        return omit_case;
+    }
 
     /**
      *
@@ -68,6 +73,10 @@ public class KeywordTaskInstance extends TaskInstance {
      */
     public void setRightBound(Integer rightBound) {
         this.rightBound = rightBound;
+    }
+    
+    public void setOmitCase(Boolean omit_case) {
+        this.omit_case = omit_case;
     }
 
 }

@@ -105,6 +105,9 @@ public class CsvParserController extends BasicWorkflowController {
 		StringProperty inputPath = basicInputViewController.getSelectedItemLabel().textProperty();
         StringProperty inputname = basicInputViewController.getSelectedCorpusName();
         CorpusData input = new CorpusData(inputname, inputPath);
+        /* instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou()); */
         input.setId(basicInputViewController.getSelectedInput().getId());
 
         instance.setInput(input);

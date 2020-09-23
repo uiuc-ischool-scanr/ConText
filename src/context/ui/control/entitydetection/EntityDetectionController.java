@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -88,24 +89,46 @@ public class EntityDetectionController extends BasicWorkflowController {
 
         StringProperty inputPath = basicInputViewController.getSelectedItemLabel().textProperty();
         StringProperty inputname = basicInputViewController.getSelectedCorpusName();
+        /*instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou());*/
         CorpusData input = new CorpusData(inputname, inputPath);
         input.setId(basicInputViewController.getSelectedInput().getId());
         instance.setInput(input);
 
         final StringProperty outputPath = basicOutputViewController.getOutputDirTextField().textProperty();
 
-//        CorpusData output = new CorpusData(NamingPolicy.generateOutputName(inputPath.get(), outputPath.get(), instance), outputPath);
+        //        CorpusData output = new CorpusData(NamingPolicy.generateOutputName(inputPath.get(), outputPath.get(), instance), outputPath);
 //        instance.setTextOutput(output);
         //Add output file list 
-        TabularData tabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
+        final TabularData oldTabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
                 NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
-        instance.setTabularOutput(tabularData, 0);
-
+                
+        /*
+        Niko
+        create parent directory for the output output
+        */
+        final String subdirectory = outputPath.get()+"/Entity-Detection/";
+        FileHandler.createDirectory(subdirectory);
+        //System.out.println("Created sub dir: "+subdirectory);
+        FileList output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory);
+        instance.setTextOutput(output);
+        outputPath.set(subdirectory);
+        /*
+        End Addition
+        */
+        
+        TabularData newTabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
+                NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
+        
+        instance.setTabularOutput(newTabularData, 0);
+       
+        
         //Add output file list 
         final String subdirectory2 = outputPath.get() + "/ED-Annotated-Results/";
         FileHandler.createDirectory(subdirectory2);
         System.out.println("Created sub dir: " + subdirectory2);
-        FileList output = new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance), subdirectory2);
+        output = new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance), subdirectory2);
         instance.setTextOutput(output);
 
         //TODO 
@@ -115,6 +138,13 @@ public class EntityDetectionController extends BasicWorkflowController {
         instance.setInnerXMLOutput(confController.isInnerXMLOutput());
 
         CTask task = new EntityDetectionTask(this.getProgress(), this.getProgressMessage());
+        // Set waiting time for entity task to load thr library
+        try {            
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        
         task.setTaskInstance(instance);
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
@@ -138,14 +168,17 @@ public class EntityDetectionController extends BasicWorkflowController {
                     ProjectManager.getThisProject().addTask(getTaskInstance());
                     setNew(false);
                 }
+                
+                instance.setTabularOutput(oldTabularData, 0);
+                
                 showNextStepPane(nextStepsViewController);
             }
         });
         getProgressBar().setVisible(true);
         deactiveAllControls();
         task.start();
-
-        setTaskInstance(task.getTaskInstance());
+     
+        setTaskInstance(task.getTaskInstance());        
 
     }
 

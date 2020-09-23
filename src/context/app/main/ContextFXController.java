@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+ * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, Amirhossein Aleyasen, 
+ * Shubhanshu Mishra, Kiumars Soltani, Liang Tao, Ming Jiang, Harathi Korrapati, 
+ * Nikolaus Nova Parulian, and Lan Jiang.  
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -39,9 +40,9 @@ import context.ui.control.entitydetection.EntityDetectionController;
 import context.ui.control.entitynetwork.EntityNetworkController;
 import context.ui.control.entropy.EntropyController;
 import context.ui.control.keyword.KeywordController;
-import context.ui.control.lexisnexis.LexisNexisNetworkGenerationController;
-import context.ui.control.lexisnexisparse.LexisNexisParseController;
-import context.ui.control.parsetree.ParseTreeController;
+//import context.ui.control.lexisnexis.LexisNexisNetworkGenerationController;
+//import context.ui.control.lexisnexisparse.LexisNexisParseController;
+//import context.ui.control.parsetree.ParseTreeController;
 import context.ui.control.pos.POSController;
 import context.ui.control.removestopword.RemoveStopwordsController;
 import context.ui.control.sentiment.SentimentController;
@@ -92,15 +93,14 @@ public class ContextFXController implements Initializable {
 
     private Label label;
     @FXML
-    static private TreeView<ProjectElement> resourceTreeView;
+    private TreeView<ProjectElement> resourceTreeView;
     @FXML
     private TabPane mainTabPane;
     @FXML
     private WebView welcomeWebView;
     @FXML
-    static private WebView helpWebView;
-    @FXML
-    private MenuItem lexisNexisNetworkGenerationMenuItem;
+    private WebView helpWebView;
+
     @FXML
     private SplitPane leftMainSplitPane;
     @FXML
@@ -108,8 +108,10 @@ public class ContextFXController implements Initializable {
     @FXML
     private Button clearLogButton;
     @FXML
-    static private TextArea logTextArea;
+    private TextArea logTextArea;
 
+    //@FXML
+    //private MenuItem lexisNexisNetworkGenerationMenuItem;
     @FXML
     private MenuItem POSMenuItem;
     @FXML
@@ -126,8 +128,10 @@ public class ContextFXController implements Initializable {
     private MenuItem sentimentAnalysisMenuItem;
     @FXML
     private MenuItem codebookApplicationMenuItem;
-    @FXML
-    private MenuItem parseLexisNexisMenuItem;
+    //@FXML
+    //private MenuItem parseLexisNexisMenuItem;
+    //@FXML
+    //private MenuItem lexisNexisNetworkGenerationMenuItem2;
     @FXML
     private MenuItem syntaxBasedMenuItem;
     @FXML
@@ -150,8 +154,7 @@ public class ContextFXController implements Initializable {
     private MenuItem keywordMenuItem;
     @FXML
     private MenuItem bigramDetectionMenuItem;
-    @FXML
-    private MenuItem lexisNexisNetworkGenerationMenuItem2;
+
     @FXML
     private MenuItem entityTypesNetworkGenerationMenuItem;
     @FXML
@@ -200,7 +203,7 @@ public class ContextFXController implements Initializable {
      *
      * @param log
      */
-    public static void appendLog(String log) {
+    public void appendLog(String log) {
         logTextArea.appendText(log + "\n");
     }
 
@@ -208,7 +211,7 @@ public class ContextFXController implements Initializable {
      *
      * @return
      */
-    public static Stage getStage() {
+    public Stage getStage() {
         return stage;
     }
 
@@ -252,15 +255,23 @@ public class ContextFXController implements Initializable {
      * @param element
      * @param index
      */
-    public static void addToTreeView(ProjectElement element, int index) {
-        resourceTreeView.getRoot().getChildren().get(index).getChildren().add(new TreeItem<ProjectElement>(element));
+    public void addToTreeView(ProjectElement element, int index) {
+        /*
+        Niko
+        add exception because this is probably the cause why ConText hanging
+         */
+        try {
+            resourceTreeView.getRoot().getChildren().get(index).getChildren().add(new TreeItem<ProjectElement>(element));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
      *
      * @param dataElement
      */
-    public static void addDataToTreeView(DataElement dataElement) {
+    public void addDataToTreeView(DataElement dataElement) {
         addToTreeView(dataElement, 0);
     }
 
@@ -268,7 +279,7 @@ public class ContextFXController implements Initializable {
      *
      * @param taskInstance
      */
-    public static void addTaskToTreeView(TaskInstance taskInstance) {
+    public void addTaskToTreeView(TaskInstance taskInstance) {
         addToTreeView(taskInstance, 1);
     }
 
@@ -276,7 +287,7 @@ public class ContextFXController implements Initializable {
      *
      * @param dataElement
      */
-    public static void addResultToTreeView(DataElement dataElement) {
+    public void addResultToTreeView(DataElement dataElement) {
         addToTreeView(dataElement, 2);
     }
 
@@ -284,7 +295,7 @@ public class ContextFXController implements Initializable {
      *
      * @param element
      */
-    public static void selectNode(ProjectElement element) {
+    public void selectNode(ProjectElement element) {
         final TreeItem<ProjectElement> root = resourceTreeView.getRoot();
         for (TreeItem<ProjectElement> child : root.getChildren()) {
             for (TreeItem<ProjectElement> node : child.getChildren()) {
@@ -297,7 +308,6 @@ public class ContextFXController implements Initializable {
     }
 
     private void initializeResourceTreeView() {
-
         final ProjectElement rootNode = new ProjectElement(new SimpleStringProperty("My Project"));
         TreeItem<ProjectElement> treeRoot = new TreeItem<ProjectElement>(rootNode);
         final ProjectElement dataNode = new ProjectElement(new SimpleStringProperty("Data"));
@@ -315,7 +325,9 @@ public class ContextFXController implements Initializable {
         treeRoot.getChildren().get(0).setExpanded(true);
         treeRoot.getChildren().get(1).setExpanded(true);
         treeRoot.getChildren().get(2).setExpanded(true);
+        
         resourceTreeView.setEditable(true);
+        
         resourceTreeView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -324,14 +336,15 @@ public class ContextFXController implements Initializable {
                     openProjectElement(item);
                 }
             }
-        });
-
+        });   
+                
         resourceTreeView.setCellFactory(new Callback<TreeView<ProjectElement>, TreeCell<ProjectElement>>() {
             @Override
             public TreeCell<ProjectElement> call(TreeView<ProjectElement> p) {
                 return new TreeCellContextMenuImpl();
             }
         });
+        
         //  root.getChildren().add(treeView);
     }
 
@@ -406,12 +419,11 @@ public class ContextFXController implements Initializable {
         fileChooser.showOpenDialog(stage);
     }
 
-    @FXML
+    /* @FXML
     private void handleLexisNexisNetworkGenerationMenuItem(ActionEvent event) {
         handleGenericTaskMenuItem(new LexisNexisNetworkGenerationController());
 
-    }
-
+    }*/
     private void handleGenericTaskMenuItem(WorkflowController controller) {
         TabManager.addTab(controller.getTaskInstance(), controller);
 //        addTaskToTreeView(controller.getTaskInstance());
@@ -462,11 +474,11 @@ public class ContextFXController implements Initializable {
         handleGenericTaskMenuItem(new CodebookAppController());
     }
 
-    @FXML
+    /* @FXML
     private void handleParseLexisNexisMenuItem(ActionEvent event) {
         handleGenericTaskMenuItem(new LexisNexisParseController());
     }
-
+     */
     @FXML
     private void handleCsvParserMenuItem(ActionEvent event) {
         handleGenericTaskMenuItem(new CsvParserController());
@@ -477,10 +489,11 @@ public class ContextFXController implements Initializable {
         handleGenericTaskMenuItem(new SyntaxBasedController());
     }
 
-    @FXML
-    private void handleDeepParsingMenuItem(ActionEvent event) {
-        handleGenericTaskMenuItem(new ParseTreeController());
-    }
+    /*@FXML
+	
+	 * private void handleDeepParsingMenuItem(ActionEvent event) {
+	 * handleGenericTaskMenuItem(new ParseTreeController()); }
+	 */
 
     @FXML
     private void handleCodebookNetworkGenerationMenuItem(ActionEvent event) {
@@ -623,8 +636,10 @@ public class ContextFXController implements Initializable {
                     if (getTreeItem().getValue() instanceof DataElement) {
                         DataElement d = (DataElement) getTreeItem().getValue();
                         String path = FileHandler.getDirOrParentDir(d.getPath().get());
-                        FileHandler.openExternalDirectory(path);
-                        System.out.println("Open external directory " + path);
+                        if (path!=null){
+                            FileHandler.openExternalDirectory(path);
+                            System.out.println("Open external directory " + path);
+                        }
                     }
 
                 }
@@ -649,7 +664,7 @@ public class ContextFXController implements Initializable {
         }
 
         private String getString() {
-            return getItem() == null ? "NULL" : getItem().toString();
+            return getItem() == null ? "" : getItem().toString();
         }
     }
 }

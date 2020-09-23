@@ -24,6 +24,9 @@ public class KeywordInContext {
     private CorpusData input;
     private CorpusData output;
     private TabularData tabular;
+    /*private Boolean drop_num = false;
+    private Boolean drop_pun = false;
+    private Boolean keep_pou = false;*/
 
     private KeywordTaskInstance instance;
     private String replaceString;
@@ -46,6 +49,9 @@ public class KeywordInContext {
         this.input = (CorpusData) instance.getInput();
         this.output = (CorpusData) instance.getTextOutput();
         this.tabular = instance.getTabularOutput(0);
+       /* this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
     }
 
     /**
@@ -59,25 +65,46 @@ public class KeywordInContext {
         if (JavaIO.readCSVFileIntoList(keywords, instance.getKeywordFile().getFile(), "\n", true) == 0) {
             return false;
         }
-
+        if (instance.getOmitCase()){
+            for (int i = 0; i < keywords.size(); i++) {
+                keywords.set(i, keywords.get(i).toLowerCase());
+            }
+        }
         System.out.println("Read all the key words");
         Map<String, Integer> keywordMap = new HashMap<String, Integer>();
         try {
             for (FileData f : input.getFiles()) {
                 StringBuffer s = new StringBuffer();
                 String content = JavaIO.readFile(f.getFile());
+                /*if (drop_num) {
+                    content = content.replaceAll("[0-9]", " ");
+                }
+                if (drop_pun) {
+                    if (keep_pou) {
+                        content = content.replaceAll("[\\p{P}&&[^#]]+"," ");
+                    } else {
+                        content = content.replaceAll("\\p{P}", " ");
+                    }
+                }*/
                 String[] words = content.split("\\W+");
                 boolean[] mark = new boolean[words.length];
                 for (int j = 0; j < words.length; j++) {
                     mark[j] = false;
                 }
                 for (int j = 0; j < words.length; j++) {
-                    if (keywords.contains(words[j])) {
+                    String word = "";
+                    if (instance.getOmitCase()){
+                        word = words[j].toLowerCase();
+                    } else {
+                        word = words[j];
+                    }
+                    if (keywords.contains(word)) {
                         if (!keywordMap.containsKey(words[j])) {
                             keywordMap.put(words[j], 0);
                         }
                         Integer count = keywordMap.get(words[j]);
                         keywordMap.put(words[j], count + 1);
+                        mark[j] = true;
                         for (int i = 1; i < instance.getLeftBound(); i++) {
                             if (j - i >= 0) {
                                 if (!keywords.contains(words[j - i])) {
@@ -100,7 +127,7 @@ public class KeywordInContext {
                 }
 
                 for (int j = 0; j < words.length; j++) {
-                    if (mark[j]) {
+                    if (!mark[j]) {
                         words[j] = replaceString;
                     }
                 }

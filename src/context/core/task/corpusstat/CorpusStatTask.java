@@ -49,7 +49,7 @@ public class CorpusStatTask extends CTask {
         CorpusData inputCorpus = (CorpusData) ins.getInput();
         task.progress(5, 20, "Loading " + ins.getInput().getPath().get());
         inputCorpus.addAllFiles(new File(inputCorpus.getPath().get()));
-
+        
         task.progress(8, 20, inputCorpus.getFiles().size() + " files added");
         CorpusStatisticsBody csb = new CorpusStatisticsBody(ins);
 

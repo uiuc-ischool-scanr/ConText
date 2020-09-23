@@ -108,6 +108,14 @@ public class EntityDetectionTaskInstance extends TaskInstance {
     }
 
     /**
+    *
+    * @param classifier4
+    */
+   public void set4Classifier(AbstractSequenceClassifier<?> classifier4) {
+       this.classifier4 = classifier4;
+   }
+    
+    /**
      *
      * @return
      */
@@ -115,13 +123,7 @@ public class EntityDetectionTaskInstance extends TaskInstance {
         return classifier4;
     }
 
-    /**
-     *
-     * @param classifier4
-     */
-    public void set4Classifier(AbstractSequenceClassifier<?> classifier4) {
-        this.classifier4 = classifier4;
-    }
+    
 
     /**
      *

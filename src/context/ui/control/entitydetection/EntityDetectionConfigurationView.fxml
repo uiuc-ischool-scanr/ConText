@@ -16,7 +16,7 @@
         <Font size="15.0" fx:id="x1" />
       </font>
     </Label>
-    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Stopword List" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+    <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Name Entity Recognizer Model" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
     <ComboBox id="codebookMethod" fx:id="modelComboBox" layoutX="118.0" layoutY="117.0" prefHeight="23.0" prefWidth="152.0" promptText="" styleClass="smallerfont">
       <items>
         <FXCollections fx:factory="observableArrayList" />

@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -99,12 +100,29 @@ public class CodebookNetworkController extends BasicWorkflowController {
 
         final StringProperty outputPath = basicOutputViewController.getOutputDirTextField().textProperty();
         
-        final String subdirectory = outputPath.get() + "/CB-Results/";
+        
+        /*
+        Niko
+        create parent directory for the output output
+        */
+        final String subdirectory = outputPath.get()+"/Codebook-Network/";
         FileHandler.createDirectory(subdirectory);
-        System.out.println("Created sub dir: "+subdirectory);
+        //System.out.println("Created sub dir: "+subdirectory);
+        FileList output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory);
+        final FileList oldOutput = (FileList) instance.getTextOutput();
+        final String oldDir = outputPath.get();
+        instance.setTextOutput(output);  
+        outputPath.set(subdirectory);
+        /*
+        End Addition
+        */
+        
+        final String subdirectory2 = outputPath.get() + "/CB-Results/";
+        FileHandler.createDirectory(subdirectory2);
+        System.out.println("Created sub dir: "+subdirectory2);
         
         
-        FileList output = new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance), subdirectory);
+         output = new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance), subdirectory2);
         instance.setTextOutput(output);
         
         StringProperty tabularName = NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance);
@@ -157,6 +175,9 @@ public class CodebookNetworkController extends BasicWorkflowController {
                     ProjectManager.getThisProject().addTask(getTaskInstance());
                     setNew(false);
                 }
+                
+                nextStepsViewController.setOutputDir(oldDir);
+                
                 showNextStepPane(nextStepsViewController);
             }
         });

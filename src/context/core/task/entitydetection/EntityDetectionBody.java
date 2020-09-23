@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  *
@@ -29,7 +31,9 @@ public class EntityDetectionBody {
     private EntityDetectionTaskInstance instance;
     private CorpusData input;
     private List<TabularData> tabularOutput;
-
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
     private AbstractSequenceClassifier<?> classifier3;
     private AbstractSequenceClassifier<?> classifier4;
     private AbstractSequenceClassifier<?> classifier7;
@@ -53,6 +57,9 @@ public class EntityDetectionBody {
 
         this.input = (CorpusData) instance.getInput();
         this.tabularOutput = instance.getTabularOutput();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
         this.classifier3 = instance.get3Classifier();
         this.classifier4 = instance.get4Classifier();
         this.classifier7 = instance.get7Classifier();
@@ -76,34 +83,50 @@ public class EntityDetectionBody {
                 try {
                     text = JavaIO.readFile(file);
                     text = text.replaceAll("\\p{Cc}", " ");
-                    text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");
-                    //System.out.println("Harathi in entity:"+text);
+                    /*if (drop_num) {
+                        text = text.replaceAll("[0-9]", " ");
+                    }
+                    if (drop_pun) {
+                        if (keep_pou) {
+                            text = text.replaceAll("[\\p{P}&&[^#]]+"," ");
+                        } else {
+                            text = text.replaceAll("\\p{P}", " ");
+                        }
+                    }*/
+                    text = text.replaceAll("[^A-Za-z0-9 :;!$%\\?\\.,\'\"-]", " ");
+                    
                     List<String[]> longEntities = new ArrayList<String[]>();
 
-                    List<ForAggregation> longEntities3 = new ArrayList<ForAggregation>();
-                    List<ForAggregation> longEntities4 = new ArrayList<ForAggregation>();
+                    //List<ForAggregation> longEntities3 = new ArrayList<ForAggregation>();
+                    //List<ForAggregation> longEntities4 = new ArrayList<ForAggregation>();
                     List<ForAggregation> longEntities7 = new ArrayList<ForAggregation>();
-                    MultiWordEntities MWE3 = MultiWordEntityRecognition(classifier3, text);
-                    MultiWordEntities MWE4 = MultiWordEntityRecognition(classifier4, text);
+                    //MultiWordEntities MWE3 = MultiWordEntityRecognition(classifier3, text);
+                    //MultiWordEntities MWE4 = MultiWordEntityRecognition(classifier4, text);
                     MultiWordEntities MWE7 = MultiWordEntityRecognition(classifier7, text);
 
-                    longEntities3.addAll(MWE3.forAgg);
+                    //longEntities3.addAll(MWE3.forAgg);
                     //longEntities4.addAll(MWE4.forAgg);
                     longEntities7.addAll(MWE7.forAgg);
 
                     HashMap<String, Integer[]> Entities = new HashMap<String, Integer[]>();
 
-                    for (int entityIndex = 0; entityIndex < longEntities3.size(); entityIndex++) {
+                    for (int entityIndex = 0; entityIndex < longEntities7.size(); entityIndex++) {
+                    Integer[] offsetArray = {MWE7.startInd.get(entityIndex)};
+                    Entities.put(longEntities7.get(entityIndex).toAggregate[0], offsetArray);
+                    longEntities.add(longEntities7.get(entityIndex).toAggregate);
+	                }
+	                    
+                    /*for (int entityIndex = 0; entityIndex < longEntities3.size(); entityIndex++) {
                         Integer[] offsetArray = {MWE3.startInd.get(entityIndex)};
                         Entities.put(longEntities3.get(entityIndex).toAggregate[0], offsetArray);
                         longEntities.add(longEntities3.get(entityIndex).toAggregate);
-                    }
+                    }*/
                     // The following code is to incorporate another NER library, but it was causing
                     // problems for large individual documents, so for now "longEntities4.addAll(MWE4.forAgg);" 
                     //has been commented out.  In the future,
                     // a check on file size may be done to switch between using the library or not.
 
-                    for (int entityIndex = 0; entityIndex < longEntities4.size(); entityIndex++) {
+                    /*for (int entityIndex = 0; entityIndex < longEntities4.size(); entityIndex++) {
 
                         if (Entities.containsKey(longEntities4.get(entityIndex).toAggregate[0]) && Arrays.asList(Entities.get(longEntities4.get(entityIndex).toAggregate[0])).contains(MWE4.startInd.get(entityIndex))) {
                             continue;
@@ -113,20 +136,18 @@ public class EntityDetectionBody {
                             offsetArray4 = Arrays.copyOf(Entities.get(longEntities4.get(entityIndex).toAggregate[0]), offsetArray4.length);
                             offsetArray4[offsetArray4.length - 1] = MWE4.startInd.get(entityIndex);
                             Entities.put(longEntities4.get(entityIndex).toAggregate[0], offsetArray4);
-                            //System.out.println("Harathi in first if longentities:"+longEntities4.get(entityIndex).toAggregate[0]);
-                            //System.out.println("Harathi in first if offset:"+offsetArray4);
+                            
                             longEntities.add(longEntities4.get(entityIndex).toAggregate);
                         } else {
                             Integer[] offsetArray = {MWE4.startInd.get(entityIndex)};
                             Entities.put(longEntities4.get(entityIndex).toAggregate[0], offsetArray);
-                           // System.out.println("Harathi in first else longentities:"+longEntities4.get(entityIndex).toAggregate[0]);
-                           // System.out.println("Harathi in first else offset:"+offsetArray);
+                           
                             longEntities.add(longEntities4.get(entityIndex).toAggregate);
                         }
 
-                    }
+                    }*/
 
-                    for (int entityIndex = 0; entityIndex < longEntities7.size(); entityIndex++) {
+                    /*for (int entityIndex = 0; entityIndex < longEntities7.size(); entityIndex++) {
 
                         if (Entities.containsKey(longEntities7.get(entityIndex).toAggregate[0]) && Arrays.asList(Entities.get(longEntities7.get(entityIndex).toAggregate[0])).contains(MWE7.startInd.get(entityIndex))) {
                             continue;
@@ -136,21 +157,38 @@ public class EntityDetectionBody {
                             offsetArray7 = Arrays.copyOf(Entities.get(longEntities7.get(entityIndex).toAggregate[0]), offsetArray7.length);
                             offsetArray7[offsetArray7.length - 1] = MWE7.startInd.get(entityIndex);
                             Entities.put(longEntities7.get(entityIndex).toAggregate[0], offsetArray7);
-                            //System.out.println("Harathi in second if longentities:"+longEntities7.get(entityIndex).toAggregate[0]);
-                            //System.out.println("Harathi in secondif offset:"+offsetArray7);
+                            
                             longEntities.add(longEntities7.get(entityIndex).toAggregate);
                         } 
                          else {
                             Integer[] offsetArray = {MWE7.startInd.get(entityIndex)};
                             Entities.put(longEntities7.get(entityIndex).toAggregate[0], offsetArray);
-                            //System.out.println("Harathi in second else longentities:"+longEntities7.get(entityIndex).toAggregate[0]);
-                            //System.out.println("Harathi in second else offset:"+offsetArray);
+                            
                             longEntities.add(longEntities7.get(entityIndex).toAggregate);
                         }
-                    }
+                    }*/
 
                     toAggregate.add(longEntities);
-
+                    
+                    
+                    //Niko
+                    //Add code for entity detection results
+                    
+                    /*String htmlString3 = classifier3.classifyToString(text, "inlineXML", true);
+                    String htmlString4 = classifier4.classifyToString(text, "inlineXML", true);*/
+                    String htmlString = classifier7.classifyToString(text, "inlineXML", true);
+                    
+                    
+                    String inputNameWithoutExtension = FilenameUtils.getBaseName(ff.getFile().getName());
+                    String inputExtension = FilenameUtils.getExtension(ff.getFile().getName());
+                    String outputFile = inputNameWithoutExtension + "-ED." + inputExtension;
+                    CorpusData output = (CorpusData) instance.getTextOutput();                    
+                    int index = output.addFile(outputFile);
+                    output.writeFile(index, htmlString.toString());
+                    
+                    //End Addition
+                                        
+                    
                 } catch (IOException e) {
                     e.printStackTrace();
                     return false;
@@ -159,31 +197,16 @@ public class EntityDetectionBody {
 
             //List<String[]> EntitiesToBeRemoved = new ArrayList<String[]>();
             List<String[]> entitiesWithCount = new CorpusAggregator().CorpusAggregate(toAggregate);
-            /*
-             for (String[] entityWithCount : entitiesWithCount) {
-             //                try {
-             if (entityWithCount[0].split(" ").length == 1 // && JavaIO.readFile(stopFile).contains(entityWithCount[0].toLowerCase()) ) {
-             EntitiesToBeRemoved.add(entityWithCount);
-             }
-             //                } catch (IOException e) {
-             //                    e.printStackTrace();
-             //                    return false;
-             //                }
-             }
-             for (String[] entityWithCount : EntitiesToBeRemoved) {
-             entitiesWithCount.remove(entityWithCount);
-             }
-
-             */
+            
 				for (int i1 = 0; i1 < entitiesWithCount.size(); i1++) {
-				String findStr = entitiesWithCount.get(i1)[0];
+				/*String findStr = entitiesWithCount.get(i1)[0];
 				int count = 0;
 				for (FileData ff : files) {
                 File file = ff.getFile();
                 String text;
                 text = JavaIO.readFile(file);
                 text = text.replaceAll("\\p{Cc}", " ");
-                text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");
+                text = text.replaceAll("[^A-Za-z0-9 :;!%$\\?\\.,\'\"-]", " ");
 				String str = text;
 				int lastIndex = 0;
 				while(lastIndex != -1){
@@ -193,9 +216,10 @@ public class EntityDetectionBody {
 					lastIndex += findStr.length();
 					}
 				}
-			    }
-				entitiesWithCount.get(i1)[2] = count + "";
-				System.out.println("word: " + entitiesWithCount.get(i1)[0]+ " frequency: "+entitiesWithCount.get(i1)[2]+ " our count: "+count);
+			    }*/
+				//entitiesWithCount.get(i1)[2] = count + "";
+				//out count is double counting
+				System.out.println("word: " + entitiesWithCount.get(i1)[0]+ " frequency: "+entitiesWithCount.get(i1)[2]);
 				}
             this.entitiesWithCount = entitiesWithCount;			
         } catch (Exception e) {
@@ -241,8 +265,7 @@ public class EntityDetectionBody {
         return toReturn;
     }
 
-    private int findNthIndexOf(String str, String needle, int occurence)
-            throws IndexOutOfBoundsException {
+    private int findNthIndexOf(String str, String needle, int occurence){
         int index = -1;
         Pattern p = Pattern.compile(needle, Pattern.MULTILINE);
         Matcher m = p.matcher(str);
@@ -280,8 +303,11 @@ public class EntityDetectionBody {
         sb.append("Term, Entity, Frequency\n");
         String toWrite = "";
         for (int i1 = 0; i1 < entitiesWithCount.size(); i1++) {
-            toWrite = entitiesWithCount.get(i1)[0].replaceAll("[^A-Za-z0-9\\. ]", "_") + "," + entitiesWithCount.get(i1)[1] + "," + (entitiesWithCount.get(i1)[2]) + "\n";
-            sb.append(toWrite);
+            //toWrite = entitiesWithCount.get(i1)[0].replaceAll("[^A-Za-z0-9\\. ]", "_") + "," + entitiesWithCount.get(i1)[1] + "," + (entitiesWithCount.get(i1)[2]) + "\n";
+        	String term_csv = entitiesWithCount.get(i1)[0].replaceAll("[^A-Za-z0-9 :;!%$\\?\\.\'\"-]", ""); //replace "," 
+        	toWrite = term_csv + "," + entitiesWithCount.get(i1)[1] + "," + (entitiesWithCount.get(i1)[2]) + "\n";
+        	
+        	sb.append(toWrite);
         }
         
         // 2016.03 Add this code to delete existing file

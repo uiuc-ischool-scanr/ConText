@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.  
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -30,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
@@ -59,6 +61,10 @@ public class KeywordConfigurationController extends ConfigurationController impl
     private TextField rightBoundTextField;
     @FXML
     private TextField keywordFileTextField;
+    @FXML
+    private CheckBox omit_case_checkbox;
+    @FXML
+    private Font x3;
 
     /**
      *
@@ -111,6 +117,13 @@ public class KeywordConfigurationController extends ConfigurationController impl
         if (file != null && file.getPath() != null) {
             keywordFileTextField.textProperty().set(file.getPath().get());
         }
+    }
+    
+    public Boolean isOmitCase(){
+        if(omit_case_checkbox.isSelected()){
+            return true;
+        }
+        return false;
     }
 
 }

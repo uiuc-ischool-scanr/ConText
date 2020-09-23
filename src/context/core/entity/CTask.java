@@ -1,8 +1,8 @@
-/*
- 
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+/* 
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+ * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, Amirhossein Aleyasen, 
+ * Shubhanshu Mishra, Kiumars Soltani, Liang Tao, Ming Jiang, Harathi Korrapati, 
+ * Nikolaus Nova Parulian, and Lan Jiang.  
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -21,6 +21,7 @@
  */
 package context.core.entity;
 
+import context.app.main.ContextFX;
 import context.app.main.ContextFXController;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -80,7 +81,8 @@ public abstract class CTask extends Service<TaskInstance> {
      * @param message
      */
     public void trace(String message) {
-        ContextFXController.appendLog(message);
+        ContextFX.appController.appendLog(message);
+        //ContextFXController.appendLog(message);
     }
     
     /**
@@ -88,7 +90,8 @@ public abstract class CTask extends Service<TaskInstance> {
      * @param message
      */
     public void info(String message) {
-        ContextFXController.appendLog(message);
+        ContextFX.appController.appendLog(message);
+        //ContextFXController.appendLog(message);
     }
     
     /**
@@ -96,7 +99,8 @@ public abstract class CTask extends Service<TaskInstance> {
      * @param message
      */
     public void warning(String message) {
-        ContextFXController.appendLog(message);
+        ContextFX.appController.appendLog(message);
+        //ContextFXController.appendLog(message);
     }
     
     /**
@@ -104,14 +108,16 @@ public abstract class CTask extends Service<TaskInstance> {
      * @param message
      */
     public void error(String message) {
-        ContextFXController.appendLog(message);
+        ContextFX.appController.appendLog(message);
+        //ContextFXController.appendLog(message);
     }
     
     /**
      *
      */
     public void newline() {
-        ContextFXController.appendLog("\n");
+        ContextFX.appController.appendLog("\n");
+        //ContextFXController.appendLog("\n");
     }
     
     /**

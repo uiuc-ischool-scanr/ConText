@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -22,6 +23,7 @@
 package context.ui.control.entitynetwork;
 
 import context.app.ProjectManager;
+import context.app.Validation;
 import context.core.entity.CTask;
 import context.core.entity.CorpusData;
 import context.core.entity.FileList;
@@ -39,6 +41,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.openide.util.Exceptions;
+import org.thehecklers.monologfx.MonologFX;
 
 /**
  *
@@ -91,31 +94,73 @@ public class EntityNetworkController extends BasicWorkflowController {
 
         StringProperty inputPath = basicInputViewController.getSelectedItemLabel().textProperty();
         StringProperty inputname = basicInputViewController.getSelectedCorpusName();
+        /*instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou());*/
         CorpusData input = new CorpusData(inputname, inputPath);
         input.setId(basicInputViewController.getSelectedInput().getId());
 //        instance.setInput((DataElement) basicInputViewController.getSelectedInput().clone());
         instance.setInput(input);
-        instance.setDistance(confController.getDistance());
+        try{
+            instance.setDistance(confController.getDistance());
+        }catch(Exception ex){
+            MonologFX mono = Validation.buildWarningButton("Distance is not set, set Distance on Step 2", "Error");
+            mono.show();
+            Exceptions.printStackTrace(ex);
+            return;
+        }
         instance.setUnitOfAnalysis(confController.getUnitOfAnalysis());
         instance.setFilterLabels(confController.getFilteredLabels());
 
         final StringProperty outputPath = basicOutputViewController.getOutputDirTextField().textProperty();
         instance.setOutputDir(outputPath.get());
 
-        TabularData tabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
-                NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
-        instance.setTabularOutput(tabularData, 0);
+        //TabularData tabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
+               // NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
+        //instance.setTabularOutput(tabularData, 0);
         
-        final String subdirectory = outputPath.get()+"/ED-Results/";
+        
+        final TabularData oldTabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
+                NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
+                
+        /*
+        Niko
+        create parent directory for the output output
+        */
+        final String subdirectory = outputPath.get()+"/Entity-Network/";
         FileHandler.createDirectory(subdirectory);
-        System.out.println("Created sub dir: "+subdirectory);
+        //System.out.println("Created sub dir: "+subdirectory);
         FileList output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory);
+        instance.setTextOutput(output);
+        final String oldDir=instance.getOutputDir();
+        instance.setOutputDir(subdirectory);
+        outputPath.set(subdirectory);
+        /*
+        End Addition
+        */
+        
+        TabularData newTabularData = new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),
+                NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
+        
+        instance.setTabularOutput(newTabularData, 0);               
+        
+        
+        final String subdirectory2 = outputPath.get()+"/ED-Results/";
+        FileHandler.createDirectory(subdirectory2);
+        System.out.println("Created sub dir: "+subdirectory);
+        output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory2);
         instance.setTextOutput(output);
         
         //TODO: set other parameters here
 
         //System.out.println(instance);
         CTask task = new EntityNetworkTask(this.getProgress(), this.getProgressMessage());
+        // Set waiting time for entity task to load thr library
+        try {            
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         task.setTaskInstance(instance);
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
@@ -133,6 +178,11 @@ public class EntityNetworkController extends BasicWorkflowController {
                     ProjectManager.getThisProject().addTask(getTaskInstance());
                     setNew(false);
                 }
+                
+                instance.setTabularOutput(oldTabularData, 0);                
+                instance.setOutputDir(oldDir);
+                basicOutputViewController.getOutputDirTextField().setText(oldDir);
+                
                 showNextStepPane(nextStepsViewController);
             }
         });
@@ -141,7 +191,6 @@ public class EntityNetworkController extends BasicWorkflowController {
         task.start();
 
         setTaskInstance(task.getTaskInstance());
-
     }
 
 }

@@ -30,6 +30,9 @@ public class Codebook {
 
     private CorpusData input;
     private CorpusData textOutput;
+   /* private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
 
     /**
      *
@@ -45,6 +48,9 @@ public class Codebook {
     private void init() {
         this.input = (CorpusData) instance.getInput();
         this.textOutput = (CorpusData) instance.getTextOutput();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
     }
 
     /**
@@ -92,7 +98,8 @@ public class Codebook {
      * @return
      */
     public boolean applyCodebook() {
-
+        //System.out.println("get all files");
+        
         List<FileData> files = input.getFiles();
 
         //Make the patterns
@@ -101,11 +108,12 @@ public class Codebook {
         Collections.reverse(words);
 
         StringBuffer sb = new StringBuffer();
-
         for (String word : words) {
             sb.append(("\\b(?i)" + word + "\\b|"));
         }
 
+        //System.out.println("create word buffer");
+        
         String regex = sb.substring(0, sb.length() - 1).toLowerCase();
 
         Pattern p = Pattern.compile(regex);
@@ -115,6 +123,17 @@ public class Codebook {
                 File f = ff.getFile();
                 StringBuffer s = new StringBuffer();
                 String content = JavaIO.readFile(f);
+                /*if (drop_num) {
+                    content.replaceAll("[0-9]", "");
+                }
+                if (drop_pun) {
+                    if (keep_pou) {
+                        content = content.replaceAll("[\\p{P}&&[^#]]+", " ");
+                    } else {
+                        content = content.replaceAll("\\p{P}", " ");
+                    }
+                }*/
+                //System.out.println(content);
                 Matcher m = p.matcher(content);
                 String replc = "";
                 StringBuffer stempb = new StringBuffer();
@@ -151,8 +170,7 @@ public class Codebook {
                 int ii = textOutput.addFile(name);
                 System.out.println("write codebook applied file " + name);
        
-                textOutput.writeFile(ii, s.toString());
-                
+                textOutput.writeFile(ii, s.toString());                
                 
             }
         } catch (IOException e) {

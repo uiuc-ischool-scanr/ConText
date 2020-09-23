@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+ * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, Amirhossein Aleyasen, 
+ * Shubhanshu Mishra, Kiumars Soltani, Liang Tao, Ming Jiang, Harathi Korrapati, 
+ * Nikolaus Nova Parulian, and Lan Jiang.  
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -21,6 +22,7 @@
  */
 package context.app.main;
 
+import java.util.Arrays;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -58,6 +60,7 @@ public class ContextFX extends Application {
 
         initialize();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ContextFX.fxml"));
+
         Parent root = (Parent) loader.load();
         //root.getStylesheets().add("style-default.css");
         appController = (ContextFXController) loader.getController();
@@ -66,7 +69,7 @@ public class ContextFX extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setTitle("ConText 1.2.0");//From August 2015, it becomes ConText 1.1 //Jan 2016 - 1.2.X
+        stage.setTitle("ConText 2.0");//From August 2015, it becomes ConText 1.1 //Jan 2016 - 1.2.X // July 2018 - 1.2.1 // April 2020 - 2.0
         stage.getIcons().add(new Image("resources/context-blue.png"));
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
@@ -87,7 +90,30 @@ public class ContextFX extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //Thread.setDefaultUncaughtExceptionHandler(ContextFX::handleException);
         launch(args);
     }
+
+    /*
+    public static void handleException(Thread t, Throwable e) {
+        System.out.println("Unhandled Exception: " + e);
+        if (e instanceof IndexOutOfBoundsException || e instanceof ArrayIndexOutOfBoundsException) {
+            boolean isUpdateCachedBoundsBug = Arrays.stream(e.getStackTrace()).anyMatch(
+                    s -> s.getClassName().startsWith("javafx.scene.Parent") && "updateCachedBounds".equals(s.getMethodName()));
+            if (isUpdateCachedBoundsBug) {
+                System.out.println("Detected an AIOBE or IOBE from the updateCachedBounds bug:");
+                e.printStackTrace();
+                //t.stop();
+            } else {
+                System.out.println("Detected an AIOBE or IOBE that is not an updateCachedBounds bug: " + e);
+                e.printStackTrace();
+                //t.stop();
+            }
+        } else {
+            e.printStackTrace();
+            //System.out.println("Unhandled Exception: " + e);
+        }
+    }
+    */
 
 }

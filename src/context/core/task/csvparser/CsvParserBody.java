@@ -31,6 +31,9 @@ public class CsvParserBody {
 	private CsvParserTaskInstance instance;
 	
 	private CorpusData input;
+        /*private Boolean drop_num;
+        private Boolean drop_pun;
+        private Boolean keep_pou;*/
 	private CorpusData output;
 	
 	private List<String[]> csvLines;
@@ -50,7 +53,10 @@ public class CsvParserBody {
 		this.csvColumnList=instance.getCsvColumnList();
 		this.groupByColumnIndex=instance.getGroupByColumnIndex();		
 		this.textColumnIndex=instance.getTextColumnIndex();
-		this.input=(CorpusData)instance.getInput();	
+		this.input=(CorpusData)instance.getInput();
+               /* this.drop_num = instance.isDropnum();
+                this.drop_pun = instance.isDroppun();
+                this.keep_pou = instance.isKeeppou();*/
 		this.output=(CorpusData)instance.getTextOutput();
 		this.csvLines=new ArrayList<String[]>();
 		this.fileCSVLines = new HashMap<String, List<String[]>>();
@@ -158,6 +164,16 @@ public class CsvParserBody {
 	public void saveTextFile(String fileName, String fileContents){
 		String outputFileName=fileName+".txt";
 		int index=output.addFile(outputFileName);
+               /* if (drop_num) {
+                    fileContents = fileContents.replaceAll("[0-9]", " ");
+                }
+                if (drop_pun) {
+                    if (keep_pou) {
+                        fileContents = fileContents.replaceAll("[\\p{P}&&[^#]]+", " ");
+                    } else {
+                        fileContents = fileContents.replaceAll("\\p{P}", " ");
+                    }
+                }*/
 		output.writeFile(index, fileContents);
 		System.err.println("Finished Writing the Modified File: "+fileName);
 	}

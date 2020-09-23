@@ -33,6 +33,9 @@ public class SentimentBody {
 
     private SentimentTaskInstance instance;
     private CorpusData input;
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
     private List<TabularData> tabularOutput;
 
     private FileData sentimentFile;
@@ -60,6 +63,9 @@ public class SentimentBody {
         this.tabularOutput = instance.getTabularOutput();
         this.pipeline = instance.getPipeline();
         this.sentimentFile = instance.getSentimentFile();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
 
     }
 
@@ -131,6 +137,16 @@ public class SentimentBody {
                     documentString = JavaIO.readFile(documentFile);
 
                     documentString = documentString.toLowerCase();
+                    /*if (drop_num) {
+                        documentString = documentString.replaceAll("[0-9]", " ");
+                    }
+                    if (drop_pun) {
+                        if (keep_pou) {
+                            documentString = documentString.replaceAll("[\\p{P}&&[^#]]+", " ");
+                        } else {
+                            documentString = documentString.replaceAll("\\p{P}", " ");
+                        }
+                    }*/
 
                     for (int j = 0; j < Ngrams.size(); j++) {
                         if (documentString.contains(Ngrams.get(j))) {

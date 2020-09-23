@@ -31,6 +31,9 @@ public class SyntaxShallowCorpus extends Corpus {
      */
     private SyntaxBasedTaskInstance instance;
     private CorpusData input;
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
     private List<TabularData> tabularOutput;
 
     private StanfordCoreNLP pipeline;
@@ -53,6 +56,9 @@ public class SyntaxShallowCorpus extends Corpus {
         super();
         this.instance = instance;
         this.input = (CorpusData) instance.getInput();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
         this.tabularOutput = instance.getTabularOutput();
         this.setUnit(UNITOFANALYSIS.SENTENCE);
         this.setWindowSize(Integer.MAX_VALUE);
@@ -78,6 +84,16 @@ public class SyntaxShallowCorpus extends Corpus {
                 e.printStackTrace();
             }
             text = text.replaceAll("\\p{Cc}", " ");
+            /*if (drop_num) {
+                text = text.replaceAll("[0-9]", " ");
+            }
+            if (drop_pun) {
+                if (keep_pou) {
+                    text = text.replaceAll("[\\p{P}&&[^#]]+", " ");
+                } else {
+                    text = text.replaceAll("\\p{P}", " ");
+                }
+            }*/
             text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");
             String fileName = ff.getName().getValue();
             SyntaxShallowTextStream ets = getShallowParseTextStream(fileName, text);
@@ -125,8 +141,7 @@ public class SyntaxShallowCorpus extends Corpus {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        String text = "Values and Harassment Prevention.\r\n"
-                + "Dear Mr. Lay, I understand that Cindy Olson talked with you about the harassment prevention training scheduled over the next few weeks. In past classes, a senior-level business person has emphasized that harassment is not tolerated and is not consistent with Enrons values. For this set of training classes, the team asked if you could deliver that message via videotape. Cindy told me that your answer is \"yes.\" I understand that you are scheduled to record an unrelated video on Thursday morning, and that it might be possible to tape this message at the end of that session. Would that work with your schedule? If so, I will provide you with talking points and a script. If another time is better for you, let me know. Thanks for your help! Michelle Cash.";
+        String text = " ";
         text += " " + text;
         text = text.replaceAll("\\p{Cc}", " ");
         text = text.replaceAll("[^A-Za-z0-9 :;!\\?\\.,\'\"-]", " ");

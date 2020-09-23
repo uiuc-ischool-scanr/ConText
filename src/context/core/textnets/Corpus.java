@@ -3,9 +3,12 @@
  */
 package context.core.textnets;
 
+import context.app.Validation;
 import context.core.textnets.Network.FileType;
 import java.util.HashMap;
 import java.util.Set;
+import org.openide.util.Exceptions;
+import org.thehecklers.monologfx.MonologFX;
 
 /**
  * @author Shubhanshu
@@ -21,23 +24,19 @@ public abstract class Corpus {
         /**
          *
          */
-        ENTITY, 
-
+        ENTITY,
         /**
          *
          */
-        CODEBOOK_LABEL, 
-
+        CODEBOOK_LABEL,
         /**
          *
          */
-        CODEBOOK_CLASS, 
-
+        CODEBOOK_CLASS,
         /**
          *
          */
-        POS, 
-
+        POS,
         /**
          *
          */
@@ -52,18 +51,15 @@ public abstract class Corpus {
         /**
          *
          */
-        SENTENCE, 
-
+        SENTENCE,
         /**
          *
          */
-        PARAGRAPH, 
-
+        PARAGRAPH,
         /**
          *
          */
-        TEXT, 
-
+        TEXT,
         /**
          *
          */
@@ -184,22 +180,28 @@ public abstract class Corpus {
      */
     public void saveNetworks(String fileName, String outputDir, FileType ft,
             LABELTYPES l) {
-        if (docLevel) {
-            for (String key : streams.keySet()) {
+        try {
+            if (docLevel) {
+                for (String key : streams.keySet()) {
+                    Network net = new Network();
+                    net.setEdgeTablePath(this.tabularOutPath + "_" + key + ".csv");
+                    TextStream t = streams.get(key);
+                    t.makeNetwork(net, windowSize, l, unit);
+                    net.saveNet(fileName + "_" + key, outputDir, ft);
+                }
+            } else {
                 Network net = new Network();
-                net.setEdgeTablePath(this.tabularOutPath + "_" + key + ".csv");
-                TextStream t = streams.get(key);
-                t.makeNetwork(net, windowSize, l, unit);
-                net.saveNet(fileName + "_" + key, outputDir, ft);
+                net.setEdgeTablePath(this.tabularOutPath);
+                for (String key : streams.keySet()) {
+                    TextStream t = streams.get(key);
+                    t.makeNetwork(net, windowSize, l, unit);
+                }
+                net.saveNet(fileName, outputDir, ft);
             }
-        } else {
-            Network net = new Network();
-            net.setEdgeTablePath(this.tabularOutPath);
-            for (String key : streams.keySet()) {
-                TextStream t = streams.get(key);
-                t.makeNetwork(net, windowSize, l, unit);
-            }
-            net.saveNet(fileName, outputDir, ft);
+        } catch (Exception ex) {
+            MonologFX mono = Validation.buildWarningButton("Error on Entity Network process", "Error");
+            mono.show();
+            Exceptions.printStackTrace(ex);
         }
     }
 

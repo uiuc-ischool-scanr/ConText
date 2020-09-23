@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+ * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, Amirhossein Aleyasen, 
+ * Shubhanshu Mishra, Kiumars Soltani, Liang Tao, Ming Jiang, Harathi Korrapati, 
+ * Nikolaus Nova Parulian, and Lan Jiang.  
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -30,8 +31,8 @@ import context.core.entity.TaskInstance;
 import context.core.task.codebook.CodebookApplicationTaskInstance;
 import context.core.task.corpusstat.CorpusStatTaskInstance;
 import context.core.task.entitydetection.EntityDetectionTaskInstance;
-import context.core.task.lexisnexis.LexisNexisNetworkGenerationTaskInstance;
-import context.core.task.lexisnexis.LexisNexisParseTaskInstance;
+//import context.core.task.lexisnexis.LexisNexisNetworkGenerationTaskInstance;
+//import context.core.task.lexisnexis.LexisNexisParseTaskInstance;
 import context.core.task.pos.POSTaskInstance;
 import context.core.task.removestopword.RemoveStopwordsTaskInstance;
 import context.core.task.sentiment.SentimentTaskInstance;
@@ -43,8 +44,8 @@ import context.ui.control.codebook.CodebookAppController;
 import context.ui.control.corpusstat.CorpusStatController;
 import context.ui.control.entitydetection.EntityDetectionController;
 import context.ui.control.filelist.FileListViewerController;
-import context.ui.control.lexisnexis.LexisNexisNetworkGenerationController;
-import context.ui.control.lexisnexisparse.LexisNexisParseController;
+//import context.ui.control.lexisnexis.LexisNexisNetworkGenerationController;
+//import context.ui.control.lexisnexisparse.LexisNexisParseController;
 import context.ui.control.pos.POSController;
 import context.ui.control.removestopword.RemoveStopwordsController;
 import context.ui.control.sentiment.SentimentController;
@@ -177,7 +178,8 @@ public class TabManager {
             public void handle(javafx.event.Event t) {
                 if (tab.isSelected()) {
                     ProjectElement elem = findInOpenTabs(tab);
-                    ContextFXController.selectNode(elem);
+                    ContextFX.appController.selectNode(elem);
+                    //ContextFXController.selectNode(elem);
                     if (elem instanceof TaskInstance) {
                         StringProperty taskname = NamingPolicy.generateTaskName(elem.getClass());
                         final String url = AppConfig.getTaskHelpguideURL(taskname.get());
@@ -317,12 +319,12 @@ public class TabManager {
             } else if (task instanceof EntityDetectionTaskInstance) {
                 controller = new EntityDetectionController((EntityDetectionTaskInstance) task);
 
-            } else if (task instanceof LexisNexisNetworkGenerationTaskInstance) {
+           /* } else if (task instanceof LexisNexisNetworkGenerationTaskInstance) {
                 controller = new LexisNexisNetworkGenerationController((LexisNexisNetworkGenerationTaskInstance) task);
 
             } else if (task instanceof LexisNexisParseTaskInstance) {
                 controller = new LexisNexisParseController((LexisNexisParseTaskInstance) task);
-
+*/
             } else if (task instanceof POSTaskInstance) {
                 controller = new POSController((POSTaskInstance) task);
 

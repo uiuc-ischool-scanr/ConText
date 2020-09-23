@@ -47,11 +47,11 @@ import org.openide.util.Lookup;
  */
 public class EntityNetworkBody {
 
+	//EntityNetworkTask is not using EntityNetworkBody, but using EntityCorpus
 	private AbstractSequenceClassifier<?> classifier3;
     private AbstractSequenceClassifier<?> classifier4;
     private AbstractSequenceClassifier<?> classifier7;
 	private StanfordCoreNLP pipeline;
-    
 	private List<String[]> NetworkEdges;
 	private HashSet<String[]> NodeHashSet;
 	private EntityNetworkTaskInstance instance;
@@ -282,7 +282,9 @@ public class EntityNetworkBody {
 		Workspace workspace = pc.getCurrentWorkspace();
 
 		//Get a graph model - it exists because we have a workspace
-		GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+		//GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+                //for java 8 into getGraphModel
+                GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getGraphModel();
 		final DirectedGraph directedGraph = graphModel.getDirectedGraph();
 
 		TObjectIntHashMap<String> nodes = new TObjectIntHashMap<String>();
@@ -308,8 +310,14 @@ public class EntityNetworkBody {
 
 			Node n0 = graphModel.factory().newNode(node_it.key());
 
-			n0.getAttributes().setValue("label", node_it.key());
-			n0.getAttributes().setValue("Type", node_index.get(node_it.value()));
+                        /*
+                        Niko
+                        Change get attributes with index
+                        */
+			//n0.getAttributes().setValue("label", node_it.key());
+			//n0.getAttributes().setValue("Type", node_index.get(node_it.value()));
+                        n0.setAttribute("label", node_it.key());
+                        n0.setAttribute("Type", node_index.get(node_it.value()));
 			directedGraph.addNode(n0);
 		}
 
@@ -492,7 +500,12 @@ public class EntityNetworkBody {
                 hashedNumOcc.put(name, 1);
             }
             ForAggregation NamedEntity = new ForAggregation(NamedEntity_array);
-            startIndicies.add(findNthIndexOf(inText, name, hashedNumOcc.get(name)));
+            try{
+                startIndicies.add(findNthIndexOf(inText, name, hashedNumOcc.get(name)));
+            }catch(IndexOutOfBoundsException ex){
+                // next value
+                continue;
+            }
             if (null != NamedEntity) {
                 NamedEntities.add(NamedEntity);
             }

@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.  
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -92,13 +93,36 @@ public class KeywordController extends BasicWorkflowController {
         KeywordTaskInstance instance = (KeywordTaskInstance) getTaskInstance();
         StringProperty inputPath = basicInputViewController.getSelectedItemLabel().textProperty();
         StringProperty inputname = basicInputViewController.getSelectedCorpusName();
+        /*instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou());*/
+        
         CorpusData input = new CorpusData(inputname, inputPath);
         instance.setInput(input);
-
+        
+        
         final StringProperty outputPath = basicOutputViewController.getOutputDirTextField().textProperty();
-        final String subdirectory = outputPath.get() + "/KWIC-Results/";
+        
+        /*
+        Niko
+        create parent directory for the output output
+        */
+        final String subdirectory = outputPath.get()+"/Keyword-In-Context/";
         FileHandler.createDirectory(subdirectory);
-        FileList output = new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance), subdirectory);
+        //System.out.println("Created sub dir: "+subdirectory);
+        FileList output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory);
+        final FileList oldOutput = (FileList) instance.getTextOutput();
+        final String oldDir = outputPath.get();
+        instance.setTextOutput(output);  
+        outputPath.set(subdirectory);
+        /*
+        End Addition
+        */
+        
+        
+        final String subdirectory2 = outputPath.get() + "/KWIC-Results/";
+        FileHandler.createDirectory(subdirectory2);
+        output = new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance), subdirectory2);
 
         instance.setTextOutput(output);
 
@@ -111,7 +135,7 @@ public class KeywordController extends BasicWorkflowController {
 
         instance.setLeftBound(confController.getLeftBound());
         instance.setRightBound(confController.getRightBound());
-
+        instance.setOmitCase(confController.isOmitCase());
         KeywordTask task = new KeywordTask(this.getProgress(), this.getProgressMessage());
         task.setTaskInstance(instance);
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -130,6 +154,7 @@ public class KeywordController extends BasicWorkflowController {
                     ProjectManager.getThisProject().addTask(getTaskInstance());
                     setNew(false);
                 }
+                nextStepsViewController.setOutputDir(oldDir);
                 showNextStepPane(nextStepsViewController);
             }
         });

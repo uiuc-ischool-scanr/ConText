@@ -188,17 +188,29 @@ public class NetworkGeneration {
 		//Workspace workspace = pc.getCurrentWorkspace();
 
         //Get a graph model - it exists because we have a workspace
-        GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+        /* 
+        Niko
+        Change this old code implementation of gephi
+        */
+        //GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+        GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getGraphModel();
         final UndirectedGraph undirectedGraph = graphModel.getUndirectedGraph();
-
+        
+        // add new attribute beforehand for gephi 0.9 fix
+        graphModel.getNodeTable().addColumn("Type", String.class);
+        
+        
+        
         //Create three nodes
         TIntObjectIterator<Pair<String, String>> node_it;
         for (node_it = nodes.iterator(); node_it.hasNext();) {
             node_it.advance();
             Node n0 = graphModel.factory().newNode(node_it.value().getLeft());
-            n0.getAttributes().setValue("label", node_it.value().getLeft());
+            n0.setAttribute("label",node_it.value().getLeft());
+            //n0.getAttributes().setValue("label", node_it.value().getLeft());
             if (instance.getNetOutputType() == 1) {
-                n0.getAttributes().setValue("Type", node_it.value().getRight());
+                n0.setAttribute("Type".toLowerCase(), node_it.value().getRight());
+                //n0.getAttributes().setValue("Type", node_it.value().getRight());                
             }
             undirectedGraph.addNode(n0);
 
@@ -211,9 +223,18 @@ public class NetworkGeneration {
             Node s2 = undirectedGraph.getNode(nodes.get(edge_it.key().getRight()).getLeft());
 
             float weight = edge_it.value();
-            Edge e0 = graphModel.factory().newEdge(s1, s2, weight, false);
-            undirectedGraph.addEdge(e0);
+            // add edge type
+            //Edge e0 = graphModel.factory().newEdge(s1, s2, weight, false);
+            try {
+                Edge e0 = graphModel.factory().newEdge(s1, s2, 0, weight, false);            
+                undirectedGraph.addEdge(e0);
+            }catch(java.lang.IllegalArgumentException ex){
+                // Skip the edge additio if it is exist
+                //ex.printStackTrace();
+                System.out.println(String.format("Edge exist for {} and {}",s1, s2));
+            }
         }
+        
 
         //Export full graph
         ExportController ec = Lookup.getDefault().lookup(ExportController.class);
@@ -410,7 +431,7 @@ public class NetworkGeneration {
             cb_it.advance();
             System.out.println(cb_it.key() + " " + cb_it.value());
             System.out.println("replaceUnderscore=" + replaceUnderscores(cb_it.key()));
-            System.out.println("repalced by=" + cb_it.key().toLowerCase());
+            System.out.println("replaced by=" + cb_it.key().toLowerCase());
             content = content.replace(replaceUnderscores(cb_it.key()), cb_it.key().toLowerCase());
             System.out.println("updated content = " + content);
         }

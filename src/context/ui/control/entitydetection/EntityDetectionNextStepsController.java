@@ -26,6 +26,7 @@ public class EntityDetectionNextStepsController extends NextStepsViewController 
             addOpenFileListViewNextStepItem();
         }
         addOpenTabularViewNextStepItem();
+        addOpenFileListViewNextStepItem();
         addOpenOutputNextStepItem();
         addReRunTaskNextStepItem();
     }

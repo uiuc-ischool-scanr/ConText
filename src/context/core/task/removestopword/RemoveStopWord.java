@@ -20,7 +20,9 @@ public class RemoveStopWord {
 
     private CorpusData input;
     private CorpusData output;
-
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
     private RemoveStopwordsTaskInstance instance;
     private String replaceString;
 
@@ -52,8 +54,11 @@ public class RemoveStopWord {
         }
 
         this.input = (CorpusData) instance.getInput();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
         this.output = (CorpusData) instance.getTextOutput();
-
+        
     }
 
     /**
@@ -75,29 +80,19 @@ public class RemoveStopWord {
         try {
             for (FileData f : input.getFiles()) {
                 String content = JavaIO.readFile(f.getFile());
+                /*if (drop_num) {
+                    content = content.replaceAll("[0-9]", " ");
+                }
+                if (drop_pun) {
+                    if (keep_pou) {
+                        content = content.replaceAll("[\\p{P}&&[^#]]+"," ");
+                    } else {
+                        content = content.replaceAll("\\p{P}", " ");
+                    }
+                }*/
                 StringBuffer s = removeStringPattern(p, content);
 
 
-                /*
-                 StringBuffer sb = new StringBuffer();
-                 PTBTokenizer<CoreLabel> ptbt = new PTBTokenizer<CoreLabel>(new FileReader(f.getFile()),
-                 new CoreLabelTokenFactory(), "invertible=true");
-                 for (String word; ptbt.hasNext();) {
-                 CoreLabel label = (CoreLabel) ptbt.next();
-                 //word = label.originalText();
-                 word = label.word();
-                 String word_lowercase = word.toLowerCase();
-                 String before = label.getString(CoreAnnotations.BeforeAnnotation.class);
-					
-                 System.out.println(before);
-
-                 if (stopwords.contains(word_lowercase)) {
-                 sb.append(before + this.replaceString);
-                 } else {
-                 sb.append(before + word);
-                 }
-                 }
-                 */
                 String inputNameWithoutExtension = FilenameUtils.getBaseName(f.getFile().getName());
                 String inputExtension = FilenameUtils.getExtension(f.getFile().getName());
 

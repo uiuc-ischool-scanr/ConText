@@ -1,8 +1,9 @@
 /*
  
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+* Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+* Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+* Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+* Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang.
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -24,10 +25,12 @@ package context.ui.control.bigram;
 import context.app.ProjectManager;
 import context.core.entity.CTask;
 import context.core.entity.CorpusData;
+import context.core.entity.FileList;
 import context.core.entity.TabularData;
 import context.core.task.bigram.BigramApplicationTaskInstance;
 import context.core.task.bigram.BigramTask;
 import context.ui.control.workflow.basic2step.Basic2StepWorkflowController;
+import context.ui.misc.FileHandler;
 import context.ui.misc.NamingPolicy;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.WorkerStateEvent;
@@ -73,10 +76,13 @@ public class BigramController extends Basic2StepWorkflowController {
         BigramApplicationTaskInstance instance = (BigramApplicationTaskInstance) getTaskInstance();
         StringProperty inputPath = basicInputViewController.getSelectedItemLabel().textProperty();
         StringProperty inputname = basicInputViewController.getSelectedCorpusName();
+        /*instance.setDropnum(basicInputViewController.isDropnum());
+        instance.setDroppun(basicInputViewController.isDroppun());
+        instance.setKeeppou(basicInputViewController.isKeeppou());*/
         CorpusData input = new CorpusData(inputname, inputPath);
         input.setId(basicInputViewController.getSelectedInput().getId());
         instance.setInput(input);
-
+        
         final StringProperty outputPath = basicOutputViewController.getOutputDirTextField().textProperty();
 
         /* Output is now a tabular data - Nov 7, 2014
@@ -84,11 +90,26 @@ public class BigramController extends Basic2StepWorkflowController {
         FileHandler.createDirectory(subdirectory);
         FileList output = new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance), subdirectory);
         instance.setTextOutput(output);*/
+
+
+        /*
+        Niko
+        add handler for creating subdirectory output
+        */
+        final String subdirectory = outputPath.get()+"/BIGRAM-Results/";
+        FileHandler.createDirectory(subdirectory);
+        System.out.println("Created sub dir: "+subdirectory);
+        FileList output=new FileList(NamingPolicy.generateOutputName(inputname.get(), outputPath.get(), instance),subdirectory);
+        instance.setTextOutput(output);
+        outputPath.set(subdirectory);  
+        /*
+        End Addition
+        */               
         
         //Add new output for tabular data - Nov 7, 2014
         TabularData tabularData=new TabularData(NamingPolicy.generateTabularName(inputname.get(), outputPath.get(), instance),NamingPolicy.generateTabularPath(inputname.get(), outputPath.get(), instance));
-		instance.setTabularOutput(tabularData,0);
-
+        
+        instance.setTabularOutput(tabularData,0);   
        
         System.out.println(instance);
         CTask task = new BigramTask(this.getProgress(), this.getProgressMessage());

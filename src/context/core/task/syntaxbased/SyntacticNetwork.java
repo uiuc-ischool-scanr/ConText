@@ -566,7 +566,11 @@ public class SyntacticNetwork {
         Workspace workspace = pc.getCurrentWorkspace();
 
         //Get a graph model - it exists because we have a workspace
-        GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+        /*
+        Niko Change
+        */
+        //GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+        GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getGraphModel();
         final DirectedGraph directedGraph = graphModel.getDirectedGraph();
 
         TObjectIntHashMap<String> nodes = new TObjectIntHashMap<String>();
@@ -590,8 +594,15 @@ public class SyntacticNetwork {
 
             Node n0 = graphModel.factory().newNode(node_it.key());
 
-            n0.getAttributes().setValue("label", node_it.key());
-            n0.getAttributes().setValue("Type", node_index.get(node_it.value()));
+            /*
+            Niko
+            Change
+            */
+            
+            //n0.getAttributes().setValue("label", node_it.key());
+            //n0.getAttributes().setValue("Type", node_index.get(node_it.value()));
+            n0.setAttribute("label", node_it.key());
+            n0.setAttribute("Type", node_index.get(node_it.value()));
             directedGraph.addNode(n0);
         }
 

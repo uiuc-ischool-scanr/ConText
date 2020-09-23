@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="435.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.ui.control.entitynetwork.EntityNetworkConfigurationController">
+<AnchorPane id="AnchorPane" pickOnBounds="true" prefHeight="435.0" snapToPixel="false" style="" styleClass="root, control-page" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="context.ui.control.entitynetwork.EntityNetworkConfigurationController">
   <children>
     <Label fx:id="titleLabel" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="600.0" styleClass="control-header" text="Configuration" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <font>
@@ -18,7 +18,7 @@
     </Label>
     <Label font="$x1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="-1.0" styleClass="control-sub-header" text="Network Generation Parameters" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
      
-   <Label labelFor="$codebookMethodComboBox" layoutX="25.0" layoutY="101.0" text="Method Type" visible="false" />
+   <Label layoutX="25.0" layoutY="101.0" text="Method Type" visible="false" />
     <ComboBox id="codebookMethod" fx:id="codebookMethodComboBox" layoutX="145.0" layoutY="96.0" prefHeight="23.0" prefWidth="141.0" promptText="" styleClass="smallerfont" visible="false">
       <items>
         <FXCollections fx:factory="observableArrayList" />
@@ -61,7 +61,7 @@
         </ComboBox>
       </labelFor>
     </Label>
-    <TextField fx:id="distanceTextField" layoutX="145.0" layoutY="164.0" prefHeight="28.0" prefWidth="141.0" />
+    <TextField fx:id="distanceTextField" layoutX="145.0" layoutY="164.0" prefHeight="28.0" prefWidth="141.0" text="7" />
     <Label layoutX="296.0" layoutY="169.0" prefHeight="18.0" prefWidth="112.0" text="Unit of Analysis" textAlignment="LEFT">
       <labelFor>
         <ComboBox id="codebookMethod" layoutX="100.0" layoutY="141.0" prefWidth="138.5" promptText="Select Method">

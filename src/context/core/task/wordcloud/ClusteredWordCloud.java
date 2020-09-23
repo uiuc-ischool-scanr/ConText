@@ -54,7 +54,10 @@ public class ClusteredWordCloud {
     private CorpusData input;
     private boolean isTff;
     private boolean isLowercase;
-    
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;
+    */
     public class SentimentTopicWord{
     	String word;
     	int sentiment, topic;
@@ -177,6 +180,9 @@ public class ClusteredWordCloud {
         this.minFontSize = instance.getMinFontSize();
         this.initSentimentDict();
         this.isLowercase = instance.getIsLowercase();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
     }
 	
 	public boolean genCloud() {

@@ -23,49 +23,15 @@
                 <MenuBar prefHeight="31.0" prefWidth="980.0" style="-fx-font-size:13;" useSystemMenuBar="false">
                   <menus>
                     <Menu mnemonicParsing="false" text="File">
-                      <items>
-                       <!-- <MenuItem mnemonicParsing="false" text="New Project...">
-                          <accelerator>
-                            <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                          </accelerator>
-                        </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Open Project">
-                          <accelerator>
-                            <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                          </accelerator>
-                        </MenuItem>
-                        <MenuItem mnemonicParsing="false" text="Close Project" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleCloseAllMenuItem" text="Close All" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Save">
-                          <accelerator>
-                            <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                          </accelerator>
-                        </MenuItem>
-                        <MenuItem mnemonicParsing="false" text="Save as...">
-                          <accelerator>
-                            <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                          </accelerator>
-                        </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />  --> 
-                        <Menu mnemonicParsing="false" text="Import">
-                          <items>
-                            <MenuItem fx:id="importTextCorpusMenuItem" mnemonicParsing="false" onAction="#handleImportTextCorpusMenuItem" text="Text Corpus Directory..." />
-                          </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Export">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="To CSV..." />
-                          </items>
-                        </Menu>
+                      <items>                     
+                        <MenuItem fx:id="importTextCorpusMenuItem" mnemonicParsing="false" onAction="#handleImportTextCorpusMenuItem" text="Import" />                     
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#handleExitMenuItem" text="Exit" />
                       </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Data Curation">
                       <items>
-                        <MenuItem fx:id="parseLexisNexisMenuItem" mnemonicParsing="false" onAction="#handleParseLexisNexisMenuItem" text="Parse LexisNexis..." />
+                        <!-- <MenuItem fx:id="parseLexisNexisMenuItem" mnemonicParsing="false" onAction="#handleParseLexisNexisMenuItem" text="Parse LexisNexis..." /> -->
                         <MenuItem fx:id="csvParserMenuItem" mnemonicParsing="false" onAction="#handleCsvParserMenuItem" text="Parse CSV Files..." />
                                         
                       </items>
@@ -76,7 +42,7 @@
                           <items>
                             <MenuItem fx:id="POSMenuItem" mnemonicParsing="false" onAction="#handlePOSMenuItem" text="Part of Speech Tagging" />
                             <MenuItem fx:id="removeStopwordsMenuItem" mnemonicParsing="false" onAction="#handleRemoveStopwordsMenuItem" text="Remove Stop Words" />
-                            <MenuItem fx:id="stemmingMenuItem" mnemonicParsing="false" onAction="#handleStemmingMenuItem" text="Stemming" />
+                            <MenuItem fx:id="stemmingMenuItem" mnemonicParsing="false" onAction="#handleStemmingMenuItem" text="Lemmatization" />
                             <MenuItem id="bigramDetectionMenuItem" fx:id="bigramDetectionMenuItem" mnemonicParsing="false" onAction="#handleBigramDetectionMenuItem" text="Bigram Detection" />
                           </items>
                         </Menu>
@@ -106,20 +72,16 @@
                     </Menu>
                     <Menu mnemonicParsing="false" text="Network Construction">
                       <items>
-                        <Menu mnemonicParsing="false" text="From Meta Data..." visible="true">
-                          <items>
-                            <MenuItem fx:id="lexisNexisNetworkGenerationMenuItem" mnemonicParsing="false" onAction="#handleLexisNexisNetworkGenerationMenuItem" text="Meta-data based (LexisNexis)" visible="true" />
-                          </items>
-                        </Menu>
+                      
                         <Menu mnemonicParsing="false" text="From Text Data...">
                           <items>
-                            <MenuItem fx:id="lexisNexisNetworkGenerationMenuItem2" mnemonicParsing="false" onAction="#handleLexisNexisNetworkGenerationMenuItem" text="Meta-data based (LexisNexis)" visible="false" />
+                            
                             <MenuItem fx:id="entityTypesNetworkGenerationMenuItem" mnemonicParsing="false" onAction="#handleEntityTypesNetworkGenerationMenuItem" text="Entity Type based" />
                             <MenuItem fx:id="codebookNetworkGenrationMenuItem" mnemonicParsing="false" onAction="#handleCodebookNetworkGenerationMenuItem" text="Co-Occurrence based" />
-                            <Menu mnemonicParsing="false" text="Syntax based">
+                            <Menu mnemonicParsing="false" text="Syntax based" visible="false">
                             	<items>
-                            		<MenuItem fx:id="shallowParsingMenuItem" mnemonicParsing="false" onAction="#handleSyntaxBasedMenuItem" text="Shallow Parsing (POS)" />
-                            		<MenuItem fx:id="deepParsingMenuItem" mnemonicParsing="false" onAction="#handleDeepParsingMenuItem" text="Deep Parsing (Parse Tree)" />
+                            		<MenuItem fx:id="shallowParsingMenuItem" mnemonicParsing="false" onAction="#handleSyntaxBasedMenuItem" text="Shallow Parsing (POS)" visible="false"/>
+                            		<MenuItem fx:id="deepParsingMenuItem" mnemonicParsing="false"  text="Deep Parsing (Parse Tree)" visible="false"/>
                             	</items>
                             
                             </Menu>
@@ -128,11 +90,7 @@
                         
                       </items>
                     </Menu>
-                    <Menu mnemonicParsing="false" text="Network Analysis" visible="false">
-                      <items>
-                        <MenuItem fx:id="geocodedNetworkMenuItem" mnemonicParsing="false" onAction="#handleGeocodedNetworkMenuItem" text="Geocoded Network" />
-                      </items>
-                    </Menu>
+                    
                     <Menu mnemonicParsing="false" text="Help">
                       <items>
                         <MenuItem fx:id="helpContentMenuItem" mnemonicParsing="false" onAction="#handleHelpContentMenuItem" text="Help Contents" />
@@ -149,35 +107,7 @@
                   </VBox.margin>
                 </MenuBar>
                 <ToolBar style="-fx-background-color: #EFEFEF;" VBox.vgrow="ALWAYS">
-                  <!-- <items>
-                    <Button fx:id="newProjectButton" ellipsisString="" graphicTextGap="0.0" minWidth="24.0" mnemonicParsing="false" onAction="#handleNewProject" prefWidth="30.0" style="" styleClass="toolbarButton" text="" textAlignment="CENTER" textOverrun="CLIP" visible="true">
-                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
-                          <image>
-                            <Image url="@../../../resources/newProject24.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
-                    <Button id="newFileButton" fx:id="newFile" ellipsisString="" graphicTextGap="0.0" minWidth="24.0" mnemonicParsing="false" onAction="#handleNewFile" prefWidth="30.0" style="" styleClass="toolbarButton" text="" textAlignment="CENTER" textOverrun="CLIP" visible="true">
-                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
-                          <image>
-                            <Image url="@../../../resources/newFile24.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
-                    <Button fx:id="saveFileButton" ellipsisString="" graphicTextGap="0.0" minWidth="24.0" mnemonicParsing="false" onAction="#handleSaveFile" prefWidth="30.0" style="" styleClass="toolbarButton" text="" textAlignment="CENTER" textOverrun="CLIP" visible="true">
-                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true" visible="true">
-                          <image>
-                            <Image url="@../../../resources/save24.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
-                  </items>  -->
+                 
                   <VBox.margin>
                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                   </VBox.margin>

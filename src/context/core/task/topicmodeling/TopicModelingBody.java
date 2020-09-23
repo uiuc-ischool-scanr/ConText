@@ -28,6 +28,9 @@ public class TopicModelingBody {
     private String log;
     private String[] allOuts;
     private boolean isLowercase;
+    /*private Boolean drop_num;
+    private Boolean drop_pun;
+    private Boolean keep_pou;*/
 
     /**
      *
@@ -46,6 +49,9 @@ public class TopicModelingBody {
         this.CorpusFiles = this.input.getFiles();
         this.allOuts = new String[2];
         this.isLowercase = instance.getIsLowercase();
+        /*this.drop_num = instance.isDropnum();
+        this.drop_pun = instance.isDroppun();
+        this.keep_pou = instance.isKeeppou();*/
     }
 
     /**

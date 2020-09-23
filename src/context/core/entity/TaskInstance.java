@@ -1,8 +1,8 @@
-/*
- 
- * Copyright (c) 2015 University of Illinois Board of Trustees, All rights reserved.   
- * Developed at GSLIS/ the iSchool, by Dr. Jana Diesner, Amirhossein Aleyasen,    
- * Chieh-Li Chin, Shubhanshu Mishra, Kiumars Soltani, and Liang Tao.     
+/* 
+ * Copyright (c) 2020 University of Illinois Board of Trustees, All rights reserved.   
+ * Developed at the iSchool, by Dr. Jana Diesner, Chieh-Li Chin, 
+ * Amirhossein Aleyasen, Shubhanshu Mishra, Kiumars Soltani, Liang Tao, 
+ * Ming Jiang, Harathi Korrapati, Nikolaus Nova Parulian, and Lan Jiang..     
  *   
  * This program is free software; you can redistribute it and/or modify it under   
  * the terms of the GNU General Public License as published by the Free Software   
@@ -16,9 +16,8 @@
  * You should have received a copy of the GNU General Public License along with   
  * this program; if not, see <http://www.gnu.org/licenses>.   
  *
- 
- 
  */
+
 package context.core.entity;
 
 import context.app.AppConfig;
@@ -48,6 +47,11 @@ public abstract class TaskInstance extends ProjectElement {
      *
      */
     protected List<TabularData> tabularOutput;
+    
+    // niko add initialization for this variables to avoid null pointer exception
+    /*protected Boolean drop_num = false;
+    protected Boolean drop_pun = false;
+    protected Boolean keep_pou = false;*/
 
     /**
      *
@@ -164,5 +168,29 @@ public abstract class TaskInstance extends ProjectElement {
     public String toString() {
         return AppConfig.getTaskLabel(this.getName().get());
     }
-
+    
+   /* public Boolean isDropnum() {
+        return this.drop_num;
+    }
+    
+    public void setDropnum(Boolean drop_num){
+        this.drop_num = drop_num;
+    }
+    
+    public Boolean isDroppun(){
+        return this.drop_pun;
+    }
+    
+    public void setDroppun(Boolean drop_num){
+        this.drop_pun = drop_num;
+    }
+    
+    public Boolean isKeeppou(){
+        return this.keep_pou;
+    }
+    
+    public void setKeeppou(Boolean drop_pou){
+        this.keep_pou = drop_pou;
+    }*/
+    
 }

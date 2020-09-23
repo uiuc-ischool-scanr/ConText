@@ -39,6 +39,9 @@ public class MalletTopicModeling {
 	public double beta;
 	public int[][] typeTopicCounts;	
 	public int totalTokens;
+        /*private Boolean drop_num;
+        private Boolean drop_pun;
+        private Boolean keep_pou;*/
 	
 	public MalletTopicModeling(int numTopics, int numWordsPerTopic,
 			int numIterations, int numOptInterval, double sumAlpha, List<FileData> CorpusFiles, String stopListPath,
@@ -52,7 +55,9 @@ public class MalletTopicModeling {
 		this.stopListPath = stopListPath;
 		this.isLowercase = isLowercase;
 		this.model = new ParallelTopicModel(this.numTopics, sumAlpha, 0.01);
-		
+		/*this.drop_num = drop_num;
+                this.drop_pun = drop_pun;
+                this.keep_pou = keep_pou;*/
 		this.topicModeling();
 	}
 	
@@ -184,8 +189,7 @@ public class MalletTopicModeling {
 		// pipeList.add( new CharSequenceLowercase() );
 		pipeList.add(new CharSequence2TokenSequence(Pattern
 				.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
-		// pipeList.add( new TokenSequenceRemoveStopwords(new
-		// File("stoplists/en.txt"), "UTF-8", false, false, false) );
+
 		File stopList = new File(stopListPath);
 		if (stopList.exists()) {
 			pipeList.add(new TokenSequenceRemoveStopwords(stopList, "UTF-8",

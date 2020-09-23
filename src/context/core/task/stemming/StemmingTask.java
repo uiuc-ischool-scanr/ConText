@@ -42,7 +42,7 @@ public class StemmingTask extends CTask {
      */
     @Override
     public TaskInstance run(TaskInstance instance, GenericTask task) {
-        task.progress(1, 20, "Starting Stemming process");
+        task.progress(1, 20, "Starting Lemmatization process");
 
         StemmingTaskInstance ins = (StemmingTaskInstance) instance;
 
@@ -53,13 +53,13 @@ public class StemmingTask extends CTask {
         task.progress(8, 20, inputCorpus.getFiles().size() + " files loaded");
         StemmingBody sb = new StemmingBody(ins);
 
-        task.progress(11, 20, "Running Stemming...");
+        task.progress(11, 20, "Running Lemmatization...");
         //Run entity Detection
         if (!sb.StemText()) {
             System.out.println("Error in detection");
             return instance;
         }
-        task.progress(20, 20, "Stemming successfully done");
+        task.progress(20, 20, "Lemmatization successfully done");
 
         task.done();
         return ins;
